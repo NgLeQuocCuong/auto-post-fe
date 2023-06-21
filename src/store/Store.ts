@@ -5,7 +5,6 @@ import { combineReducers } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { StoreState } from 'store/type';
-// import middleware from 'store/middleware';
 
 export const appReducer = combineReducers(reducers);
 
