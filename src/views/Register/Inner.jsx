@@ -1,4 +1,4 @@
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -13,7 +13,7 @@ const Inner = memo(({ handleRegister }) => {
             <div className="account-layout-container">
                 <div className="account-layout__left">
                     <div className="account-layout__autopost-logo"><span>AUTO</span>POST</div>
-                    <div className="account-layout__input">
+                    <form className="account-layout__input">
                         <div className="input__title">Đăng ký</div>
                         <div>
                             <AccountInput label="Họ và tên" type="text" />
@@ -41,10 +41,11 @@ const Inner = memo(({ handleRegister }) => {
                                 Đăng nhập
                             </NavLink>
                         </div>
-                        <div className="account-layout__footer">
+
+                    </form>
+                    <div className="account-layout__footer">
                             © 2023 AutoPost is a product of Horus Co., Ltd
                         </div>
-                    </div>
                 </div>
                 <div className="account-layout__right">
                     <img src={AccountLayoutImage} alt="Account layout" />

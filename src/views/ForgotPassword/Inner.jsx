@@ -1,41 +1,47 @@
-import React from 'react';
-import { Button, Checkbox, Input } from 'antd';
+import { Button } from 'antd';
 import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
-import CommonInput from 'components/CommonInput';
+import '../../layouts/Account/index.scss';
+import AccountInput from 'layouts/Account/AccountInput';
+import AccountLayoutImage from '../../assets/images/AccountLayoutImage.png';
 
-const Inner = memo(({ handleLogin }) => {
+const Inner = memo(({ handleRegister }) => {
     return (
-        <AccountLayout title="Login">
-            <div className="input-container">
-                <div>
-                    <label className="input-title required">Password</label>
-                    <Input required size="large" placeholder="Password" />
+        <AccountLayout title="Register">
+            <div className="account-layout-container">
+                <div className="account-layout__left">
+                    <div className="account-layout__autopost-logo"><span>AUTO</span>POST</div>
+                    <div className="account-layout__input">
+                        <div className="input__title">Đặt lại mật khẩu</div>
+                        <div>
+                            <AccountInput label="Email" type="email" />
+                        </div>
+                        <Button id="register" className="account-layout-button" type="primary">
+                        <NavLink to={routeConstants.LOGIN}>
+                                Gửi yêu cầu
+                            </NavLink>
+                        </Button>
+                        <div className="has-account">
+                            <NavLink to={routeConstants.LOGIN}>
+                                Quay lại trang đăng nhập
+                            </NavLink>
+                        </div>
+
+                    </div>
+                    <div className="account-layout__footer">
+                            © 2023 AutoPost is a product of Horus Co., Ltd
+                        </div>
                 </div>
-                <div>
-                    <label className="input-title required">Re-enter Password</label>
-                    <Input.Password
-                        required
-                        size="large"
-                        placeholder="Password"
-                    />
+                <div className="account-layout__right">
+                    <img src={AccountLayoutImage} alt="Account layout" />
                 </div>
             </div>
-            <label htmlFor="check1">Label for checkbox</label>
-            <Checkbox type="CHECKBOX" id="check1"/>
-            <CommonInput.Text type="TEXT" />
-            <CommonInput.Date type="DATE" />
-            <br></br>
-            <Button id="login" className="account-layout-button" type="primary">
-                <NavLink to={routeConstants.LOGIN}>
-                    Change password
-                </NavLink>
-            </Button>
         </AccountLayout>
     );
 });
 
-Inner.displayName = 'ForgotPassword Inner';
+Inner.displayName = 'Register Inner';
+
 export default Inner;

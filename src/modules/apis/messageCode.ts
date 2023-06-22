@@ -90,7 +90,7 @@ const messageCodes = {
 
     EMAIL_ALREADY_EXIST: 'Email đã tồn tại',
     THIS_FACEBOOK_ACCOUNT_ALREADY_EXIST: 'Tài khoản Facebook đã tồn tại',
-
+    
     default: 'Có lỗi xảy ra... Vui lòng thử lại',
 } as {
     [key: string]: string;
