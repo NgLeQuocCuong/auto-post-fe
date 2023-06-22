@@ -1,12 +1,12 @@
 import { Button, Input } from 'antd';
-import MainLayout from 'layouts/Web';
+import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 
 const Inner = memo(({ handleLogin }) => {
     return (
-        <MainLayout title="Login">
+        <AccountLayout title="Login">
             <div className="input-container">
                 <div>
                     <label className="input-title required">Email</label>
@@ -30,7 +30,7 @@ const Inner = memo(({ handleLogin }) => {
             <Button id="login" className="account-layout-button" type="primary">
                 Login
             </Button>
-        </MainLayout>
+        </AccountLayout>
     );
 });
 
