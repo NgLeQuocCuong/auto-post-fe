@@ -7,7 +7,7 @@ interface Props {
     subTitle?: string;
 }
 
-const MainLayout: FC<PropsWithChildren<Props>> = memo(
+const RSPLayout: FC<PropsWithChildren<Props>> = memo(
     ({ children, title, subTitle }) => {
         return (
             <div>
@@ -17,6 +17,6 @@ const MainLayout: FC<PropsWithChildren<Props>> = memo(
         );
     }
 );
-MainLayout.displayName = 'MainLayout';
+RSPLayout.displayName = 'RSPLayout';
 
-export default MainLayout;
+export default RSPLayout;

@@ -2,23 +2,8 @@ import React from 'react';
 import './index.scss';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 import LogoSmall from 'components/HomePage/icons/LogoSmall';
-import SearchIcon from 'components/HomePage/icons/SearchIcon';
-import routeConstants from 'route/routeConstant';
 
-const items = [
-    {
-        id: 1,
-        name: 'TRANG CHỦ',
-        url: routeConstants.MAINPAGE,
-    },
-    {
-        id: 2,
-        name: 'BÀI VIẾT',
-        url: routeConstants.POST,
-    },
-];
 const Header: React.FC = () => {
     return (
         <header className="header">
@@ -27,12 +12,12 @@ const Header: React.FC = () => {
                     <NavLink to={'/'}>
                         <LogoSmall></LogoSmall>
                     </NavLink>
-                    <div className="header__wrap--search">
+                    {/* <div className="header__wrap--search">
                         <SearchIcon className="header__wrap--icon"></SearchIcon>
                         <input type="text" placeholder="Tìm kiếm ..." />
-                    </div>
+                    </div> */}
                 </div>
-                <ul className="header__wrap--items">
+                {/* <ul className="header__wrap--items">
                     {items.map(item => (
                         <li className="header__wrap--item" key={item.id}>
                             <NavLink
@@ -43,10 +28,10 @@ const Header: React.FC = () => {
                             </NavLink>
                         </li>
                     ))}
-                </ul>
+                </ul> */}
                 <div className="header__wrap--button">
-                    <Button icon={<PlusOutlined />} type="primary">
-                        <NavLink to="/post-page">Đăng bài</NavLink>
+                    <Button type="primary">
+                        <NavLink to="/login">Đăng nhập</NavLink>
                     </Button>
                 </div>
             </div>
