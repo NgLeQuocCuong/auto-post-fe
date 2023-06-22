@@ -1,119 +1,79 @@
-@import 'scss/global.scss';
-$wwhite: #ffffff;
-$bblack: #000000;
-$bluehover: #1453dc;
+@import 'scss/global';
 .header {
-    background-color: $wwhite;
-    padding: 10px;
-    height: 60px;
-    max-width: 1920px;
-    font-family: 'Inter', sans-serif;
-    line-height: 60px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-    .header-content {
+    &__wrap {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-
-        .header-left {
+        padding: 16px 48px;
+        border-bottom: 1px solid $color-hborder;
+        background-color: $color--light;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        &--logo {
             display: flex;
             align-items: center;
-            width: 485px;
-            .logo {
-                color: $bblack;
-                margin-right: 20px;
-                font-size: 24px;
-            }
-
-            .searchbar {
-                input {
-                    height: 48px;
-                    width: 320px;
-                    font-size: 16px;
-                    padding-left: 10px;
-                    border-radius: 24px;
-                    border: none;
-                    background-color: #11111114;
+            justify-content: space-between;
+            width: 350px;
+        }
+        &--search {
+            position: relative;
+            display: inline-block;
+            margin-left: 30px;
+            box-sizing: border-box;
+            input {
+                width: 240px;
+                padding: 10px 10px 10px 40px;
+                font-family: $font-inter;
+                background-color: $color-hsbg;
+                color: $color-hstext;
+                font-size: 16px;
+                border-radius: 16px;
+                border: 1px solid transparent;
+                outline: 0;
+                transition: all 0.25s linear;
+                &::placeholder {
+                    color: $color-hstext;
+                    font-family: $font-inter;
+                }
+                &:focus {
+                    background-color: $color--light;
+                    border: 1px solid $color-hstext;
                 }
             }
         }
-
-        .header-center {
-            flex: 1;
-
+        &--icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+        }
+        &--items {
+            list-style: none;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 0;
+        }
+        &--item {
+            padding: 0 16px;
+        }
+        &--link {
+            text-decoration: none;
             font-weight: 600;
-            font-size: 16px;
-            width: 130px;
-            height: 48px;
-            border: 24px;
-            a {
-                color: #686868;
-                text-align: center;
-                text-decoration: none;
-                margin: 0 20px;
-                width: 130px;
-                height: 48px;
-                line-height: 48px;
-                border-radius: 24px;
-                &:hover {
-                    color: #0042ed;
-                    background-color: #dde7fd;
-                }
+            color: $color-hstext;
+            padding: 10px 15px;
+            border-radius: 12px;
+            transition: all 0.2s linear;
+            &:hover {
+                color: $color-htext-hover;
+                background-color: $color-hborder;
             }
         }
-
-        .header-right {
-            width: 485px;
-            display: flex;
-            align-items: center;
-
-            .create-post-button {
-                padding: 8px 16px;
-                border: none;
-                border-radius: 24px;
-                width: 130px;
-                height: 48px;
+        &--button {
+            margin-left: auto;
+            Button {
                 font-size: 16px;
-                font-weight: 400;
-                background-color: #155df5;
-                color: $wwhite;
-                margin-left: auto;
-                cursor: pointer;
-            }
-            .login {
-                padding: 8px 16px;
-                border: none;
-                border-radius: 24px;
-                width: 130px;
-                height: 48px;
-                font-size: 16px;
-                font-weight: 400;
-                background-color: #155df5;
-                color: $wwhite;
-                margin-left: auto;
-                cursor: pointer;
-            }
-            span {
-                color: #686868;
-                margin: 0 20px;
-            }
-            span a {
-                color: #6293fe;
                 font-weight: 500;
-                text-decoration: none;
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-            .create-post-button:hover {
-                background-color: $bluehover;
-            }
-            .login:hover {
-                background-color: $bluehover;
             }
         }
     }

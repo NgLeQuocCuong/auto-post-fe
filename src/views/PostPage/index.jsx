@@ -2,7 +2,7 @@ import { memo, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'reducers/token/function';
 import userService from 'services/userService';
-import Inner from 'views/Login/Inner';
+import Inner from 'views/PostPage/Inner';
 
 const Wrapper = memo(() => {
     const navigate = useNavigate();
@@ -27,6 +27,6 @@ const Wrapper = memo(() => {
 });
 Wrapper.displayName = 'Login';
 
-const Login = Wrapper;
+const PostPage = Wrapper;
 
-export default Login;
+export default PostPage;

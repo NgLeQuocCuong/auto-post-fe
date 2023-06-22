@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.scss';
+import '../style.scss';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
