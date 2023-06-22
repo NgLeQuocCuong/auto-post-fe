@@ -1,0 +1,84 @@
+@import 'scss/global.scss';
+
+*[class^='ant'] {
+    font-family: $font-inter;
+}
+
+.container {
+    width: 30%;
+    margin: 2% auto;
+}
+
+/* Override ant design  */
+.ant-list-split .ant-list-item {
+    border-block-end: 1px solid #d9d9d9;
+}
+.ant-form-item-control-input-content {
+    @include font-16;
+    font-weight: 500;
+}
+.ant-form-item {
+    margin-bottom: 12px;
+}
+.ant-image-mask {
+    border-radius: 50%;
+}
+
+.form {
+    &__title {
+        font-weight: 500;
+        @include font-24;
+    }
+    &__label {
+        &-padding-bottom-0 .ant-form-item-label {
+            padding-bottom: 0;
+            label {
+                color: #727272;
+            }
+        }
+    }
+    &__btn {
+        &-big {
+            height: 40px;
+            font-size: 16px;
+        }
+        &-blue {
+            color: #155df5;
+            &:not(:disabled):hover,
+            &:not(:disabled):active {
+                color: #4096ff;
+            }
+        }
+        &-border {
+            border-color: #155df5;
+            &:not(:disabled):hover,
+            &:not(:disabled):active {
+                border-color: #4096ff;
+            }
+        }
+        &-noborder {
+            border: none;
+            &:not(:disabled):hover,
+            &:not(:disabled):active {
+                border: none;
+            }
+        }
+    }
+    /* Avatar */
+    &__avatar {
+        &-round {
+            border-radius: 50%;
+        }
+    }
+}
+
+/* CheckIcon container */
+.list {
+    &-icon-group {
+        display: flex;
+        align-items: center;
+        svg {
+            margin-left: 8px;
+        }
+    }
+}
