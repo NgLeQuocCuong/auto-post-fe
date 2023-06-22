@@ -1,0 +1,16 @@
+@import 'scss/global';
+// @import '../../scss/global.scss';
+
+.wrapper {
+    width: 1280px;
+    height: 600px;
+    border-radius: 20px;
+    margin: 60px auto 0;
+    background-color: $color-gray;
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: baseline;
+        font-weight: normal !important;
+    }
+}

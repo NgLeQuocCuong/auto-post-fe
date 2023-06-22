@@ -1,0 +1,9 @@
+@import 'scss/global';
+
+.wrapper {
+    width: 800px;
+    height: 600px;
+    border-radius: 20px;
+    margin: 20px auto;
+    background-color: $color-gray;
+}

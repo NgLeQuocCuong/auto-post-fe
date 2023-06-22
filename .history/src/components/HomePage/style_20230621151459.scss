@@ -1,0 +1,28 @@
+@import 'scss/global';
+
+.wrapper {
+    width: 1280px;
+    height: 600px;
+    border-radius: 20px;
+    margin: 60px auto 0;
+    background-color: $color-gray;
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 57px;
+        width: 250px;
+        padding: 25px 35px;
+        &--main {
+            text-transform: uppercase;
+            margin-block: 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        &--sub {
+            margin-block: 0;
+            font-weight: 300;
+            color: #898080;
+        }
+    }
+}

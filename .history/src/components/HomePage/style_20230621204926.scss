@@ -1,0 +1,75 @@
+@import 'scss/global';
+
+.wrapper {
+    width: 1280px;
+    height: 800px;
+    border-radius: 20px;
+    margin: 60px auto 120px;
+    background-color: $color-gray;
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 57px;
+        width: 240px;
+        padding: 20px 35px;
+        &--main {
+            text-transform: uppercase;
+            margin-block: 0;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        &--sub {
+            margin-block: 0;
+            font-weight: 300;
+            color: #bbabab;
+        }
+    }
+    &__social {
+        padding: 20px 35px;
+        &--title {
+            margin-right: 30px;
+        }
+    }
+    &__checkList {
+        padding: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &--label {
+            font-weight: 600;
+        }
+    }
+    &__button {
+        float:right;
+        margin-right: 35px;
+        &--content {
+            padding: 
+        }
+    }
+}
+
+.contentwrapper {
+    margin: 0 35px;
+    background-color: #FCF7F7;
+    border-color: #FCF7F7;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Inter';
+    font-size: 16px;
+}
+.ql-toolbar.ql-snow {
+    border: 0 !important;
+    border-bottom: 1px solid #bbabab !important;
+}
+.ql-container {
+    font-family: $font-inter !important;
+    .ql-editor {
+        font-size: 16px !important;
+    }
+}
+.ql-container.ql-snow {
+    border: 0 !important;
+    height: 450px;
+}
