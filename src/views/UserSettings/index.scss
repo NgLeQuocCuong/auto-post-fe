@@ -4,9 +4,9 @@
     font-family: $font-inter;
 }
 
-.container {
-    width: 30%;
-    margin: 2% auto;
+#root {
+    max-width: 448px;
+    margin: 72px auto;
 }
 
 /* Override ant design  */
@@ -40,7 +40,7 @@
     &__btn {
         &-big {
             height: 40px;
-            font-size: 16px;
+            @include font-16;
         }
         &-blue {
             color: #155df5;
@@ -77,8 +77,6 @@
     &-icon-group {
         display: flex;
         align-items: center;
-        svg {
-            margin-left: 8px;
-        }
+        gap: 8px;
     }
 }

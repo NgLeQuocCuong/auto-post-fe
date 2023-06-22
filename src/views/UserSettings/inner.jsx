@@ -1,5 +1,4 @@
 import { Button, Form, Typography, Space, List, Col, Row, Image } from 'antd';
-import Message from 'components/Message';
 import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
 import './index.scss';
@@ -8,7 +7,7 @@ import CheckIcon from 'components/CommonInput/icons/CheckIcon';
 const Inner = memo(({ handleUnlinkFacebook, handleLogout }) => {
     return (
         <AccountLayout title="User Settings">
-            <Row className="container">
+            <Row>
                 <Col span={6}>
                     <Image
                         width={94}
@@ -62,27 +61,23 @@ const Inner = memo(({ handleUnlinkFacebook, handleLogout }) => {
                                     </Typography.Text>
 
                                     <Button
+                                        type="link"
                                         danger
-                                        className="form__btn-noborder"
                                         onClick={handleUnlinkFacebook}
                                     >
                                         Hủy liên kết Facebook
                                     </Button>
                                 </List.Item>
                                 <List.Item>
-                                    <Typography.Text>Zalo</Typography.Text>
-                                    <Button className="form__btn-blue form__btn-noborder">
-                                        Liên kết Zalo
-                                    </Button>
+                                    <Typography.Text className="list-icon-group">
+                                        Zalo
+                                    </Typography.Text>
+                                    <Button type="link">Liên kết Zalo</Button>
                                 </List.Item>
                             </List>
                         </Form.Item>
                         <Form.Item className="form__label-padding-bottom-0">
-                            <Button
-                                danger
-                                onClick={handleLogout}
-                                className="form__btn-noborder"
-                            >
+                            <Button type="link" danger onClick={handleLogout}>
                                 Đăng xuất
                             </Button>
                         </Form.Item>
