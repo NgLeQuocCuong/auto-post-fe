@@ -3,63 +3,57 @@ import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
+import '../../layouts/Account/index.scss';
 import AccountInput from 'layouts/Account/AccountInput';
-import Checkbox from 'components/CommonInput/components/Checkbox';
 import AccountLayoutImage from '../../assets/images/AccountLayoutImage.png';
-const Inner = memo(({ handleLogin }) => {
+
+const Inner = memo(({ handleRegister }) => {
     return (
-        <AccountLayout title="Login">
+        <AccountLayout title="Register">
             <div className="account-layout-container">
                 <div className="account-layout__left">
-
-
                     <div className="account-layout__autopost-logo"><span>AUTO</span>POST</div>
-                    
                     <div className="account-layout__input">
-                    <div className="input__title">Đăng nhập</div>
+                        <div className="input__title">Đăng ký</div>
+                        <div>
+                            <AccountInput label="Họ và tên" type="text" />
+                        </div>
+                        <div>
+                            <AccountInput label="Email" type="email" />
+                        </div>
                         <div>
                             <AccountInput label="Tên đăng nhập" type="text" />
                         </div>
                         <div>
                             <AccountInput label="Mật khẩu" type="password" />
                         </div>
-                        <div className="input__group">
-                            <Checkbox value="Ghi nhớ" options={
-                                [
-                                    {value: 'Ghi nhớ đăng nhập', 
-                                    label: 'Ghi nhớ đăng nhập'}
-                                ]} 
-                            />
-                            <NavLink to={routeConstants.FORGOT_PASSWORD}>
-                                Quên mật khẩu?
-                            </NavLink>
+                        <div>
+                            <AccountInput label="Nhập lại mật khẩu" type="password" />
                         </div>
-                        
                         <Button id="register" className="account-layout-button" type="primary">
-                            <NavLink to={routeConstants.LOGIN}>
-                                Đăng nhập
+                        <NavLink to={routeConstants.LOGIN}>
+                                Đăng ký
                             </NavLink>
                         </Button>
                         <div className="has-account">
-                            Chưa có tài khoản? &nbsp;
-                            <NavLink to={routeConstants.REGISTER}>
-                                Đăng ký
+                            Đã có tài khoản? &nbsp;
+                            <NavLink to={routeConstants.LOGIN}>
+                                Đăng nhập
                             </NavLink>
                         </div>
-                    </div>
-                    <div className="account-layout__footer">
-                        © 2023 AutoPost is a product of Horus Co., Ltd
+                        <div className="account-layout__footer">
+                            © 2023 AutoPost is a product of Horus Co., Ltd
+                        </div>
                     </div>
                 </div>
                 <div className="account-layout__right">
-                    <img src={AccountLayoutImage} alt="Account layout"/>
+                    <img src={AccountLayoutImage} alt="Account layout" />
                 </div>
-
             </div>
         </AccountLayout>
     );
 });
 
-Inner.displayName = 'Login Inner';
+Inner.displayName = 'Register Inner';
 
 export default Inner;

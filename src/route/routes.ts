@@ -32,6 +32,16 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
+        name: 'Register',
+        path: routeConstants.REGISTER,
+        Component: commonLoadable(() => import('views/Register')),
+    },
+    {
+        name: 'Forgot Password',
+        path: routeConstants.FORGOT_PASSWORD,
+        Component: commonLoadable(() => import('views/ForgotPassword')),
+    },
+    {
         name: '404',
         path: '*',
         redirect: routeConstants.LOGIN,
