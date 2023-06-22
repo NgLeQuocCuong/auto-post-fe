@@ -1,7 +1,7 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'reducers/token/function';
-import userService from 'services/userService';
+
 import Inner from 'views/UserSettings/inner';
 import Message from 'components/Message';
 
@@ -10,23 +10,62 @@ const Wrapper = memo(() => {
     useEffect(() => {
         const token = getToken();
         if (token) {
-            // navigate to main page
+            // navigate to the main page
         }
     }, [navigate]);
 
-    const handleUnlinkFacebook = useCallback(async data => {
-        const response = await userService.post(data);
+    const [facebookLinked, setFacebookLinked] = useState(true);
+    const [zaloLinked, setZaloLinked] = useState(true);
 
-        if (response.isSuccess) {
-            ///
-        }
+    const handleToggleFacebookLink = useCallback(
+        async data => {
+            if (facebookLinked) {
+                // Handle unlink Facebook
+                // const response = await userService.unlinkFacebook();
+                const response = { isSuccess: true }; // Mock response
+                if (response.isSuccess) {
+                    setFacebookLinked(false);
+                    // Perform other actions after successful Facebook unlink
+                }
+            } else {
+                // Handle link Facebook
+                // const response = await userService.linkFacebook();
+                const response = { isSuccess: true }; // Mock response
+                if (response.isSuccess) {
+                    setFacebookLinked(true);
+                    // Perform other actions after successful Facebook link
+                }
+            }
+        },
+        [facebookLinked]
+    );
 
-        return response;
-    }, []);
+    const handleToggleZaloLink = useCallback(
+        async data => {
+            if (zaloLinked) {
+                // Handle unlink Zalo
+                // const response = await userService.unlinkZalo();
+                const response = { isSuccess: true }; // Mock response
+                if (response.isSuccess) {
+                    setZaloLinked(false);
+                    // Perform other actions after successful Zalo unlink
+                }
+            } else {
+                // Handle link Zalo
+                // const response = await userService.linkZalo();
+                const response = { isSuccess: true }; // Mock response
+                if (response.isSuccess) {
+                    setZaloLinked(true);
+                    // Perform other actions after successful Zalo link
+                }
+            }
+        },
+        [zaloLinked]
+    );
 
     const handleLogout = useCallback(async data => {
-        const response = await userService.post(data);
-
+        // const response = await userService.logout();
+        const response = { isSuccess: true }; // Mock response
         if (response.isSuccess) {
             // Logout
         }
@@ -36,11 +75,15 @@ const Wrapper = memo(() => {
 
     return (
         <Inner
-            handleUnlinkFacebook={handleUnlinkFacebook}
+            facebookLinked={facebookLinked}
+            zaloLinked={zaloLinked}
+            handleToggleFacebookLink={handleToggleFacebookLink}
+            handleToggleZaloLink={handleToggleZaloLink}
             handleLogout={handleLogout}
         />
     );
 });
+
 Wrapper.displayName = 'User Settings';
 
 const UserSettings = Wrapper;
