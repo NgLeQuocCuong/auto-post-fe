@@ -3,7 +3,6 @@ import { memo } from 'react';
 import AccountLayout from 'layouts/Account';
 import './index.scss';
 import CheckIcon from 'components/CommonInput/icons/CheckIcon';
-import CloseIcon from 'components/CommonInput/icons/CloseIcon';
 
 const Inner = memo(
     ({
@@ -68,7 +67,7 @@ const Inner = memo(
                                             {facebookLinked ? (
                                                 <CheckIcon />
                                             ) : (
-                                                <CloseIcon />
+                                                ''
                                             )}
                                         </Typography.Text>
 
@@ -84,12 +83,8 @@ const Inner = memo(
                                     </List.Item>
                                     <List.Item>
                                         <Typography.Text className="list-icon-group">
-                                            Zalo{' '}
-                                            {zaloLinked ? (
-                                                <CheckIcon />
-                                            ) : (
-                                                <CloseIcon />
-                                            )}
+                                            Zalo
+                                            {zaloLinked ? <CheckIcon /> : ''}
                                         </Typography.Text>
                                         <Button
                                             type="link"

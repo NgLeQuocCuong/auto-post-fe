@@ -15,7 +15,7 @@ const Wrapper = memo(() => {
     }, [navigate]);
 
     const [facebookLinked, setFacebookLinked] = useState(true);
-    const [zaloLinked, setZaloLinked] = useState(true);
+    const [zaloLinked, setZaloLinked] = useState(false);
 
     const handleToggleFacebookLink = useCallback(
         async data => {
@@ -67,10 +67,10 @@ const Wrapper = memo(() => {
         // const response = await userService.logout();
         const response = { isSuccess: true }; // Mock response
         if (response.isSuccess) {
-            // Logout
+            return Message.sendSuccess('Đang đăng xuất', 2);
+        } else {
+            return Message.sendError('Có lỗi xảy ra', 2);
         }
-
-        return Message.sendSuccess('Đăng xuất', 2);
     }, []);
 
     return (
