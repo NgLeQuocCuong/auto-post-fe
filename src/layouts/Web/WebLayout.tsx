@@ -1,6 +1,6 @@
 import {FC, PropsWithChildren, memo} from 'react';
 import './index.scss';
-import Header from 'components/HomePage/components/Header';
+import Header from '../../components/PostPage/components/Header';
 
 const WebLayout: FC<PropsWithChildren> = memo(
     ({children}) => {

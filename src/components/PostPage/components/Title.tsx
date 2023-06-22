@@ -1,6 +1,6 @@
 import {FC, memo} from 'react';
 import '../style.scss';
-import PenIcon from 'components/HomePage/icons/PenIcon';
+import PenIcon from 'components/PostPage/icons/PenIcon';
 
 interface Props {
     title?: string;

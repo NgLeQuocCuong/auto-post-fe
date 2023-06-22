@@ -3,8 +3,8 @@ import '../style.scss';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
-import LogoSmall from 'components/HomePage/icons/LogoSmall';
-import SearchIcon from 'components/HomePage/icons/SearchIcon';
+import LogoSmall from 'components/PostPage/icons/LogoSmall';
+import SearchIcon from 'components/PostPage/icons/SearchIcon';
 
 const items = [
     {

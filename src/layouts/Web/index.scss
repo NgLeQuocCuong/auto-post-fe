@@ -2,7 +2,7 @@
 
 .wrap {
     &__header{
-        background-color: #f5f5f5;
+        background-color: $color-gray-light;
         &--menu {
             position: fixed;
             top: 0;

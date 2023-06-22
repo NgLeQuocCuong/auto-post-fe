@@ -1,13 +1,13 @@
 // import { Button, Input } from 'antd';
 import { memo } from 'react';
-import Social from 'components/HomePage/components/Social';
-import Title from 'components/HomePage/components/Title';
-import Wrapper from 'components/HomePage/components/Wrapper';
 import './style.scss';
-import Content from 'components/HomePage/components/Content';
-import CheckList from 'components/HomePage/components/DropDown';
-import DropButton from 'components/HomePage/components/DropButton';
 import WebLayout from 'layouts/Web/WebLayout';
+import Wrapper from 'components/PostPage/components/Wrapper';
+import Social from 'components/PostPage/components/Social';
+import CheckList from 'components/PostPage/components/DropDown';
+import DropButton from 'components/PostPage/components/DropButton';
+import Title from 'components/PostPage/components/Title';
+import Content from 'components/PostPage/components/Content';
 
 // import AccountLayout from 'layouts/Account';
 // import { NavLink } from 'react-router-dom';
