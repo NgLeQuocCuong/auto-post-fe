@@ -6,8 +6,7 @@ import Icon404 from 'views/Error/ErrorHanlder/E404/Icon404';
 const E404 = memo(() => {
     return (
         <div className="error-page">
-            <div className="error-page__logo">
-            </div>
+            <div className="error-page__logo"></div>
             <h1 className="error-page__title">404</h1>
             <div className="error-page__main-content">
                 <Icon404 />
