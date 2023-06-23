@@ -1,3 +1,4 @@
+import Popup from 'components/Popup';
 import { memo, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'reducers/token/function';
@@ -14,16 +15,15 @@ const Wrapper = memo(() => {
     }, [navigate]);
 
     const handleRegister = useCallback(async data => {
-        const response = await userService.login(data);
-
+        const response = await userService.register(data);
         if (response.isSuccess) {
-            // set token
+            Popup.popupSuccess('Đăng ký thành công!');
+            
         }
-
         return response;
     }, []);
 
-    return <Inner handleLogin={handleRegister} />;
+    return <Inner handleRegister={handleRegister} />;
 });
 Wrapper.displayName = 'Register';
 

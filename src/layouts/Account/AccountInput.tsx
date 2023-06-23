@@ -1,36 +1,36 @@
-import { useState, memo, FC, FocusEvent } from 'react'
+import {  memo, FC } from 'react'
+import {Form, Input } from 'antd';
 import './index.scss';
 
 interface AccountInputProps {
-  label: string;
-  type: string;
+
+    type: string;
+    name: string;
+    placeholder: string;
+    required?: boolean;
+    requiredMessage?: string;
 }
 
-const AccountInput: FC<AccountInputProps> = memo(({ label, type }) => {
-    const [isLabelVisible, setIsLabelVisible] = useState(false);
-    const [isInputFocused, setIsInputFocused] = useState(false);
+const AccountInput: FC<AccountInputProps> = memo(
+    ({ type, 
+        name, 
+        placeholder, 
+        required, 
+        requiredMessage,
+        ...props 
+    }) => {
 
-    const handleFocus = () => {
-        setIsLabelVisible(true);
-        setIsInputFocused(true);
-    };
-
-    const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-        if (e.target.value.length === 0) {
-            setIsLabelVisible(false); //Don't show label when the input is empty
-        }
-        setIsInputFocused(false);
-    };
+    const rules = required ? [{ required: true, message: requiredMessage || 'Trường này không được để trống.' }] : [];
 
     return (
-        <div className="account-input-container">
-            <label className={`account-input__label ${isLabelVisible && 'visible'}`}>{label}</label>
-            <input 
-                className={`account-input__input ${isInputFocused && 'focused'}`} 
-                type={type} placeholder={label} 
-                onFocus={handleFocus} onBlur={handleBlur} 
+        <Form.Item name={name} rules={rules}>
+            <Input 
+                type={type} 
+                name={name} 
+                placeholder={placeholder} 
+                {...props}
             />
-        </div>
+        </Form.Item>
     );
 });
 
