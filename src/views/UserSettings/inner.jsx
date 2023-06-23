@@ -14,7 +14,7 @@ const Inner = memo(
     }) => {
         return (
             <AccountLayout title="User Settings">
-                <Row>
+                <Row className="container">
                     <Col span={6}>
                         <Image
                             width={94}
