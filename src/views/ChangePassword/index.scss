@@ -1,0 +1,46 @@
+@import 'scss/global.scss';
+
+*[class^='ant'] {
+    font-family: $font-inter;
+}
+
+.container {
+    max-width: 448px;
+    margin: 72px auto;
+}
+
+.form {
+    &__title {
+        font-weight: 600;
+        @include font-24;
+        display: inline-block;
+        margin-bottom: 16px;
+    }
+    &__label {
+        &-fw-600 {
+            .ant-form-item-label {
+                font-weight: 600;
+            }
+        }
+    }
+    &__avatar {
+        &-round {
+            border-radius: 50%;
+        }
+        &-fit {
+            object-fit: none;
+        }
+    }
+}
+.ant-image-mask {
+    border-radius: 50%;
+}
+
+.ant-form-item-label > label.ant-form-item-required::after {
+    display: inline-block;
+    color: #ff4d4f;
+    content: '*';
+}
+.ant-form-item-label > label.ant-form-item-required::before {
+    content: none !important;
+}
