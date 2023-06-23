@@ -1,8 +1,10 @@
 const messageCodes = {
-    SUCCESS: 'Success',
+    SUCCESS: 'Thành công',
     CONTACT_ADMIN_FOR_SUPPORT:
         'Có lỗi xảy ra. Vui lòng liên hệ quản trị viên để được hỗ trợ',
-
+    USER_NOT_FOUND: 'Email đăng nhập không tồn tại',
+    INVALID_PASSWORD: 'Mật khẩu đã nhập không chính xác',
+    EMAIL_HAS_BEEN_USED: 'Email đã được sử dụng',
     VALIDATION_ERROR: 'Dữ liệu không hợp lệ',
     PARSE_ERROR: 'Dữ liệu không hợp lệ',
     AUTHENTICATION_FAILED: 'Đăng nhập thất bại',

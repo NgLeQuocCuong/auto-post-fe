@@ -2,15 +2,18 @@ import ApiBase from 'modules/apis/apiBase';
 
 const _USER_PATH = '/users';
 const _OAUTH_PATH = '/oauth';
-
 class UserService extends ApiBase {
     me = () => {
         const url = `${_USER_PATH}/get/me`;
         return this.get(url);
     };
-
+    register = (requestBody: any) => {
+        const url = `${_USER_PATH}/register`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
     login = (requestBody: any) => {
-        const url = `${_OAUTH_PATH}/login`;
+        const url = `${_USER_PATH}/login`;
         const res = this.post(url, requestBody);
         return res;
     };
