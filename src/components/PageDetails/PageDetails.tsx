@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import './style.scss';
-import MainLayout from 'layouts/Main';
+import AccountLayout from 'layouts/Account';
 // import Wrapper from 'components/PageDetails/components/Wrapper';
 // import Title from 'components/PageDetails/components/Title';
 // import Social from 'components/PageDetails/components/Social';
@@ -23,7 +23,7 @@ interface Props {
 }
 const PageDetails = memo(post => {
     return (
-        <MainLayout>
+        <AccountLayout>
             <div className="post-container">
                 <div className="header">
                     <div className="left-section">
@@ -72,7 +72,7 @@ const PageDetails = memo(post => {
                 </div>
                 <div className="post-content">Lorem Sirum</div>
             </div>
-        </MainLayout>
+        </AccountLayout>
     );
 });
 
