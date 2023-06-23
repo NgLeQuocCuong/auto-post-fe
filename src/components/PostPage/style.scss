@@ -1,11 +1,14 @@
 @import 'scss/global';
 
 .wrapper {
-    width: 80%;
-    height: 800px;
-    border-radius: 20px;
-    margin: 0 auto;
-    background-color: $color--light;
+    padding: 120px 0;
+    &__content {
+        width: 90%;
+        height: 800px;
+        border-radius: 20px;
+        margin: 0 auto;
+        background-color: $color--light;
+    }
     &__title {
         display: flex;
         align-items: center;
@@ -23,7 +26,7 @@
         &--sub {
             margin-block: 0;
             font-weight: 300;
-            color: #bbabab;
+            color: $color--subtext;
         }
     }
     &__social {
@@ -51,9 +54,8 @@
     &__wrap {
         display: flex;
         align-items: center;
-        width: 100%;
         padding: 16px 48px;
-        border-bottom: 1px solid #dde7fd;
+        border-bottom: 1px solid $color--border2;
         background-color: $color--light;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         &--logo {
@@ -71,7 +73,7 @@
                 width: 240px;
                 padding: 10px 10px 10px 40px;
                 font-family: $font-inter;
-                background-color: #ececec;
+                background-color: $color-bg-input;
                 color: $color--text4;
                 font-size: 16px;
                 border-radius: 16px;
@@ -113,9 +115,9 @@
             padding: 10px 15px;
             border-radius: 12px;
             transition: all 0.2s linear;
-            &:active {
-                color: #0042ed;
-                background-color: #dde7fd;
+            &-active {
+                color: $color--text5;
+                background-color: $color--border2;
             }
         }
         &--button {
@@ -124,7 +126,7 @@
     }
 }
 //menu
-.navbar {
+.nav-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -132,13 +134,16 @@
 }
 //css content wrapper
 .contentwrapper {
+    display: flex;
+    flex-direction: column;
     &__content {
         margin: 0 35px;
+        padding-bottom: 44px;
         background-color: $color-gray-light;
         border-color: $color-gray-light;
         border-radius: 12px;
         overflow: hidden;
-        font-family: 'Inter';
+        font-family: $font-inter;
         font-size: 16px;
     }
 }
@@ -154,6 +159,7 @@
 }
 .ql-container.ql-snow {
     border: 0 !important;
+    border-bottom: 1px solid #bbabab !important;
     height: 450px;
 }
 /* Định nghĩa kiểu hiển thị của ảnh */

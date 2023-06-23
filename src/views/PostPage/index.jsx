@@ -4,7 +4,7 @@ import Inner from 'views/PostPage/Inner';
 const Wrapper = memo(() => {
     return <Inner/>;
 });
-Wrapper.displayName = 'Login';
+Wrapper.displayName = 'PostPage';
 
 const PostPage = Wrapper;
 

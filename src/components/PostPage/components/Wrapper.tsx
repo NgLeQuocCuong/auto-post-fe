@@ -4,8 +4,8 @@ import '../style.scss';
 const Wrapper: FC<PropsWithChildren> = memo(
     ({ children }) => {
         return (
-            <div style={{padding: '120px 0'}}>
-                <div className='wrapper'>
+            <div className='wrapper'>
+                <div className='wrapper__content'>
                     {children}
                 </div>
             </div>

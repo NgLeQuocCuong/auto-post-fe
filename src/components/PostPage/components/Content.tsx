@@ -11,36 +11,20 @@ const Content: FC = memo(() => {
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [{ list: 'ordered' }, { list: 'bullet' }],
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ['link', 'image',],
+            ['link', 'image'],
         ],
     }
-    const formats = [
-        'header',
-        'font',
-        'size',
-        'bold',
-        'italic',
-        'underline',
-        'strike',
-        'blockquote',
-        'list',
-        'bullet',
-        'indent',
-        'link',
-        'image',
-        'color',
-        'size',
-        'video',
-        'align',
-        'background',
-        'direction',
-        'code-block',
-        'code',
-        ];
     
     return (
-        <div className = 'contentwrapper'>
-            <ReactQuill formats={formats} modules={modules} theme="snow" value={value} onChange={setValue} className='contentwrapper__content'/>
+        <div className='contentwrapper'>
+            <ReactQuill 
+                modules={modules} 
+                theme="snow" 
+                value={value} 
+                onChange={setValue} 
+                className='contentwrapper__content'
+                placeholder='Nhập nội dung ...'
+            />
         </div>
     );
 });

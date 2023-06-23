@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { FC, memo } from 'react';
 import './style.scss';
 import WebLayout from 'layouts/Web/WebLayout';
 import Wrapper from 'components/PostPage/components/Wrapper';
@@ -8,11 +8,11 @@ import Content from 'components/PostPage/components/Content';
 import CheckList from 'components/PostPage/components/DropDown';
 import DropButton from 'components/PostPage/components/DropButton';
 
-const PostPage = memo(() => {
+const PostPage: FC = memo(() => {
     return (
         <WebLayout>
             <Wrapper>
-                <div className='navbar'>
+                <div className='nav-bar'>
                     <Title title='tạo bài viết mới' subTitle='Bạn muốn đăng gì nào?' />
                     <Social/>
                 </div>

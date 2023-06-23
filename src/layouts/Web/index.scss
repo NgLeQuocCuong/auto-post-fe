@@ -1,14 +1,17 @@
 @import 'scss/global';
 
+.container {
+    width: 90%;
+    margin: 0 auto;
+    background-color: $color-gray-light;
+}
+
 .wrap {
-    &__header{
-        background-color: $color-gray-light;
-        &--menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-        }
+    &--menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
     }
 }

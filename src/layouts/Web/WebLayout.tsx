@@ -1,12 +1,12 @@
 import {FC, PropsWithChildren, memo} from 'react';
 import './index.scss';
-import Header from '../../components/PostPage/components/Header';
+import Header from 'components/PostPage/components/Header';
 
 const WebLayout: FC<PropsWithChildren> = memo(
     ({children}) => {
         return (
-            <div className='wrap__header'>
-                <div className='wrap__header--menu'>
+            <div className='container'>
+                <div className='wrap--menu'>
                     <Header></Header>
                 </div>
                 {children}

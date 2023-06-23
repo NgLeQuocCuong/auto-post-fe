@@ -37,7 +37,9 @@ const Header: React.FC = () => {
                     {
                         items.map((item) => (
                             <li className='header__wrap--item' key={item.id}>
-                                <NavLink to={item.url} className='header__wrap--link'>
+                                <NavLink 
+                                    to={item.url} 
+                                    className={({isActive}) => (isActive ? 'header__wrap--link-active header__wrap--link' : 'header__wrap--link')}>
                                     {item.name}
                                 </NavLink>
                             </li>
@@ -45,9 +47,11 @@ const Header: React.FC = () => {
                     }
                 </ul>
                 <div className='header__wrap--button'>
-                    <Button icon={<PlusOutlined />} type="primary">
-                        Đăng bài
-                    </Button>
+                    <NavLink to={'/post-page'}>
+                        <Button icon={<PlusOutlined />} type="primary">
+                            Đăng bài
+                        </Button>
+                    </NavLink>
                 </div>
             </div>
         </header>

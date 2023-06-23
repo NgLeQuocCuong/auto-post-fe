@@ -41,11 +41,11 @@ const routes: Array<Route> = [
         path: routeConstants.POST_PAGE,
         Component: commonLoadable(() => import('views/PostPage')),
     },
-    // {
-    //     name: '404',
-    //     path: '*',
-    //     redirect: routeConstants.LOGIN,
-    // },
+    {
+        name: '404',
+        path: '*',
+        redirect: routeConstants.HOMEPAGE,
+    },
 ];
 
 export default routes;
