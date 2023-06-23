@@ -1,4 +1,4 @@
-@import '../../scss/global.scss';
+@import 'scss/global.scss';
 
 .account-input-container {
     position: relative;
@@ -6,40 +6,38 @@
     width: 100%;
 }
 
-.account-input__label {
-    display: none;
-    width: auto;
-    position: absolute;
-    top: -10px;
-    padding: 0 2px;
-    margin-left: 16px;
-    background: white;
-    color: black;
-    @include font-14;
-}
-
-input {
-    width: calc(100% - 16px); //Avoid the input to overflow 16px to the right
-    height: 44px;
-    border-radius: 6px;
-    padding-left: 16px;
-    margin: 0;
-    outline: none;
-    border: 1px solid #868686;
-    @include font-16;
-}
-
-
-input::placeholder {
-    @include font-16;
-    
-}
-
-input:focus::placeholder {
-    color: transparent;
-
-}
-
-input:not(:empty) label {
-    display: inline-block !important;
+.account-input {
+    &__label {
+        display: none;
+        width: auto;
+        position: absolute;
+        top: -10px;
+        padding: 0 2px;
+        margin-left: 16px;
+        background: white;
+        color: black;
+        @include font-14;
+        &.visible {
+            display: inline-block;
+        }
+    }
+    &__input {
+        width: calc(100% - 16px); //Avoid the input to overflow 16px to the right
+        height: 44px;
+        border-radius: 6px;
+        padding-left: 16px;
+        margin: 0;
+        outline: none;
+        border: 1px solid #868686;
+        @include font-16;
+        &::placeholder {
+            @include font-16;
+        }
+        &:focus::placeholder {
+            color: transparent;
+        }
+        &.focused {
+            border-color: blue;
+        }
+    }
 }

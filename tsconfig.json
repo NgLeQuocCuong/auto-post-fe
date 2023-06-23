@@ -19,7 +19,10 @@
         "jsx": "react-jsx",
         "noFallthroughCasesInSwitch": true,
         "baseUrl": "src",
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "paths": {
+          "scss/*": ["../../scss/*"],
+        }
     },
     "include": ["src", "declarations.d.ts"],
 }

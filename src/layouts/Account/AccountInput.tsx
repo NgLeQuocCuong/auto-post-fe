@@ -1,30 +1,38 @@
-import { useRef } from 'react'
+import { useState, memo, FC, FocusEvent } from 'react'
 import './index.scss';
-function AccountInput(props: any) {
-    const formLabel = useRef<HTMLLabelElement>(null);
-    const formInput = useRef<HTMLInputElement>(null);
-    const handleFocus = () => {
-        if (formLabel.current !== null) {
-            formLabel.current.style.display = 'inline-block';
-        }
-        if (formInput.current !== null) {
-            formInput.current.style.border = '1px solid blue';
-        }
-    };
-    const handleBlur = () => {
-        if (formInput.current?.value === '' && formLabel.current !== null) {
-                formLabel.current.style.display = 'none';
-        }
-        if (formInput.current !== null) {
-            formInput.current.style.border = '1px solid #868686';
-        }
-    };
-    return (
-        <div className="account-input-container">
-            <label ref={formLabel} className="account-input__label">{props.label}</label>
-            <input ref={formInput} type={props.type} placeholder={props.label} onFocus={handleFocus} onBlur={handleBlur} />
-        </div>
-    )
+
+interface AccountInputProps {
+  label: string;
+  type: string;
 }
 
+const AccountInput: FC<AccountInputProps> = memo(({ label, type }) => {
+    const [isLabelVisible, setIsLabelVisible] = useState(false);
+    const [isInputFocused, setIsInputFocused] = useState(false);
+
+    const handleFocus = () => {
+        setIsLabelVisible(true);
+        setIsInputFocused(true);
+    };
+
+    const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+        if (e.target.value.length === 0) {
+            setIsLabelVisible(false); //Don't show label when the input is empty
+        }
+        setIsInputFocused(false);
+    };
+
+    return (
+        <div className="account-input-container">
+            <label className={`account-input__label ${isLabelVisible && 'visible'}`}>{label}</label>
+            <input 
+                className={`account-input__input ${isInputFocused && 'focused'}`} 
+                type={type} placeholder={label} 
+                onFocus={handleFocus} onBlur={handleBlur} 
+            />
+        </div>
+    );
+});
+
+AccountInput.displayName = 'AccountInput';
 export default AccountInput;

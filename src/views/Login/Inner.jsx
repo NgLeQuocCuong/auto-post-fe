@@ -19,7 +19,9 @@ const Inner = memo(({ handleLogin }) => {
                 <span>AUTO</span>POST
             </div>
 
-            <div className="account-layout__input">
+            <form className="account-layout__input"
+                  onSubmit={handleLogin}
+            >
                 <div className="input__title">Đăng nhập</div>
                 <div>
                 <AccountInput label="Tên đăng nhập" type="text" />
@@ -41,23 +43,21 @@ const Inner = memo(({ handleLogin }) => {
                     Quên mật khẩu?
                 </NavLink>
                 </div>
-
-                <Button
-                id="register"
-                className="account-layout-button"
-                type="primary"
-                onClick={handleMessage}
-                >
-                <NavLink to={routeConstants.LOGIN}>Đăng nhập</NavLink>
-                
-                </Button>
-                
-
+                <NavLink to={routeConstants.ALL_POSTS}>
+                    <Button
+                    id="register"
+                    className="account-layout-button"
+                    type="primary"
+                    onClick={handleMessage}
+                    >
+                    Đăng nhập
+                    </Button>
+                </NavLink>
                 <div className="has-account">
-                Chưa có tài khoản? &nbsp;
-                <NavLink to={routeConstants.REGISTER}>Đăng ký</NavLink>
+                    Chưa có tài khoản? &nbsp;
+                    <NavLink to={routeConstants.REGISTER}>Đăng ký</NavLink>
                 </div>
-            </div>
+            </form>
             <div className="account-layout__footer">
                 © 2023 AutoPost is a product of Horus Co., Ltd
             </div>
