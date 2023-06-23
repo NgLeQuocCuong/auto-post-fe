@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import './style.scss';
 import AccountLayout from 'layouts/Account';
+import { useEffect } from 'react';
 // import Wrapper from 'components/PageDetails/components/Wrapper';
 // import Title from 'components/PageDetails/components/Title';
 // import Social from 'components/PageDetails/components/Social';
@@ -24,22 +25,16 @@ interface Props {
 const PageDetails = memo(post => {
     return (
         <AccountLayout>
-            <div className="post-container">
+            <div className="details-view-container">
+                <div className="upper">
+                    <button className="edit-button">Edit</button>
+                </div>
                 <div className="header">
                     <div className="left-section">
-                        <div className="avatar">
-                            <img src="https://picsum.photos/170" alt="Avatar" />
-                        </div>
                         <div className="post-info">
-                            <h2 className="post-title">Phạm Quốc An </h2>
                             <div className="post-meta">
                                 <div className="category">
                                     <span>Quảng cáo</span>
-                                </div>
-                                <div className="info">
-                                    <span>
-                                        <strong>ID:</strong> ABCD
-                                    </span>
                                 </div>
                                 <div>
                                     <span>
@@ -52,7 +47,6 @@ const PageDetails = memo(post => {
                     </div>
                     <div className="right-section">
                         <div className="actions">
-                            <button className="edit-button">Edit</button>
                             <div className="social-stats">
                                 <div className="platform">
                                     <span>Seen: 1000</span>
