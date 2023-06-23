@@ -1,6 +1,6 @@
-import { Spin } from "antd";
-import { memo, useEffect } from "react";
-import { setError } from "reducers/error/function";
+import { Spin } from 'antd';
+import { memo, useEffect } from 'react';
+import { setError } from 'reducers/error/function';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const LoadableLoading = memo(({ error, retry, timedOut, pastDelay }) => {
@@ -13,7 +13,7 @@ const LoadableLoading = memo(({ error, retry, timedOut, pastDelay }) => {
 
     useEffect(() => {
         if (timedOut) {
-            setError(408, "Request timed out");
+            setError(408, 'Request timed out');
         }
     }, [timedOut]);
 
@@ -23,6 +23,6 @@ const LoadableLoading = memo(({ error, retry, timedOut, pastDelay }) => {
         </div>
     );
 });
-LoadableLoading.displayName = "LoadableLoading";
+LoadableLoading.displayName = 'LoadableLoading';
 
 export default LoadableLoading;

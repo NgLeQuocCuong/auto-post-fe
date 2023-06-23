@@ -4,13 +4,9 @@ import { StoreState } from 'store/type';
 import { commonActions } from '.';
 
 export const setExampleData = (value?: string) => {
-    dispatch(
-        commonActions.SET_EXAMPLE_DATA(value)
-    );
+    dispatch(commonActions.SET_EXAMPLE_DATA(value));
 };
 
 export const useFullScreenDataEntry = () => {
-    return useSelector(
-        (state: StoreState) => state?.common?.example
-    );
+    return useSelector((state: StoreState) => state?.common?.example);
 };
