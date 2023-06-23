@@ -32,6 +32,11 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
+        name: 'PageDetails',
+        path: routeConstants.PAGEDETAILS,
+        Component: commonLoadable(() => import('views/ViewPageDetails')),
+    },
+    {
         name: '404',
         path: '*',
         redirect: routeConstants.LOGIN,
