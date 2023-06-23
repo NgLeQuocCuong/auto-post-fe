@@ -1,9 +1,7 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "typeRoots": [
-            "node_modules/@types",
-          ],
+        "typeRoots": ["node_modules/@types"],
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
         "skipLibCheck": true,
@@ -21,5 +19,5 @@
         "baseUrl": "src",
         "experimentalDecorators": true
     },
-    "include": ["src", "declarations.d.ts"],
+    "include": ["src", "declarations.d.ts"]
 }

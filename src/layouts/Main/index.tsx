@@ -7,16 +7,14 @@ interface Props {
     subTitle?: string;
 }
 
-const MainLayout: FC<PropsWithChildren<Props>> = memo(
-    ({ children, title, subTitle }) => {
-        return (
-            <div>
-                <Header />
-                {children}
-            </div>
-        );
-    }
-);
+const MainLayout: FC<PropsWithChildren<Props>> = memo(({ children }) => {
+    return (
+        <div>
+            <Header />
+            {children}
+        </div>
+    );
+});
 MainLayout.displayName = 'MainLayout';
 
 export default MainLayout;
