@@ -1,10 +1,11 @@
 import './index.scss';
 import { Button } from 'antd';
-import { memo, useState, useCallback, useEffect } from 'react';
-import routeConstants from 'route/routeConstant';
+import { memo, useState} from 'react';
+// import routeConstants from 'route/routeConstant';
 import Dropdown from 'components/CommonInput/components/Dropdown';
 import TextInput from 'components/CommonInput/components/TextInput';
 import ToggleFilterIcon from 'components/CommonInput/icons/ToggleFilterIcon';
+import TableComponent from 'components/HomePage/components/Table';
 
 const Inner = memo(() => {
     const [isFilterShown, setIsFilterShown] = useState(false);
@@ -52,6 +53,7 @@ const Inner = memo(() => {
 
                 <Button type="primary">Áp dụng</Button>
             </div>
+            <TableComponent />
         </div>
     )
 });
