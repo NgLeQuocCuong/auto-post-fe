@@ -1,0 +1,83 @@
+@import 'scss/global.scss';
+
+.all-posts-container {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.all-posts {
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        &__title {
+            @include font-32;
+            @include fontSemibold;
+        }
+    }
+    &__filters {
+        display: none;
+        &.show-filters {
+            display: flex !important;
+            justify-content: flex-start;
+            height: 40px;
+            *:not(:last-child) {
+                margin-right: 24px;
+            }
+        }
+        .ant-btn-primary {
+            width: 96px;
+            height: 40px;
+            span {
+                margin: 0;
+            }
+        }
+    }
+
+}
+.posts-number {
+    margin-left: 8px;
+    color: $color--text2;
+}
+.ant-dropdown-trigger {
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: $color--text2;
+    span {
+        padding-left: 12px;
+    }
+    svg {
+        margin-right: 12px;
+    }
+}
+
+.ant-input-affix-wrapper {
+    width: 400px;
+    padding-right: 0;
+    .ant-input-suffix {
+        margin: 0;
+        width: 24px;
+        height: 40px;
+    }
+}
+
+.show-filters-btn {
+    border-radius: 24px;
+    background: $color--black_10;
+    display: flex;
+    align-items: center;
+    &.btn-shown {
+        background: $color--blue-bg;
+        color: blue;
+    } 
+}
+
