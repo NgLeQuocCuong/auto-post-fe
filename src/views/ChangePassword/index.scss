@@ -11,36 +11,39 @@
 
 .form {
     &__title {
-        font-weight: 600;
         @include font-24;
+        @include fontSemibold;
         display: inline-block;
-        margin-bottom: 16px;
+        &:has(+ .ant-space) {
+            margin-bottom: 16px;
+        }
     }
     &__label {
         &-fw-600 {
             .ant-form-item-label {
-                font-weight: 600;
+                @include fontSemibold;
             }
         }
     }
     &__avatar {
         &-round {
             border-radius: 50%;
+            + .ant-image-mask {
+                border-radius: 50%;
+            }
         }
         &-fit {
             object-fit: none;
         }
     }
-}
-.ant-image-mask {
-    border-radius: 50%;
-}
-
-.ant-form-item-label > label.ant-form-item-required::after {
-    display: inline-block;
-    color: #ff4d4f;
-    content: '*';
-}
-.ant-form-item-label > label.ant-form-item-required::before {
-    content: none !important;
+    .ant-form-item-label > label.ant-form-item-required {
+        &::after {
+            display: inline-block;
+            color: #ff4d4f;
+            content: '*';
+        }
+        &::before {
+            content: none !important;
+        }
+    }
 }

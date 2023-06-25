@@ -35,82 +35,70 @@ const Inner = memo(({ handleChangePassword }) => {
     ];
     return (
         <AccountLayout title="Change Password">
-            <Row className="container">
-                <Col span={6}>
-                    <Image
-                        width={94}
-                        height={94}
-                        src="https://i.imgur.com/ff52d7O.png"
-                        className="form__avatar-round form__avatar-fit"
+            <Form layout="vertical" className="container form">
+                <Form.Item>
+                    <Typography.Text className="form__title">
+                        Đổi mật khẩu
+                    </Typography.Text>
+                </Form.Item>
+                <Form.Item
+                    className="form__label-fw-600"
+                    name="password_current"
+                    label="Mật khẩu hiện tại"
+                    rules={rulesPasswordCurrent}
+                >
+                    <PasswordInput
+                        required
+                        size="large"
+                        placeholder="Nhập mật khẩu hiện tại"
                     />
-                </Col>
-                <Col span={18}>
-                    <Form layout="vertical">
-                        <Form.Item>
-                            <Typography className="form__title">
-                                Đổi mật khẩu
-                            </Typography>
-                        </Form.Item>
-                        <Form.Item
-                            className="form__label-fw-600"
-                            name="password_current"
-                            label="Mật khẩu hiện tại"
-                            rules={rulesPasswordCurrent}
-                        >
-                            <PasswordInput
-                                required
-                                size="large"
-                                placeholder="Nhập mật khẩu hiện tại"
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            className="form__label-fw-600"
-                            name="password_new"
-                            label="Mật khẩu mới"
-                            hasFeedback
-                            rules={rulesPasswordNew}
-                            tooltip={passwordTooltip}
-                        >
-                            <PasswordInput
-                                required
-                                size="large"
-                                placeholder="Nhập mật khẩu mới"
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            className="form__label-fw-600"
-                            name="password_renew"
-                            label="Xác nhận mật khẩu mới"
-                            dependencies={['password_new']}
-                            hasFeedback
-                            rules={rulesPasswordRenew}
-                        >
-                            <PasswordInput
-                                required
-                                size="large"
-                                placeholder="Nhập lại mật khẩu mới"
-                            />
-                        </Form.Item>
-                        <Form.Item style={{ clear: 'both' }}>
-                            <NavLink to={routeConstants.USER_SETTINGS}>
-                                <Button size="large" type="default">
-                                    Hủy
-                                </Button>
-                            </NavLink>
-                            <Button
-                                size="large"
-                                type="primary"
-                                onClick={handleChangePassword}
-                                style={{
-                                    float: 'right',
-                                }}
-                            >
-                                Lưu
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </Col>
-            </Row>
+                </Form.Item>
+                <Form.Item
+                    className="form__label-fw-600"
+                    name="password_new"
+                    label="Mật khẩu mới"
+                    hasFeedback
+                    rules={rulesPasswordNew}
+                    tooltip={passwordTooltip}
+                >
+                    <PasswordInput
+                        required
+                        size="large"
+                        placeholder="Nhập mật khẩu mới"
+                    />
+                </Form.Item>
+                <Form.Item
+                    className="form__label-fw-600"
+                    name="password_renew"
+                    label="Xác nhận mật khẩu mới"
+                    dependencies={['password_new']}
+                    hasFeedback
+                    rules={rulesPasswordRenew}
+                >
+                    <PasswordInput
+                        required
+                        size="large"
+                        placeholder="Nhập lại mật khẩu mới"
+                    />
+                </Form.Item>
+                <Form.Item style={{ clear: 'both' }}>
+                    <NavLink to={routeConstants.USER_SETTINGS}>
+                        <Button size="large" type="default">
+                            Hủy
+                        </Button>
+                    </NavLink>
+                    <Button
+                        size="large"
+                        type="primary"
+                        onClick={handleChangePassword}
+                        style={{
+                            float: 'right',
+                        }}
+                    >
+                        Lưu
+                    </Button>
+                </Form.Item>
+            </Form>
         </AccountLayout>
     );
 });
