@@ -4,6 +4,7 @@ import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
+import Message from 'components/Message';
 import './index.scss';
 
 const Inner = memo(({ handleChangePassword }) => {
@@ -26,16 +27,29 @@ const Inner = memo(({ handleChangePassword }) => {
         ...rulesPasswordCurrent,
         ({ getFieldValue }) => ({
             validator(_, value) {
-                if (!value || getFieldValue('password_new') === value) {
+                if (!value || getFieldValue('new_password') === value) {
                     return Promise.resolve();
                 }
                 return Promise.reject(new Error('Mật khẩu không trùng khớp'));
             },
         }),
     ];
+    const onFinish = values => {
+        handleChangePassword(values);
+    };
+    const onFinishFailed = () => {
+        Message.sendError('Vui lòng kiểm tra lại thông tin');
+    };
+
     return (
         <AccountLayout title="Change Password">
-            <Form layout="vertical" className="container form">
+            <Form
+                layout="vertical"
+                className="container form"
+                medthod="POST"
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+            >
                 <Form.Item>
                     <Typography.Text className="form__title">
                         Đổi mật khẩu
@@ -43,7 +57,7 @@ const Inner = memo(({ handleChangePassword }) => {
                 </Form.Item>
                 <Form.Item
                     className="form__label-fw-600"
-                    name="password_current"
+                    name="current_password"
                     label="Mật khẩu hiện tại"
                     rules={rulesPasswordCurrent}
                 >
@@ -55,7 +69,7 @@ const Inner = memo(({ handleChangePassword }) => {
                 </Form.Item>
                 <Form.Item
                     className="form__label-fw-600"
-                    name="password_new"
+                    name="new_password"
                     label="Mật khẩu mới"
                     hasFeedback
                     rules={rulesPasswordNew}
@@ -69,9 +83,9 @@ const Inner = memo(({ handleChangePassword }) => {
                 </Form.Item>
                 <Form.Item
                     className="form__label-fw-600"
-                    name="password_renew"
+                    name="renew_password"
                     label="Xác nhận mật khẩu mới"
-                    dependencies={['password_new']}
+                    dependencies={['new_password']}
                     hasFeedback
                     rules={rulesPasswordRenew}
                 >
@@ -90,7 +104,7 @@ const Inner = memo(({ handleChangePassword }) => {
                     <Button
                         size="large"
                         type="primary"
-                        onClick={handleChangePassword}
+                        htmlType="submit"
                         style={{
                             float: 'right',
                         }}
