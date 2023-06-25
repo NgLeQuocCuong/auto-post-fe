@@ -1,0 +1,57 @@
+@import 'scss/global.scss';
+
+*[class^='ant'] {
+    font-family: $font-inter;
+}
+
+.container {
+    max-width: 448px;
+    margin: 72px auto;
+}
+
+.form {
+    &__title {
+        @include font-24;
+        @include fontSemibold;
+        display: inline-block;
+        &:has(+ .ant-space) {
+            margin-bottom: 16px;
+        }
+    }
+    &__label {
+        &-fw-600 {
+            .ant-form-item-label {
+                @include fontSemibold;
+            }
+        }
+    }
+    &__btn {
+        &-blue {
+            color: #155df5;
+            &:not(:disabled):hover,
+            &:not(:disabled):active {
+                color: #69b1ff;
+            }
+        }
+        &-border {
+            border-color: #155df5;
+            &:not(:disabled):hover,
+            &:not(:disabled):active {
+                border-color: #69b1ff;
+            }
+        }
+        &-padding-0 {
+            padding: 0;
+        }
+    }
+    .ant-form-item-label > label.ant-form-item-required {
+        &::after {
+            display: inline-block;
+            color: #ff4d4f;
+            content: '*';
+        }
+        &::before {
+            content: none !important;
+        }
+    }
+}
