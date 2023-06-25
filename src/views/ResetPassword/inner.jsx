@@ -8,6 +8,8 @@ import Message from 'components/Message';
 import './index.scss';
 
 const Inner = memo(({ handleResetPassword }) => {
+    const passwordTooltip =
+        'Mật khẩu tối thiểu 8 ký tự, chỉ gồm chữ và số, và có ít nhất một số';
     const rules = [
         {
             required: true,
@@ -59,6 +61,7 @@ const Inner = memo(({ handleResetPassword }) => {
                     label="Mật khẩu mới"
                     hasFeedback
                     rules={rulesPassword}
+                    tooltip={passwordTooltip}
                 >
                     <PasswordInput
                         size="large"
