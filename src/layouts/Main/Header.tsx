@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import LogoSmall from 'components/HomePage/icons/LogoSmall';
 import SearchIcon from 'components/HomePage/icons/SearchIcon';
 import routeConstants from 'route/routeConstant';
+import { memo } from 'react';
 
 const items = [
     {
@@ -19,7 +20,7 @@ const items = [
         url: routeConstants.MAINPAGE,
     },
 ];
-const Header: React.FC = () => {
+const Header: React.FC = memo(() => {
     return (
         <header className="header">
             <div className="header__wrap">
@@ -54,6 +55,8 @@ const Header: React.FC = () => {
             </div>
         </header>
     );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;
