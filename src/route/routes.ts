@@ -37,6 +37,11 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/UserSettings')),
     },
     {
+        name: 'Reset Password',
+        path: routeConstants.RESET_PASSWORD,
+        Component: commonLoadable(() => import('views/ResetPassword')),
+    },
+    {
         name: '404',
         path: '*',
         redirect: routeConstants.LOGIN,
