@@ -1,4 +1,4 @@
-import { notification } from "antd";
+import { notification } from 'antd';
 
 const defaultMessageDuration = {
     info: 7,
@@ -12,7 +12,7 @@ class Message {
         message: string | undefined,
         duration: number = defaultMessageDuration.success
     ) => {
-        notification["success"]({
+        notification['success']({
             message: message,
             duration: duration,
         });
@@ -22,7 +22,7 @@ class Message {
         message: string | undefined,
         duration: number = defaultMessageDuration.info
     ) => {
-        notification["info"]({
+        notification['info']({
             message: message,
             duration: duration,
         });
@@ -32,7 +32,7 @@ class Message {
         message: string | undefined,
         duration: number = defaultMessageDuration.warning
     ) => {
-        notification["warning"]({
+        notification['warning']({
             message: message,
             duration: duration,
         });
@@ -42,7 +42,7 @@ class Message {
         message: string | undefined,
         duration: number = defaultMessageDuration.error
     ) => {
-        notification["error"]({
+        notification['error']({
             message: message,
             duration: duration,
         });

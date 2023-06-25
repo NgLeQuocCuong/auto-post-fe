@@ -1,7 +1,5 @@
 import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-    IProfileState, ProfileState
-} from 'reducers/profile/type';
+import { IProfileState, ProfileState } from 'reducers/profile/type';
 
 const initialState: ProfileState = new ProfileState();
 
@@ -22,7 +20,6 @@ const UPDATE_PROFILE: ProfileCaseReducer<IProfileState> = (
 const RESET_PROFILE: ProfileCaseReducer<undefined> = () => {
     return initialState;
 };
-
 
 const profileSlice = createSlice({
     name: 'profile',
