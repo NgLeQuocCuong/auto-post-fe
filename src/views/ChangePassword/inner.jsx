@@ -1,4 +1,4 @@
-import { Button, Form, Typography, Row, Col, Image } from 'antd';
+import { Button, Form, Typography } from 'antd';
 import PasswordInput from 'components/CommonInput/components/PasswordInput';
 import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
