@@ -1,4 +1,4 @@
-import { Optional } from "utils/commonType";
+import { Optional } from 'utils/commonType';
 
 export interface CommonState {
     example: string;
