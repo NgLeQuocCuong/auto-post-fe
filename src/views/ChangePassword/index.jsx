@@ -16,7 +16,6 @@ const Wrapper = memo(() => {
                 },
             };
             const response = await userService.changePassword(data, config);
-            console.log(response);
             if (response.isSuccess) {
                 Message.sendSuccess('Thay đổi mật khẩu thành công!', 2);
                 navigate(routeConstants.USER_SETTINGS);
