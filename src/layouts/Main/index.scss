@@ -70,7 +70,6 @@
             }
         }
         &--button {
-            margin-left: auto;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -120,7 +119,7 @@
                     }
                     li {
                         width: 150px;
-                        padding: 10px 10px;
+                        padding: 5px;
                         p {
                             &#logout {
                                 color: #fa4d56;
@@ -131,6 +130,7 @@
                             p {
                                 color: #fff;
                                 &#logout {
+                                    cursor: pointer;
                                     color: #fff;
                                 }
                             }

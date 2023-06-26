@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import LogoSmall from 'components/HomePage/icons/LogoSmall';
-import SearchIcon from 'components/HomePage/icons/SearchIcon';
 import routeConstants from 'route/routeConstant';
 import { memo, useState, FC } from 'react';
+import Logout from './Logout';
+import Searchbar from 'layouts/Main/Searchbar';
 
 const items = [
     {
@@ -19,10 +20,15 @@ const items = [
         url: routeConstants.POST,
     },
 ];
+interface Props {
+    firstName: string;
+}
 // eslint-disable-next-line no-undef
-const Header: FC = memo(() => {
+const Header: FC<Props> = memo(({ firstName }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+    if (!firstName) {
+        firstName = 'default';
+    }
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
@@ -33,10 +39,7 @@ const Header: FC = memo(() => {
                     <NavLink to={'/'}>
                         <LogoSmall></LogoSmall>
                     </NavLink>
-                    <div className="header__wrap--search">
-                        <SearchIcon className="header__wrap--icon"></SearchIcon>
-                        <input type="text" placeholder="Tìm kiếm ..." />
-                    </div>
+                    <Searchbar></Searchbar>
                 </div>
                 <ul className="header__wrap--items">
                     {items.map(item => (
@@ -62,7 +65,7 @@ const Header: FC = memo(() => {
                             className="acc"
                             to={routeConstants.USER_SETTINGS}
                         >
-                            An
+                            {firstName}
                         </NavLink>{' '}
                         !
                     </p>
@@ -94,12 +97,7 @@ const Header: FC = memo(() => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink
-                                    to={routeConstants.USER_SETTINGS}
-                                    className="Drop-item"
-                                >
-                                    <p id="logout">Đăng xuất</p>
-                                </NavLink>
+                                <Logout></Logout>
                             </li>
                         </ul>
                     </div>
