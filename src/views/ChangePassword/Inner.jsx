@@ -35,6 +35,7 @@ const Inner = memo(({ handleChangePassword }) => {
         }),
     ];
     const onFinish = values => {
+        delete values.renew_password;
         handleChangePassword(values);
     };
     const onFinishFailed = () => {
