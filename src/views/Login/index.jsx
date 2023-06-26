@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from 'reducers/token/function';
+import { getToken, setToken } from 'reducers/token/function';
 import userService from 'services/userService';
 import Inner from 'views/Login/Inner';
 
@@ -9,17 +9,17 @@ const Wrapper = memo(() => {
     useEffect(() => {
         const token = getToken();
         if (token) {
-            // navigate to main page
+            //Navigate to main page
         }
     }, [navigate]);
 
     const handleLogin = useCallback(async data => {
+        //TODO: Implement login API
         const response = await userService.login(data);
-
         if (response.isSuccess) {
             // set token
+            setToken(response.data.accessToken);
         }
-
         return response;
     }, []);
 

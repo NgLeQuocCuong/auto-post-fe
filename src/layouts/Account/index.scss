@@ -1,1 +1,65 @@
 @import 'scss/global.scss';
+@import 'AccountInput';
+@import 'OverrideAntd';
+
+.account-layout-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    a {
+        text-decoration: none;
+        color: blue;
+    }
+}
+.account-layout {
+    &__left {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 27.5%;
+        margin: 24px auto;
+    }
+    //TODO: Add new logo from Figma
+    // &__autopost-logo {
+    // }
+    &__input {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100%;
+        .input__title {
+            @include font-32;
+            @include fontBold;
+            margin-bottom: 8px;
+        }
+        .input__group {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+    &__footer {
+        @include font-14;
+    }
+    &__right {
+        width: 55%;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+.account-layout-button {
+    width: 100%;
+    height: 48px;
+    margin: 12px 0;
+    @include font-16;
+}
+
+.has-account {
+    margin-top: 12px;
+}
+
+.checkbox-label {
+    @include font-16;
+}

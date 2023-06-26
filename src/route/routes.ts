@@ -32,6 +32,11 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
+        name: 'Register',
+        path: routeConstants.REGISTER,
+        Component: commonLoadable(() => import('views/Register')),
+    },
+    {
         name: 'User Settings',
         path: routeConstants.USER_SETTINGS,
         Component: commonLoadable(() => import('views/UserSettings')),

@@ -1,0 +1,44 @@
+@import 'scss/global.scss';
+
+.account-input-container {
+    position: relative;
+    margin: 12px 0;
+    width: 100%;
+}
+
+.account-input {
+    &__label {
+        display: none;
+        width: auto;
+        position: absolute;
+        top: -10px;
+        padding: 0 2px;
+        margin-left: 16px;
+        background: white;
+        color: black;
+        @include font-14;
+        &.visible {
+            display: inline-block;
+        }
+    }
+    &__input {
+        width: calc(
+            100% - 16px
+        ); //Avoid the input to overflow 16px to the right
+        height: 44px;
+        border-radius: 6px;
+        padding-left: 16px;
+        margin: 0;
+        outline: none;
+        @include font-16;
+        &::placeholder {
+            @include font-16;
+        }
+        &:focus::placeholder {
+            color: transparent;
+        }
+        &.focused {
+            border-color: blue;
+        }
+    }
+}
