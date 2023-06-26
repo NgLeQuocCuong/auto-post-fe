@@ -38,7 +38,6 @@ const Inner = memo(({ handleUserUpdate }) => {
                     username: 'Username',
                     email: 'duonghoang@example.com.vn',
                 }}
-                method="POST"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >

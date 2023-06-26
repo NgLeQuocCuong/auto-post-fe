@@ -28,7 +28,7 @@
     .ant-form-item-label > label.ant-form-item-required {
         &::after {
             display: inline-block;
-            color: #ff4d4f;
+            color: $color--red;
             content: '*';
         }
         &::before {
