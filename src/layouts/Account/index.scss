@@ -1,13 +1,15 @@
 @import 'scss/global.scss';
 @import 'AccountInput';
-a {
-    text-decoration: none;
-    color: blue;
-}
+@import 'OverrideAntd';
+
 .account-layout-container {
     display: flex;
     flex-direction: row;
     height: 100vh;
+    a {
+        text-decoration: none;
+        color: blue;
+    }
 }
 .account-layout {
     &__left {

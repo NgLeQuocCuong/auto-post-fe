@@ -1,6 +1,4 @@
 import Message from 'components/Message';
-import Popup from 'components/Popup';
-
 import { forEach, isArray, isObject } from 'lodash';
 import { BodyType, BodyTypeEnum, DEFAULT_BODY_TYPE } from 'modules/apis/config';
 import messageCodes from 'modules/apis/messageCode';
@@ -37,7 +35,8 @@ interface IApiOptions {
 }
 
 class ApiBase {
-    private _baseUrl = 'http://192.168.30.149:8000/api';
+    private _baseUrl = process.env.REACT_APP_API_URL + '/api';
+
     get(
         url: string,
         options: IApiOptions = {},
@@ -177,12 +176,8 @@ class ApiBase {
             setError(error.errorCode, error.message);
         }
         if (error.messageCode) {
-            // Message.sendError(
-            //     messageCodes[error.messageCode] || messageCodes.default
-            // );
-            Popup.popupError(
-                messageCodes[error.messageCode] || messageCodes.default,
-                error.message
+            Message.sendError(
+                messageCodes[error.messageCode] || messageCodes.default
             );
         }
         return error;

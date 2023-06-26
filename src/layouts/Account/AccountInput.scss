@@ -28,7 +28,6 @@
         padding-left: 16px;
         margin: 0;
         outline: none;
-        border: 1px solid #868686;
         @include font-16;
         &::placeholder {
             @include font-16;
@@ -42,8 +41,4 @@
     }
 }
 
-.ant-form-item {
-    input {
-        height: 40px;
-    }
-}
+

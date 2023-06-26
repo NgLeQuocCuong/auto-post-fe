@@ -19,10 +19,9 @@ const Wrapper = memo(() => {
         if (response.isSuccess) {
             Popup.popupSuccess('Đăng nhập thành công', `Chào mừng ${data.email} đến với AutoPost!`);
             setToken(response.data.accessToken);
-            navigate('/posts');
         }
         return response;
-    }, [navigate]);
+    }, []);
 
     return <Inner handleLogin={handleLogin} />;
 });
