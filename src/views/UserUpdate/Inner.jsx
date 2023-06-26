@@ -1,5 +1,5 @@
 import { Button, Form, Typography, Space } from 'antd';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import AccountLayout from 'layouts/Account';
 import routeConstants from 'route/routeConstant';
 import { NavLink } from 'react-router-dom';
@@ -7,7 +7,11 @@ import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
 import './index.scss';
 
-const Inner = memo(({ handleUserUpdate }) => {
+const Inner = memo(({ handleUserUpdate, userInfo }) => {
+    const [form] = Form.useForm();
+    useEffect(() => {
+        form.setFieldsValue(userInfo);
+    }, [form, userInfo]);
     const rules = [
         {
             pattern: /^[^\d]+$/,
@@ -30,14 +34,10 @@ const Inner = memo(({ handleUserUpdate }) => {
     return (
         <AccountLayout title="User Update">
             <Form
+                form={form}
                 layout="vertical"
                 className="container form"
-                initialValues={{
-                    first_name: 'Dương',
-                    last_name: 'Hoàng',
-                    username: 'Username',
-                    email: 'duonghoang@example.com.vn',
-                }}
+                initialValues={userInfo}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
