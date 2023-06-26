@@ -1,13 +1,6 @@
-import {
-    FC,
-    PropsWithChildren,
-    memo,
-    useCallback,
-    useEffect,
-    useState,
-} from 'react';
+import { FC, PropsWithChildren, memo } from 'react';
 import './index.scss';
-import userService from 'services/userService';
+
 import Header from './Header';
 
 interface Props {

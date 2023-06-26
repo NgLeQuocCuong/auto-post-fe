@@ -1,4 +1,3 @@
-import React from 'react';
 import './index.scss';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
@@ -6,7 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import LogoSmall from 'components/HomePage/icons/LogoSmall';
 import SearchIcon from 'components/HomePage/icons/SearchIcon';
 import routeConstants from 'route/routeConstant';
-import { memo, useState } from 'react';
+import { memo, useState, FC } from 'react';
 
 const items = [
     {
@@ -20,7 +19,8 @@ const items = [
         url: routeConstants.POST,
     },
 ];
-const Header: React.FC = memo(() => {
+// eslint-disable-next-line no-undef
+const Header: FC = memo(() => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -77,18 +77,29 @@ const Header: React.FC = memo(() => {
                         ></div>
                         <ul className="dropdown-menu">
                             <li>
-                                <NavLink to={routeConstants.USER_SETTINGS}>
-                                    <a href="/">Xem hồ sơ</a>
+                                <NavLink
+                                    to={routeConstants.USER_SETTINGS}
+                                    className="Drop-item"
+                                >
+                                    <p>Xem hồ sơ</p>
                                 </NavLink>
                             </li>
 
                             <li>
-                                <a href="/">Đổi mật khẩu</a>
+                                <NavLink
+                                    to={routeConstants.USER_SETTINGS}
+                                    className="Drop-item"
+                                >
+                                    <p>Đổi mật khẩu</p>
+                                </NavLink>
                             </li>
                             <li>
-                                <a href="/" id="logout">
-                                    Đăng xuất
-                                </a>
+                                <NavLink
+                                    to={routeConstants.USER_SETTINGS}
+                                    className="Drop-item"
+                                >
+                                    <p id="logout">Đăng xuất</p>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
