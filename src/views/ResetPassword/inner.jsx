@@ -19,7 +19,7 @@ const Inner = memo(({ handleResetPassword }) => {
     const rulesPassword = [
         ...rules,
         {
-            pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/,
+            pattern: /^(?=.*[\d])(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
             message: 'Mật khẩu không hợp lệ',
         },
     ];
@@ -46,7 +46,6 @@ const Inner = memo(({ handleResetPassword }) => {
             <Form
                 layout="vertical"
                 className="container form"
-                medthod="POST"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >

@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Inner from 'views/ResetPassword/inner';
+import Inner from 'views/ResetPassword/Inner';
 import routeConstants from 'route/routeConstant';
 import Message from 'components/Message';
 
