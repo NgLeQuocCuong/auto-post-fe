@@ -14,7 +14,14 @@ const Inner = memo(({ handleUserUpdate }) => {
             message: 'Không hợp lệ',
         },
     ];
+    const rulesUsername = [
+        {
+            pattern: /^[a-zA-Z0-9]+$/,
+            message: 'Không hợp lệ',
+        },
+    ];
     const onFinish = values => {
+        delete values.email;
         handleUserUpdate(values);
     };
     const onFinishFailed = () => {
@@ -62,7 +69,7 @@ const Inner = memo(({ handleUserUpdate }) => {
                     name="username"
                     label="Tên đăng nhập"
                     className="form__label-fw-600"
-                    rules={rules}
+                    rules={rulesUsername}
                 >
                     <TextInput size="large" placeholder="Nhập tên đăng nhập" />
                 </Form.Item>
