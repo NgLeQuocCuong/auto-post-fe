@@ -1,6 +1,6 @@
 import { Button, Form, Typography, Space, List, Col, Row, Image } from 'antd';
 import { memo } from 'react';
-import AccountLayout from 'layouts/Account';
+import MainLayout from 'layouts/Main';
 import './index.scss';
 import CheckIcon from 'components/CommonInput/icons/CheckIcon';
 
@@ -13,7 +13,7 @@ const Inner = memo(
         zaloLinked,
     }) => {
         return (
-            <AccountLayout title="User Settings">
+            <MainLayout title="User Settings">
                 <Row className="container">
                     <Col span={6}>
                         <Image
@@ -110,7 +110,7 @@ const Inner = memo(
                         </Form>
                     </Col>
                 </Row>
-            </AccountLayout>
+            </MainLayout>
         );
     }
 );

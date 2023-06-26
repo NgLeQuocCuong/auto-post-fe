@@ -6,7 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import LogoSmall from 'components/HomePage/icons/LogoSmall';
 import SearchIcon from 'components/HomePage/icons/SearchIcon';
 import routeConstants from 'route/routeConstant';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 const items = [
     {
@@ -17,10 +17,15 @@ const items = [
     {
         id: 2,
         name: 'BÀI VIẾT',
-        url: routeConstants.MAINPAGE,
+        url: routeConstants.POST,
     },
 ];
 const Header: React.FC = memo(() => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
     return (
         <header className="header">
             <div className="header__wrap">
@@ -51,6 +56,42 @@ const Header: React.FC = memo(() => {
                             Đăng bài
                         </Button>
                     </NavLink>
+                    <p>
+                        Hello,{' '}
+                        <NavLink
+                            className="acc"
+                            to={routeConstants.USER_SETTINGS}
+                        >
+                            An
+                        </NavLink>{' '}
+                        !
+                    </p>
+                    <div
+                        className={`user-dropdown ${
+                            isDropdownOpen ? 'open' : ''
+                        }`}
+                    >
+                        <div
+                            className="dropdown"
+                            onClick={toggleDropdown}
+                        ></div>
+                        <ul className="dropdown-menu">
+                            <li>
+                                <NavLink to={routeConstants.USER_SETTINGS}>
+                                    <a href="/">Xem hồ sơ</a>
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <a href="/">Đổi mật khẩu</a>
+                            </li>
+                            <li>
+                                <a href="/" id="logout">
+                                    Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </header>
