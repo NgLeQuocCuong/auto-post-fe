@@ -2,7 +2,7 @@ import { memo, useCallback } from 'react';
 import userService from 'services/userService';
 import { useNavigate } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
-import Inner from 'views/ChangePassword/inner';
+import Inner from 'views/ChangePassword/Inner';
 import Message from 'components/Message';
 
 const Wrapper = memo(() => {

@@ -46,7 +46,6 @@ const Inner = memo(({ handleChangePassword }) => {
             <Form
                 layout="vertical"
                 className="container form"
-                medthod="POST"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
