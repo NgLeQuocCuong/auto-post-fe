@@ -18,5 +18,5 @@
         "baseUrl": "src",
         "experimentalDecorators": true
     },
-    "include": ["src", "declarations.d.ts"],
+    "include": ["src", "declarations.d.ts"]
 }
