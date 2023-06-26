@@ -1,8 +1,12 @@
 import { memo } from 'react';
-import PageDetails from 'components/PageDetails/PageDetails';
+import PageDetails from './PageDetails';
 
 const Inner = memo(() => {
-    return <PageDetails />;
+    return (
+        <div className="container-detail">
+            <PageDetails />
+        </div>
+    );
 });
 
 Inner.displayName = 'PageDetails Inner';

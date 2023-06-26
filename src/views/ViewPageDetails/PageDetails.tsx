@@ -1,44 +1,25 @@
 import { memo } from 'react';
 import './style.scss';
 import AccountLayout from 'layouts/Account';
-import ZaloIcon from 'components/PageDetails/icons/ZaloIcon';
-import FBIcon from 'components/PageDetails/icons/FBIcon';
-import ViewIcon from 'components/PageDetails/icons/ViewIcon';
-import ShareIcon from 'components/PageDetails/icons/ShareIcon';
-import LikeIcon from 'components/PageDetails/icons/LikeIcon';
-import CommentIcon from 'components/PageDetails/icons/CommentIcon';
-import PencilIcon from 'components/PageDetails/icons/PencilIcon';
-import TrashIcon from 'components/PageDetails/icons/TrashIcon';
-// import Wrapper from 'components/PageDetails/components/Wrapper';
-// import Title from 'components/PageDetails/components/Title';
-// import Social from 'components/PageDetails/components/Social';
-// import Content from 'components/PageDetails/components/Content';
-// import CheckList from 'components/PageDetails/components/DropDown';
-// import DropButton from 'components/PageDetails/components/DropButton';
-interface Post {
-    id: number;
-    title: string;
-    category: string;
-    timestamp: string;
-    content: string;
-    likes: number;
-    comments: number;
-    shares: number;
-}
+import ZaloIcon from 'components/CommonInput/icons/ZaloIcon';
+import FBIcon from 'components/CommonInput/icons/FBIcon';
+import ViewIcon from 'components/CommonInput/icons/ViewIcon';
+import ShareIcon from 'components/CommonInput/icons/ShareIcon';
+import LikeIcon from 'components/CommonInput/icons/LikeIcon';
+import CommentIcon from 'components/CommonInput/icons/CommentIcon';
+import PencilIcon from 'components/CommonInput/icons/PencilIcon';
+import TrashIcon from 'components/CommonInput/icons/TrashIcon';
 
-interface Props {
-    post: Post;
-}
-const PageDetails = memo(post => {
+const PageDetails = memo(() => {
     return (
         <AccountLayout>
             <div className="details-view-container">
                 <div className="upper">
                     <button className="edit-button">
-                        <PencilIcon></PencilIcon> Sửa bài viết
+                        <PencilIcon /> <p>Sửa bài viết</p>
                     </button>
                     <button className="del-button">
-                        <TrashIcon></TrashIcon> Xóa bài viết
+                        <TrashIcon /> <p>Xóa bài viết</p>
                     </button>
                 </div>
                 <div className="header">
@@ -67,52 +48,52 @@ const PageDetails = memo(post => {
                             <div className="social-stats">
                                 <div className="FB-stat">
                                     <div className="platfrom-F">
-                                        <FBIcon></FBIcon>
+                                        <FBIcon />
                                     </div>
                                     <div className="platform">
                                         <span>
-                                            <ViewIcon></ViewIcon> 1000
+                                            <ViewIcon /> 1000
                                         </span>
                                     </div>
                                     <div className="platform">
                                         <span>
-                                            <LikeIcon></LikeIcon> 100
+                                            <LikeIcon /> 100
                                         </span>
                                     </div>
                                     <div className="platform">
                                         <span>
-                                            <CommentIcon></CommentIcon> 50
+                                            <CommentIcon /> 50
                                         </span>
                                     </div>
                                     <div className="platform">
                                         <span>
-                                            <ShareIcon></ShareIcon> 21
+                                            <ShareIcon /> 21
                                         </span>
                                     </div>
                                 </div>
                                 <div className="Zalo-stat">
                                     <div className="platfrom-Z">
-                                        <ZaloIcon></ZaloIcon>
+                                        <ZaloIcon />
                                     </div>
 
                                     <div className="platform">
                                         <span>
-                                            <ViewIcon></ViewIcon> 1000
+                                            <ViewIcon /> 1000
                                         </span>
                                     </div>
                                     <div className="platform">
                                         <span>
-                                            <LikeIcon></LikeIcon> 100
+                                            <LikeIcon /> 100
                                         </span>
                                     </div>
                                     <div className="platform">
                                         <span>
-                                            <CommentIcon></CommentIcon> 50
+                                            <CommentIcon /> 50
                                         </span>
                                     </div>
                                     <div className="platform">
                                         <span>
-                                            <ShareIcon></ShareIcon> 21
+                                            <ShareIcon /> 21
                                         </span>
                                     </div>
                                 </div>
