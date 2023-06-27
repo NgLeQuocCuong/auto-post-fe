@@ -9,8 +9,14 @@ import LikeIcon from 'components/CommonInput/icons/LikeIcon';
 import CommentIcon from 'components/CommonInput/icons/CommentIcon';
 import PencilIcon from 'components/CommonInput/icons/PencilIcon';
 import TrashIcon from 'components/CommonInput/icons/TrashIcon';
+import { FC } from 'react';
 
-const Inner = memo(() => {
+interface Props {
+    postType: string;
+    createAt: string;
+}
+
+const Inner: FC<Props> = memo(({ postType, createAt }) => {
     return (
         <div className="container-detail">
             <AccountLayout>
@@ -38,9 +44,9 @@ const Inner = memo(() => {
                                         </div>
                                     </div>
                                     <div className="content">
-                                        <div className="type">QUẢNG CÁO</div>
+                                        <div className="type">{postType}</div>
                                         <br></br>
-                                        <span>19:28 - 22/02/2002</span>
+                                        <span>{createAt}</span>
                                     </div>
                                 </div>
                             </div>
