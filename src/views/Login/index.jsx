@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, setToken } from 'reducers/token/function';
 import userService from 'services/userService';
 import Inner from 'views/Login/Inner';
-
+import Popup from 'components/Popup';
 const Wrapper = memo(() => {
     const navigate = useNavigate();
     useEffect(() => {
@@ -19,6 +19,10 @@ const Wrapper = memo(() => {
         if (response.isSuccess) {
             // set token
             setToken(response.data.accessToken);
+            Popup.sendSuccess(
+                'Đăng nhập thành công.',
+                `Chào mừng ${response.data.user.name} đến với AutoPost!`
+            );
         }
         return response;
     }, []);
