@@ -40,6 +40,7 @@ const routes: Array<Route> = [
         name: 'User Update',
         path: routeConstants.USER_UPDATE,
         Component: commonLoadable(() => import('views/UserUpdate')),
+        authorization: true,
     },
     {
         name: '404',
