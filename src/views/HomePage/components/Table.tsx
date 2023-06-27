@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import Eye from 'components/HomePage/icons/Eye';
-import Edit from 'components/HomePage/icons/Edit';
-import Delete from 'components/HomePage/icons/Delete';
-import FacebookIcon from 'components/HomePage/icons/FacebookIcon';
+import Eye from 'icons/Eye';
+import Edit from 'icons/Edit';
+import Delete from 'icons/Delete';
+import FacebookIcon from 'icons/FacebookIcon';
 
 interface DataType {
   key: string;
