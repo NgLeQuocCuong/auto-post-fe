@@ -37,6 +37,11 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/UserSettings')),
     },
     {
+        name: 'All Posts',
+        path: routeConstants.ALL_POSTS,
+        Component: commonLoadable(() => import('views/AllPosts')),
+    },
+    {
         name: '404',
         path: '*',
         redirect: routeConstants.LOGIN,
