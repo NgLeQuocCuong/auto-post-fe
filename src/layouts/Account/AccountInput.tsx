@@ -5,13 +5,14 @@ import './index.scss';
 interface AccountInputProps {
     type?: string | 'text';
     name: string;
+    label: string;
     placeholder?: string | 'Nhập vào trường này';
     required?: boolean;
     requiredMessage?: string;
 }
 
 const AccountInput: FC<AccountInputProps> = memo(
-    ({ type, name, placeholder, required, requiredMessage, ...props }) => {
+    ({ type, name, label, placeholder, required, requiredMessage }) => {
         const rules = required
             ? [
                   {
@@ -23,13 +24,8 @@ const AccountInput: FC<AccountInputProps> = memo(
             : [];
 
         return (
-            <Form.Item name={name} rules={rules}>
-                <Input
-                    type={type}
-                    name={name}
-                    placeholder={placeholder}
-                    {...props}
-                />
+            <Form.Item name={name} rules={rules} label={label}>
+                <Input type={type} placeholder={placeholder} />
             </Form.Item>
         );
     }

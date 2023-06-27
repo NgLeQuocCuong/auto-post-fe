@@ -7,6 +7,8 @@ import 'layouts/Account/index.scss';
 import AccountInput from 'layouts/Account/AccountInput';
 import Message from 'components/Message';
 import AccountLayoutImage from 'assets/images/AccountLayoutImage.png';
+import AutopostLogo48 from 'assets/images/AutopostLogo48';
+
 const Inner = memo(({ handleRegister }) => {
     const handleFinish = values => {
         //using regex to validate all fields
@@ -30,35 +32,47 @@ const Inner = memo(({ handleRegister }) => {
                 'Mật khẩu phải có ít nhất 8 ký tự và 1 chữ số.'
             );
         }
+        if (values.password !== values.confirm_password) {
+            return Message.sendError('Mật khẩu nhập lại không khớp.');
+        }
         handleRegister(values);
     };
     return (
         <AccountLayout title="Register">
             <div className="account-layout-container">
                 <div className="account-layout__left">
-                    {/* TODO: Add new logo from Figma */}
+                    <div className="account-layout__autopost-logo">
+                        <AutopostLogo48 />
+                    </div>
                     <Form
                         className="account-layout__input"
                         onFinish={handleFinish}
                         method="POST"
+                        layout="vertical"
                     >
                         <div className="input__title">Đăng ký</div>
-                        <AccountInput
-                            name="first_name"
-                            type="text"
-                            required
-                            requiredMessage="Vui lòng nhập họ."
-                            placeholder="Họ"
-                        />
-                        <AccountInput
-                            name="last_name"
-                            type="text"
-                            required
-                            requiredMessage="Vui lòng nhập tên."
-                            placeholder="Tên"
-                        />
+
+                        <div className="account-layout__input--vertical">
+                            <AccountInput
+                                name="first_name"
+                                label="Họ"
+                                type="text"
+                                required
+                                requiredMessage="Vui lòng nhập họ."
+                                placeholder="Họ"
+                            />
+                            <AccountInput
+                                name="last_name"
+                                label="Tên"
+                                type="text"
+                                required
+                                requiredMessage="Vui lòng nhập tên."
+                                placeholder="Tên"
+                            />
+                        </div>
                         <AccountInput
                             name="email"
+                            label="Email"
                             type="email"
                             required
                             requiredMessage="Vui lòng nhập email."
@@ -66,6 +80,7 @@ const Inner = memo(({ handleRegister }) => {
                         />
                         <AccountInput
                             name="username"
+                            label="Tên đăng nhập"
                             type="text"
                             required
                             requiredMessage="Vui lòng nhập tên đăng nhập."
@@ -73,13 +88,15 @@ const Inner = memo(({ handleRegister }) => {
                         />
                         <AccountInput
                             name="password"
+                            label="Mật khẩu"
                             type="password"
                             required
                             requiredMessage="Vui lòng nhập mật khẩu."
                             placeholder="Mật khẩu"
                         />
                         <AccountInput
-                            name="re-password"
+                            name="confirm_password"
+                            label="Nhập lại mật khẩu"
                             type="password"
                             required
                             requiredMessage="Vui lòng nhập lại mật khẩu."

@@ -6,6 +6,7 @@ import routeConstants from 'route/routeConstant';
 import Checkbox from 'components/CommonInput/components/Checkbox';
 import AccountInput from 'layouts/Account/AccountInput';
 import AccountLayoutImage from 'assets/images/AccountLayoutImage.png';
+import AutopostLogo48 from 'assets/images/AutopostLogo48';
 const Inner = memo(({ handleLogin }) => {
     const handleFinish = values => {
         handleLogin(values);
@@ -14,15 +15,19 @@ const Inner = memo(({ handleLogin }) => {
         <AccountLayout title="Login">
             <div className="account-layout-container">
                 <div className="account-layout__left">
-                    {/* TODO: Add new logo from Figma */}
+                    <div className="account-layout__autopost-logo">
+                        <AutopostLogo48 />
+                    </div>
                     <Form
                         className="account-layout__input"
                         onFinish={handleFinish}
                         method="POST"
+                        layout="vertical"
                     >
                         <div className="input__title">Đăng nhập</div>
                         <AccountInput
                             name="email"
+                            label="Email"
                             type="email"
                             required
                             requiredMessage="Vui lòng nhập email"
@@ -30,12 +35,13 @@ const Inner = memo(({ handleLogin }) => {
                         />
                         <AccountInput
                             name="password"
+                            label="Mật khẩu"
                             type="password"
                             required
                             requiredMessage="Vui lòng nhập mật khẩu"
                             placeholder="Mật khẩu"
                         />
-                        <div className="input__group">
+                        <div className="account-layout__input--vertical">
                             <Checkbox
                                 value="remember"
                                 options={[
