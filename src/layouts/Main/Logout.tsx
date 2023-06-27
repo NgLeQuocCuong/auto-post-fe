@@ -1,26 +1,13 @@
 import routeConstants from 'route/routeConstant';
-import { memo, useCallback } from 'react';
-import userService from 'services/userService';
+import { memo } from 'react';
 import './index.scss';
-import Message from 'components/Message';
-import { useNavigate } from 'react-router-dom';
-import { setToken } from 'reducers/token/function';
+import { NavLink } from 'react-router-dom';
 
 const Logout = memo(() => {
-    const navigate = useNavigate();
-    const handleLogout = useCallback(async () => {
-        const response = await userService.logout();
-        if (response.isSuccess) {
-            Message.sendSuccess('Đăng xuất thành công!', 2);
-            setToken('');
-            navigate(routeConstants.LOGIN);
-        }
-        return response;
-    }, [navigate]);
     return (
-        <p className="Drop-item" onClick={handleLogout}>
+        <NavLink className="Drop-item" to={routeConstants.LOGOUT}>
             <p id="logout">Đăng xuất</p>
-        </p>
+        </NavLink>
     );
 });
 Logout.displayName = 'Logout';

@@ -90,8 +90,8 @@
                 .dropdown-menu {
                     display: none;
                     position: absolute;
-                    background-color: #ffffff;
-                    border: #d8d8d8 solid 1px;
+                    background-color: $color--light;
+                    border: $color-detail-border solid 1px;
                     border-radius: 4px;
                     padding: 0;
                     list-style: none;
@@ -122,21 +122,21 @@
                         padding: 5px;
                         p {
                             &#logout {
-                                color: #fa4d56;
+                                color: $color-hlogout;
                             }
-                            color: #007bff;
+                            color: $color-hdrop;
                         }
                         &:hover {
                             p {
-                                color: #fff;
+                                color: $color--light;
                                 &#logout {
                                     cursor: pointer;
-                                    color: #fff;
+                                    color: $color--light;
                                 }
                             }
-                            background-color: #007bff;
+                            background-color: $color-hdrop;
                             &:last-child {
-                                background-color: #fa4d56;
+                                background-color: $color-hlogout;
                             }
                         }
                     }
@@ -147,12 +147,12 @@
             }
             .acc {
                 text-decoration: none;
-                color: #155df5;
+                color: $color-accname;
                 :visited {
-                    color: #155df5;
+                    color: $color-accname;
                 }
                 :hover {
-                    color: #0042ed;
+                    color: $color-hov-acc;
                 }
             }
         }

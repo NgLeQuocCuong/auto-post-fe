@@ -2,9 +2,10 @@ const routeConstants = {
     LOGIN: '/login',
     FORGOT_PASSWORD: '/forgot-password',
     MAINPAGE: '/',
-    POST: '/post-pages',
+    POST: '/post-page',
     USER_SETTINGS: '/user-settings',
-    ALLPOSTS: '/all-post-views',
+    ALL_POSTS: '/posts',
+    LOGOUT: '/logout',
 };
 
 export default routeConstants;
