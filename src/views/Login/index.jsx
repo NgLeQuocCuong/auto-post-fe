@@ -21,7 +21,7 @@ const Wrapper = memo(() => {
             setToken(response.data.accessToken);
             Popup.sendSuccess(
                 'Đăng nhập thành công.',
-                `Chào mừng ${response.data.user.name} đến với AutoPost!`
+                `Chào mừng ${data.email} đến với AutoPost!`
             );
         }
         return response;
