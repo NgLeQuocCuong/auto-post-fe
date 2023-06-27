@@ -10,26 +10,50 @@ import { FC } from 'react';
 interface Props {
     postType: string;
     createAt: string;
+    uid: string;
 }
 
-const Wrapper: FC<Props> = memo(() => {
+const Wrapper: FC<Props> = memo(uid => {
     const navigate = useNavigate();
     const [postType, setpostType] = useState('');
     const [createAt, setcreateAt] = useState('');
-    const uid = '07cc67f4-45d6-494b-adac-09b5cbc7e2b5';
+    const [content, setContent] = useState('');
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
     useEffect(function effectFunction() {
         const token = getToken();
         if (token) {
             (async () => {
-                const response = await userService.getdetails(uid);
-                setpostType(await response.data.post_type);
-                setcreateAt(await response.data.created_at);
+                const response = await userService.getdetails(
+                    'b8e856b3-e41c-481b-b565-8463a0889dd1'
+                );
+                if (response.isSuccess) {
+                    setpostType(await response.data.postType);
+                    setcreateAt(await response.data.createdAt);
+                    setContent(await response.data.content);
+                    const datetime = new Date(createAt);
+                    if (!isNaN(datetime.getTime())) {
+                        const dt = datetime.toISOString().split('T')[0];
+                        const parts = dt.split('-');
+                        setDate(`${parts[2]}/${parts[1]}/${parts[0]}`);
+                        setTime(
+                            datetime.toLocaleTimeString([], {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                            })
+                        );
+                    }
+                } else {
+                    navigate(routeConstants.MAINPAGE);
+                }
             })();
         } else {
             navigate(routeConstants.LOGIN);
         }
     });
-    return <Inner postType={postType} createAt={createAt} />;
+    return (
+        <Inner postType={postType} date={date} time={time} content={content} />
+    );
 });
 Wrapper.displayName = 'PageDetails';
 

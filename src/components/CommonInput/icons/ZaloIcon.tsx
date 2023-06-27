@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 function ZaloIcon(props: any) {
     return (
         <svg

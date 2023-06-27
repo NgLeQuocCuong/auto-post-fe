@@ -13,10 +13,13 @@ import { FC } from 'react';
 
 interface Props {
     postType: string;
-    createAt: string;
+    date: string;
+    time: string;
+    content: string;
 }
 
-const Inner: FC<Props> = memo(({ postType, createAt }) => {
+const Inner: FC<Props> = memo(({ postType, date, time, content }) => {
+    const formattedContent = content.replace(/\n/g, '<br />');
     return (
         <div className="container-detail">
             <AccountLayout>
@@ -46,7 +49,9 @@ const Inner: FC<Props> = memo(({ postType, createAt }) => {
                                     <div className="content">
                                         <div className="type">{postType}</div>
                                         <br></br>
-                                        <span>{createAt}</span>
+                                        <span>
+                                            {time} - {date}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +117,13 @@ const Inner: FC<Props> = memo(({ postType, createAt }) => {
                     </div>
                     <div className="post-content">
                         <h2>Nội dung bài đăng</h2>
-                        <div>Content</div>
+                        <div>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: formattedContent,
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
             </AccountLayout>
