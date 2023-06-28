@@ -26,6 +26,7 @@ interface Props {
 const Inner: FC<Props> = memo(
     ({ postType, date, time, content, uid, imageurls }) => {
         const navigate = useNavigate();
+        const imgpath = 'http://192.168.1.24:8000';
         const handleremove = useCallback(async () => {
             const response = await userService.remove(uid);
             if (response.isSuccess) {
@@ -136,8 +137,9 @@ const Inner: FC<Props> = memo(
                             <div className="imgs">
                                 {imageurls.map((path, index) => (
                                     <img
+                                        className="img"
                                         key={index}
-                                        src={path}
+                                        src={imgpath + path}
                                         alt={`Img no.${index}`}
                                     />
                                 ))}

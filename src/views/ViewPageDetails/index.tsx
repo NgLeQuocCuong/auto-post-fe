@@ -24,7 +24,7 @@ const Wrapper: FC<Props> = memo(({ uid }) => {
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const token = useToken();
-    const fuid = 'acee37d4-4967-422e-8713-0f0e04644155';
+    const fuid = uid ? uid : '72616fb0-0b4c-42ed-8647-a8fbdf90e3ab';
     useEffect(() => {
         if (token) {
             userService.getdetails(fuid).then(res => {
@@ -38,7 +38,11 @@ const Wrapper: FC<Props> = memo(({ uid }) => {
                         res.data.content
                     );
                     setContent(formattedContent);
-                    setImageurls(res.data.images);
+                    setImageurls(
+                        res.data.images.map(
+                            (item: { source: string }) => item.source
+                        )
+                    );
                     const datetime = new Date(createAt);
                     if (!isNaN(datetime.getTime())) {
                         const dt = datetime.toISOString().split('T')[0];
@@ -58,7 +62,7 @@ const Wrapper: FC<Props> = memo(({ uid }) => {
         } else {
             navigate(routeConstants.LOGIN);
         }
-    }, [createAt, navigate, token]);
+    }, [createAt, navigate, token, fuid]);
     return (
         <Inner
             postType={postType}
