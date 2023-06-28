@@ -7,11 +7,12 @@ import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
 import './index.scss';
 
-const Inner = memo(({ handleUserUpdate, userInfo }) => {
+const Inner = memo(({ handleUserUpdate, userProfile }) => {
     const [form] = Form.useForm();
     useEffect(() => {
-        form.setFieldsValue(userInfo);
-    }, [form, userInfo]);
+        form.setFieldsValue(userProfile);
+    }, [form, userProfile]);
+    const usernameTooltip = 'Tên đăng nhập tối thiểu 8 ký tự gồm chữ hoặc số';
     const rules = [
         {
             pattern: /^[^\d]+$/,
@@ -20,7 +21,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
     ];
     const rulesUsername = [
         {
-            pattern: /^[a-zA-Z0-9]+$/,
+            pattern: /^[a-zA-Z\d]{8,}$/,
             message: 'Không hợp lệ',
         },
     ];
@@ -37,7 +38,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                 form={form}
                 layout="vertical"
                 className="container form"
-                initialValues={userInfo}
+                initialValues={userProfile}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
@@ -48,7 +49,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                 </Form.Item>
                 <Space>
                     <Form.Item
-                        name="first_name"
+                        name="firstName"
                         label="Họ"
                         className="form__label-fw-600"
                         rules={rules}
@@ -56,7 +57,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                         <TextInput size="large" placeholder="Nhập họ" />
                     </Form.Item>
                     <Form.Item
-                        name="last_name"
+                        name="lastName"
                         label="Tên"
                         className="form__label-fw-600"
                         rules={rules}
@@ -68,6 +69,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                     name="username"
                     label="Tên đăng nhập"
                     className="form__label-fw-600"
+                    tooltip={usernameTooltip}
                     rules={rulesUsername}
                 >
                     <TextInput size="large" placeholder="Nhập tên đăng nhập" />
@@ -79,7 +81,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                 >
                     <TextInput size="large" placeholder="Nhập email" disabled />
                 </Form.Item>
-                <Form.Item style={{ clear: 'both' }}>
+                <Form.Item className="clear-both">
                     <NavLink to={routeConstants.USER_SETTINGS}>
                         <Button size="large" type="default">
                             Hủy
@@ -89,9 +91,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                         size="large"
                         type="primary"
                         htmlType="submit"
-                        style={{
-                            float: 'right',
-                        }}
+                        className="float-right"
                     >
                         Lưu
                     </Button>

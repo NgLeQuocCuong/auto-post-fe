@@ -37,6 +37,11 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/UserSettings')),
     },
     {
+        name: 'Change Password',
+        path: routeConstants.CHANGE_PASSWORD,
+        Component: commonLoadable(() => import('views/ChangePassword')),
+    },
+    {
         name: 'User Update',
         path: routeConstants.USER_UPDATE,
         Component: commonLoadable(() => import('views/UserUpdate')),
