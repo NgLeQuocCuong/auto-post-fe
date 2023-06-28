@@ -7,11 +7,11 @@ import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
 import './index.scss';
 
-const Inner = memo(({ handleUserUpdate, userProfile }) => {
+const Inner = memo(({ handleUserUpdate, userInfo }) => {
     const [form] = Form.useForm();
     useEffect(() => {
-        form.setFieldsValue(userProfile);
-    }, [form, userProfile]);
+        form.setFieldsValue(userInfo);
+    }, [form, userInfo]);
     const usernameTooltip = 'Tên đăng nhập tối thiểu 8 ký tự gồm chữ hoặc số';
     const rules = [
         {
@@ -38,7 +38,7 @@ const Inner = memo(({ handleUserUpdate, userProfile }) => {
                 form={form}
                 layout="vertical"
                 className="container form"
-                initialValues={userProfile}
+                initialValues={userInfo}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
