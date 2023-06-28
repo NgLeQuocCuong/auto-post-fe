@@ -7,24 +7,12 @@ interface AccountInputProps {
     name: string;
     label: string;
     placeholder?: string | 'Nhập vào trường này';
-    required?: boolean;
-    requiredMessage?: string;
 }
 
 const AccountInput: FC<AccountInputProps> = memo(
-    ({ type, name, label, placeholder, required, requiredMessage }) => {
-        const rules = required
-            ? [
-                  {
-                      required: true,
-                      message:
-                          requiredMessage || 'Trường này không được để trống.',
-                  },
-              ]
-            : [];
-
+    ({ type, name, label, placeholder, ...props }) => {
         return (
-            <Form.Item name={name} rules={rules} label={label}>
+            <Form.Item name={name} label={label} required {...props}>
                 <Input type={type} placeholder={placeholder} />
             </Form.Item>
         );

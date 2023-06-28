@@ -8,6 +8,19 @@ import AccountInput from 'layouts/Account/AccountInput';
 import AccountLayoutImage from 'assets/images/AccountLayoutImage.png';
 import AutopostLogo48 from 'assets/images/AutopostLogo48';
 const Inner = memo(({ handleLogin }) => {
+    //Validate rules
+    const emailRules = [
+        {
+            type: 'email',
+            message: 'Định dạng email không hợp lệ.',
+        },
+    ];
+    const passwordRules = [
+        {
+            pattern: /^(?=.*[\d])(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
+            message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
+        },
+    ];
     const handleFinish = values => {
         handleLogin(values);
     };
@@ -21,7 +34,6 @@ const Inner = memo(({ handleLogin }) => {
                     <Form
                         className="account-layout__input"
                         onFinish={handleFinish}
-                        method="POST"
                         layout="vertical"
                     >
                         <div className="input__title">Đăng nhập</div>
@@ -29,17 +41,17 @@ const Inner = memo(({ handleLogin }) => {
                             name="email"
                             label="Email"
                             type="email"
-                            required
                             requiredMessage="Vui lòng nhập email"
                             placeholder="Email"
+                            rules={emailRules}
                         />
                         <AccountInput
                             name="password"
                             label="Mật khẩu"
                             type="password"
-                            required
                             requiredMessage="Vui lòng nhập mật khẩu"
                             placeholder="Mật khẩu"
+                            rules={passwordRules}
                         />
                         <div className="account-layout__input--vertical">
                             <Checkbox

@@ -5,36 +5,51 @@ import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import 'layouts/Account/index.scss';
 import AccountInput from 'layouts/Account/AccountInput';
-import Message from 'components/Message';
 import AccountLayoutImage from 'assets/images/AccountLayoutImage.png';
 import AutopostLogo48 from 'assets/images/AutopostLogo48';
 
 const Inner = memo(({ handleRegister }) => {
+    //Validate rules
+    const nameRules = [
+        {
+            pattern: /^[^\d]+$/,
+            message: 'Họ và tên không được chứa số.',
+        },
+    ];
+    const usernameRules = [
+        {
+            min: 8,
+            message: 'Tên đăng nhập phải có ít nhất 8 ký tự.',
+        },
+    ];
+    const emailRules = [
+        {
+            type: 'email',
+            message: 'Định dạng email không hợp lệ.',
+        },
+    ];
+    const passwordRules = [
+        {
+            pattern: /^(?=.*[\d])(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
+            message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
+        },
+    ];
+    const confirmPasswordRules = [
+        ...passwordRules,
+        ({ getFieldValue }) => ({
+            validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                }
+                return Promise.reject(
+                    new Error('Mật khẩu nhập lại không trùng khớp.')
+                );
+            },
+        }),
+    ];
     const handleFinish = values => {
-        //using regex to validate all fields
-        const nameRegex = /^[^\d]+$/;
-        if (
-            !nameRegex.test(values.first_name) ||
-            !nameRegex.test(values.last_name)
-        ) {
-            return Message.sendError('Họ và tên không được chứa số.');
-        }
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(values.email)) {
-            return Message.sendError('Email không hợp lệ.');
-        }
-        if (values.username.length < 8) {
-            return Message.sendError('Tên đăng nhập phải có ít nhất 8 ký tự.');
-        }
-        const passwordRegex = /[a-zA-Z0-9]{8,}$/;
-        if (!passwordRegex.test(values.password)) {
-            return Message.sendError(
-                'Mật khẩu phải có ít nhất 8 ký tự và 1 chữ số.'
-            );
-        }
-        if (values.password !== values.confirm_password) {
-            return Message.sendError('Mật khẩu nhập lại không khớp.');
-        }
+        //Delete confirm password field before calling API
+        delete values.confirm_password;
         handleRegister(values);
     };
     return (
@@ -47,7 +62,6 @@ const Inner = memo(({ handleRegister }) => {
                     <Form
                         className="account-layout__input"
                         onFinish={handleFinish}
-                        method="POST"
                         layout="vertical"
                     >
                         <div className="input__title">Đăng ký</div>
@@ -60,6 +74,7 @@ const Inner = memo(({ handleRegister }) => {
                                 required
                                 requiredMessage="Vui lòng nhập họ."
                                 placeholder="Họ"
+                                rules={nameRules}
                             />
                             <AccountInput
                                 name="last_name"
@@ -68,6 +83,7 @@ const Inner = memo(({ handleRegister }) => {
                                 required
                                 requiredMessage="Vui lòng nhập tên."
                                 placeholder="Tên"
+                                rules={nameRules}
                             />
                         </div>
                         <AccountInput
@@ -77,6 +93,7 @@ const Inner = memo(({ handleRegister }) => {
                             required
                             requiredMessage="Vui lòng nhập email."
                             placeholder="Email"
+                            rules={emailRules}
                         />
                         <AccountInput
                             name="username"
@@ -85,6 +102,8 @@ const Inner = memo(({ handleRegister }) => {
                             required
                             requiredMessage="Vui lòng nhập tên đăng nhập."
                             placeholder="Tên đăng nhập"
+                            tooltip="Tên đăng nhập phải có ít nhất 8 ký tự."
+                            rules={usernameRules}
                         />
                         <AccountInput
                             name="password"
@@ -93,6 +112,8 @@ const Inner = memo(({ handleRegister }) => {
                             required
                             requiredMessage="Vui lòng nhập mật khẩu."
                             placeholder="Mật khẩu"
+                            tooltip="Mật khẩu phải có ít nhất 8 kí tự, bao gồm cả chữ và số."
+                            rules={passwordRules}
                         />
                         <AccountInput
                             name="confirm_password"
@@ -101,6 +122,7 @@ const Inner = memo(({ handleRegister }) => {
                             required
                             requiredMessage="Vui lòng nhập lại mật khẩu."
                             placeholder="Nhập lại mật khẩu"
+                            rules={confirmPasswordRules}
                         />
                         <Button
                             className="account-layout-button"
