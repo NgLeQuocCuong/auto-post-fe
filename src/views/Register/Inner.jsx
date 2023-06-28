@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import 'layouts/Account/index.scss';
 import AccountInput from 'layouts/Account/AccountInput';
-import AutopostLogo48 from 'assets/images/AutopostLogo48';
 
 const Inner = memo(({ handleRegister }) => {
     //Validate rules
