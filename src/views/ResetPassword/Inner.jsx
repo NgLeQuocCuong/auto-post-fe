@@ -35,6 +35,8 @@ const Inner = memo(({ handleResetPassword }) => {
         }),
     ];
     const onFinish = values => {
+        delete values.passwordRetype;
+        values.token = 'token_param_from_url';
         handleResetPassword(values);
     };
     const onFinishFailed = () => {
@@ -42,7 +44,6 @@ const Inner = memo(({ handleResetPassword }) => {
     };
     return (
         <AccountLayout title="Reset Password">
-            <div className="container"></div>
             <Form
                 layout="vertical"
                 className="container form"
@@ -69,7 +70,7 @@ const Inner = memo(({ handleResetPassword }) => {
                 </Form.Item>
                 <Form.Item
                     className="form__label-fw-600"
-                    name="password_retype"
+                    name="passwordRetype"
                     label="Xác nhận mật khẩu mới"
                     dependencies={['password']}
                     hasFeedback
@@ -80,7 +81,7 @@ const Inner = memo(({ handleResetPassword }) => {
                         placeholder="Nhập lại mật khẩu mới"
                     />
                 </Form.Item>
-                <Form.Item style={{ clear: 'both' }}>
+                <Form.Item className="clear-both">
                     <NavLink to={routeConstants.USER_SETTINGS}>
                         <Button
                             size="large"
@@ -94,9 +95,7 @@ const Inner = memo(({ handleResetPassword }) => {
                         size="large"
                         type="primary"
                         htmlType="submit"
-                        style={{
-                            float: 'right',
-                        }}
+                        className="float-right"
                     >
                         Lưu
                     </Button>

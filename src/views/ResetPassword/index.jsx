@@ -8,13 +8,13 @@ const Wrapper = memo(() => {
     const navigate = useNavigate();
     const handleResetPassword = useCallback(
         async data => {
-            //const response = await userService.resetPassword(data);
+            // const response = await userService.resetPassword(data);
             const response = { isSuccess: true };
             if (response.isSuccess) {
-                Message.sendSuccess('Đặt mật khẩu thành công!', 2);
-                navigate(routeConstants.RESET_PASSWORD);
+                Message.sendSuccess('Đặt mật khẩu thành công!');
+                navigate(routeConstants.USER_SETTINGS);
             } else {
-                Message.sendError('Có lỗi xảy ra', 2);
+                Message.sendError('Có lỗi xảy ra');
             }
             return response;
         },
