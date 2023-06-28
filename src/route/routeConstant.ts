@@ -6,6 +6,7 @@ const routeConstants = {
     USER_SETTINGS: '/user-settings',
     ALL_POSTS: '/posts',
     LOGOUT: '/logout',
+    CHANGE_PASSWORD: '/change-password',
 };
 
 export default routeConstants;
