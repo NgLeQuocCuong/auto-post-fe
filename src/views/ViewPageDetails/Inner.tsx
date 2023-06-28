@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import './style.scss';
 import AccountLayout from 'layouts/Account';
-import ZaloIcon from 'components/CommonInput/icons/ZaloIcon';
-import FBIcon from 'components/CommonInput/icons/FBIcon';
-import ViewIcon from 'components/CommonInput/icons/ViewIcon';
-import ShareIcon from 'components/CommonInput/icons/ShareIcon';
-import LikeIcon from 'components/CommonInput/icons/LikeIcon';
-import CommentIcon from 'components/CommonInput/icons/CommentIcon';
+// import ZaloIcon from 'components/CommonInput/icons/ZaloIcon';
+// import FBIcon from 'components/CommonInput/icons/FBIcon';
+// import ViewIcon from 'components/CommonInput/icons/ViewIcon';
+// import ShareIcon from 'components/CommonInput/icons/ShareIcon';
+// import LikeIcon from 'components/CommonInput/icons/LikeIcon';
+// import CommentIcon from 'components/CommonInput/icons/CommentIcon';
 import PencilIcon from 'components/CommonInput/icons/PencilIcon';
 import TrashIcon from 'components/CommonInput/icons/TrashIcon';
 import { FC, useCallback } from 'react';
@@ -40,7 +40,7 @@ const Inner: FC<Props> = memo(
                 <AccountLayout>
                     <div className="details-view-container">
                         <div className="upper">
-                            <button className="edit-button">
+                            {/* <button className="edit-button">
                                 <PencilIcon /> <p>Sửa bài viết</p>
                             </button>
                             <button
@@ -48,7 +48,7 @@ const Inner: FC<Props> = memo(
                                 onClick={handleremove}
                             >
                                 <TrashIcon /> <p>Xóa bài viết</p>
-                            </button>
+                            </button> */}
                         </div>
                         <div className="header">
                             <div className="left-section">
@@ -77,7 +77,16 @@ const Inner: FC<Props> = memo(
                                 </div>
                             </div>
                             <div className="right-section">
-                                <div className="actions">
+                                <button className="edit-button">
+                                    <PencilIcon /> <p>Sửa bài viết</p>
+                                </button>
+                                <button
+                                    className="del-button"
+                                    onClick={handleremove}
+                                >
+                                    <TrashIcon /> <p>Xóa bài viết</p>
+                                </button>
+                                {/* <div className="actions">
                                     <h2>Nền tảng đã đăng</h2>
                                     <div className="social-stats">
                                         <div className="FB-stat">
@@ -124,7 +133,7 @@ const Inner: FC<Props> = memo(
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="post-content">
