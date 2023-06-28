@@ -1,45 +1,47 @@
 @import 'scss/global.scss';
 
-.ant-dropdown-trigger {
-    width: 200px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    color: $color--text2;
-    span {
-        padding-left: 12px;
+.all-posts-container {
+    .ant-dropdown-trigger {
+        width: 200px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        color: $color--text2;
+        span {
+            padding-left: 12px;
+        }
+        svg {
+            margin-right: 12px;
+        }
     }
-    svg {
-        margin-right: 12px;
-    }
-}
 
-.ant-input-affix-wrapper {
-    width: 400px;
-    padding: 0 12px;
-    .ant-input-suffix {
+    .ant-input-affix-wrapper {
+        width: 400px;
+        padding: 0 12px;
+        .ant-input-suffix {
+            height: 40px;
+        }
+    }
+
+    .ant-radio-group,
+    .ant-checkbox-group {
+        display: flex;
+        flex-direction: column;
+        > * {
+            margin: 8px 0;
+        }
+    }
+
+    .ant-table-cell {
+        max-width: 40rem;
+        @include overflow-long-text;
+    }
+
+    .ant-btn {
         height: 40px;
     }
-}
-
-.ant-radio-group,
-.ant-checkbox-group {
-    display: flex;
-    flex-direction: column;
-    > * {
-        margin: 8px 0;
-    }
-}
-
-.ant-table-cell {
-    max-width: 40rem;
-    @include overflow-long-text;
-}
-
-.ant-btn {
-    height: 40px;
 }
