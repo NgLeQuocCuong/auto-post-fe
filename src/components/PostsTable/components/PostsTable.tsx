@@ -1,9 +1,7 @@
 import { FC, memo, useState } from 'react';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import Eye from 'components/PostsTable/icons/Eye';
-import Edit from 'components/PostsTable/icons/Edit';
-import Delete from 'components/PostsTable/icons/Delete';
+import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 interface RowData {
     uid: string;
@@ -43,9 +41,9 @@ const columns: ColumnsType<RowData> = [
         key: 'action',
         render: () => (
             <Space size="middle">
-                <Eye />
-                <Edit />
-                <Delete />
+                <EyeOutlined />
+                <EditOutlined />
+                <DeleteOutlined />
             </Space>
         ),
     },
