@@ -1,5 +1,4 @@
 import './index.scss';
-import { Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
@@ -23,14 +22,9 @@ const items = [
 ];
 interface Props {
     firstName: string;
-    setfirstName: Dispatch<SetStateAction<string>>;
 }
-// eslint-disable-next-line no-undef
-const Header: FC<Props> = memo(({ firstName, setfirstName }) => {
+const Header: FC<Props> = memo(({ firstName }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    if (!firstName) {
-        setfirstName('default');
-    }
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };

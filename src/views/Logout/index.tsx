@@ -13,6 +13,9 @@ const Logout = memo(() => {
             Message.sendSuccess('Đăng xuất thành công!', 2);
             setToken('');
             navigate(routeConstants.LOGIN);
+        } else {
+            setToken('');
+            navigate(routeConstants.LOGIN);
         }
         return response;
     }, [navigate]);

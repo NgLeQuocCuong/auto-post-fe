@@ -1,24 +1,15 @@
-import {
-    FC,
-    PropsWithChildren,
-    memo,
-    useState,
-    useEffect,
-    Dispatch,
-    SetStateAction,
-} from 'react';
+import { FC, PropsWithChildren, memo, useState, useEffect } from 'react';
 import './index.scss';
-import userService from 'services/userService';
-import { useToken, setToken } from 'reducers/token/function';
+import { useToken } from 'reducers/token/function';
 import Header from './Header';
 import routeConstants from 'route/routeConstant';
 import { useNavigate } from 'react-router-dom';
+import { useUserProfile } from 'reducers/profile/function';
 
 interface Props {
     title?: string;
     subTitle?: string;
     firstName: string;
-    setfirstName: Dispatch<SetStateAction<string>>;
 }
 
 const MainLayout: FC<PropsWithChildren<Props>> = memo(({ children }) => {
@@ -26,29 +17,22 @@ const MainLayout: FC<PropsWithChildren<Props>> = memo(({ children }) => {
     const [authorized, setAuthorized] = useState(false);
     const [firstName, setFirstName] = useState('');
     const token = useToken();
+    const user = useUserProfile();
     useEffect(() => {
         if (token) {
-            userService.me().then(res => {
-                if (res.isSuccess) {
-                    setAuthorized(true);
-                    setFirstName(res.data.firstName);
-                } else {
-                    setToken('');
-                    setAuthorized(false);
-                    navigate(routeConstants.LOGIN);
-                }
-            });
+            setFirstName(user.firstName);
+            setAuthorized(true);
         } else {
             setAuthorized(false);
             navigate(routeConstants.LOGIN);
         }
-    }, [authorized, token, navigate]);
+    }, [authorized, token, navigate, user.firstName]);
     if (!authorized) {
         return null;
     }
     return (
         <div>
-            <Header firstName={firstName} setfirstName={setFirstName} />
+            <Header firstName={firstName ? firstName : 'default'} />
             {children}
         </div>
     );
