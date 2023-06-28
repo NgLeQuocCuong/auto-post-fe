@@ -35,6 +35,7 @@ const routes: Array<Route> = [
         name: 'User Settings',
         path: routeConstants.USER_SETTINGS,
         Component: commonLoadable(() => import('views/UserSettings')),
+        authorization: true,
     },
     {
         name: '404',
