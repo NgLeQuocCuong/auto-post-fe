@@ -17,7 +17,7 @@ const items = [
     {
         id: 2,
         name: 'BÀI VIẾT',
-        url: routeConstants.POST,
+        url: routeConstants.ALL_POSTS,
     },
 ];
 interface Props {
@@ -86,7 +86,7 @@ const Header: FC<Props> = memo(({ firstName }) => {
 
                             <li>
                                 <NavLink
-                                    to={routeConstants.USER_SETTINGS}
+                                    to={routeConstants.CHANGE_PASSWORD}
                                     className="Drop-item"
                                 >
                                     <p>Đổi mật khẩu</p>
