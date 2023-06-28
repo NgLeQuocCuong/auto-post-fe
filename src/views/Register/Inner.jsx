@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import 'layouts/Account/index.scss';
 import AccountInput from 'layouts/Account/AccountInput';
-import AccountLayoutImage from 'assets/images/AccountLayoutImage.png';
 import AutopostLogo48 from 'assets/images/AutopostLogo48';
 
 const Inner = memo(({ handleRegister }) => {
@@ -30,7 +29,7 @@ const Inner = memo(({ handleRegister }) => {
     ];
     const passwordRules = [
         {
-            pattern: /^(?=.*[\d])(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
+            pattern: /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
             message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
         },
     ];
@@ -53,87 +52,70 @@ const Inner = memo(({ handleRegister }) => {
         handleRegister(values);
     };
     return (
-        <AccountLayout title="Register">
-            <div className="account-layout-container">
-                <div className="account-layout__left">
-                    <div className="account-layout__autopost-logo">
-                        <AutopostLogo48 />
-                    </div>
-                    <Form
-                        className="account-layout__input"
-                        onFinish={handleFinish}
-                        layout="vertical"
-                    >
-                        <div className="input__title">Đăng ký</div>
-
-                        <div className="account-layout__input--vertical">
-                            <AccountInput
-                                name="firstName"
-                                label="Họ"
-                                type="text"
-                                placeholder="Họ"
-                                rules={nameRules}
-                            />
-                            <AccountInput
-                                name="lastName"
-                                label="Tên"
-                                type="text"
-                                placeholder="Tên"
-                                rules={nameRules}
-                            />
-                        </div>
-                        <AccountInput
-                            name="email"
-                            label="Email"
-                            type="email"
-                            placeholder="Email"
-                            rules={emailRules}
-                        />
-                        <AccountInput
-                            name="username"
-                            label="Tên đăng nhập"
-                            type="text"
-                            placeholder="Tên đăng nhập"
-                            tooltip="Tên đăng nhập phải có ít nhất 8 ký tự."
-                            rules={usernameRules}
-                        />
-                        <AccountInput
-                            name="password"
-                            label="Mật khẩu"
-                            type="password"
-                            placeholder="Mật khẩu"
-                            tooltip="Mật khẩu phải có ít nhất 8 kí tự, bao gồm cả chữ và số."
-                            rules={passwordRules}
-                        />
-                        <AccountInput
-                            name="confirmPassword"
-                            label="Nhập lại mật khẩu"
-                            type="password"
-                            placeholder="Nhập lại mật khẩu"
-                            rules={confirmPasswordRules}
-                        />
-                        <Button
-                            className="account-layout-button"
-                            type="primary"
-                            htmlType="submit"
-                        >
-                            Đăng ký
-                        </Button>
-                        <div className="has-account">
-                            Đã có tài khoản? &nbsp;
-                            <NavLink to={routeConstants.LOGIN}>
-                                Đăng nhập
-                            </NavLink>
-                        </div>
-                    </Form>
-                    <div className="account-layout__footer">
-                        © 2023 AutoPost is a product of Horus Co., Ltd
-                    </div>
+        <AccountLayout title="Đăng ký">
+            <Form
+                className="account-layout__input"
+                onFinish={handleFinish}
+                layout="vertical"
+            >
+                <div className="account-layout__input--vertical">
+                    <AccountInput
+                        name="firstName"
+                        label="Họ"
+                        type="text"
+                        placeholder="Họ"
+                        rules={nameRules}
+                    />
+                    <AccountInput
+                        name="lastName"
+                        label="Tên"
+                        type="text"
+                        placeholder="Tên"
+                        rules={nameRules}
+                    />
                 </div>
-                <div className="account-layout__right">
-                    <img src={AccountLayoutImage} alt="Account layout" />
+                <AccountInput
+                    name="email"
+                    label="Email"
+                    type="email"
+                    placeholder="Email"
+                    rules={emailRules}
+                />
+                <AccountInput
+                    name="username"
+                    label="Tên đăng nhập"
+                    type="text"
+                    placeholder="Tên đăng nhập"
+                    tooltip="Tên đăng nhập phải có ít nhất 8 ký tự."
+                    rules={usernameRules}
+                />
+                <AccountInput
+                    name="password"
+                    label="Mật khẩu"
+                    type="password"
+                    placeholder="Mật khẩu"
+                    tooltip="Mật khẩu phải có ít nhất 8 kí tự, bao gồm cả chữ và số."
+                    rules={passwordRules}
+                />
+                <AccountInput
+                    name="confirmPassword"
+                    label="Nhập lại mật khẩu"
+                    type="password"
+                    placeholder="Nhập lại mật khẩu"
+                    rules={confirmPasswordRules}
+                />
+                <Button
+                    className="account-layout-button"
+                    type="primary"
+                    htmlType="submit"
+                >
+                    Đăng ký
+                </Button>
+                <div className="has-account">
+                    Đã có tài khoản? &nbsp;
+                    <NavLink to={routeConstants.LOGIN}>Đăng nhập</NavLink>
                 </div>
-            </div>
+            </Form>
         </AccountLayout>
     );
 });
