@@ -3,19 +3,19 @@ import Inner from 'views/ViewPageDetails/Inner';
 import { useState } from 'react';
 import './style.scss';
 import userService from 'services/userService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useToken } from 'reducers/token/function';
 import routeConstants from 'route/routeConstant';
 import { FC } from 'react';
 import showdown from 'showdown';
+
 declare module 'showdown';
 interface Props {
     postType: string;
     createAt: string;
-    uid: string;
 }
 
-const Wrapper: FC<Props> = memo(({ uid }) => {
+const Wrapper: FC<Props> = memo(() => {
     const navigate = useNavigate();
     const [postType, setpostType] = useState('');
     const [createAt, setcreateAt] = useState('');
@@ -24,7 +24,8 @@ const Wrapper: FC<Props> = memo(({ uid }) => {
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const token = useToken();
-    const fuid = uid ? uid : '72616fb0-0b4c-42ed-8647-a8fbdf90e3ab';
+    const { uid } = useParams();
+    const fuid = uid ? uid : '';
     useEffect(() => {
         if (token) {
             userService.getdetails(fuid).then(res => {
@@ -56,7 +57,7 @@ const Wrapper: FC<Props> = memo(({ uid }) => {
                         );
                     }
                 } else {
-                    navigate(routeConstants.MAINPAGE);
+                    navigate(routeConstants.ALL_POSTS);
                 }
             });
         } else {

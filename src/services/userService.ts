@@ -19,9 +19,14 @@ class UserService extends ApiBase {
         const url = `${_POST_PATH}/${uid}/detail`;
         return this.get(url);
     };
+
     remove = (uid: string) => {
         const url = `${_POST_PATH}/${uid}/remove`;
         return this.post(url, uid);
+    };
+    logout = () => {
+        const url = `${_USER_PATH}/logout`;
+        return this.post(url);
     };
     changePassword = (requestBody: {
         current_password: string;
