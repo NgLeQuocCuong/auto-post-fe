@@ -35,6 +35,7 @@ const routes: Array<Route> = [
         name: 'Change Password',
         path: routeConstants.CHANGE_PASSWORD,
         Component: commonLoadable(() => import('views/ChangePassword')),
+        authorization: true,
     },
     {
         name: 'User Settings',
