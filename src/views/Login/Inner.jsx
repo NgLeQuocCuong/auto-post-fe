@@ -41,7 +41,6 @@ const Inner = memo(({ handleLogin }) => {
                             name="email"
                             label="Email"
                             type="email"
-                            requiredMessage="Vui lòng nhập email"
                             placeholder="Email"
                             rules={emailRules}
                         />
@@ -49,7 +48,6 @@ const Inner = memo(({ handleLogin }) => {
                             name="password"
                             label="Mật khẩu"
                             type="password"
-                            requiredMessage="Vui lòng nhập mật khẩu"
                             placeholder="Mật khẩu"
                             rules={passwordRules}
                         />

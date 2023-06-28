@@ -71,8 +71,6 @@ const Inner = memo(({ handleRegister }) => {
                                 name="firstName"
                                 label="Họ"
                                 type="text"
-                                required
-                                requiredMessage="Vui lòng nhập họ."
                                 placeholder="Họ"
                                 rules={nameRules}
                             />
@@ -80,8 +78,6 @@ const Inner = memo(({ handleRegister }) => {
                                 name="lastName"
                                 label="Tên"
                                 type="text"
-                                required
-                                requiredMessage="Vui lòng nhập tên."
                                 placeholder="Tên"
                                 rules={nameRules}
                             />
@@ -90,8 +86,6 @@ const Inner = memo(({ handleRegister }) => {
                             name="email"
                             label="Email"
                             type="email"
-                            required
-                            requiredMessage="Vui lòng nhập email."
                             placeholder="Email"
                             rules={emailRules}
                         />
@@ -99,8 +93,6 @@ const Inner = memo(({ handleRegister }) => {
                             name="username"
                             label="Tên đăng nhập"
                             type="text"
-                            required
-                            requiredMessage="Vui lòng nhập tên đăng nhập."
                             placeholder="Tên đăng nhập"
                             tooltip="Tên đăng nhập phải có ít nhất 8 ký tự."
                             rules={usernameRules}
@@ -109,8 +101,6 @@ const Inner = memo(({ handleRegister }) => {
                             name="password"
                             label="Mật khẩu"
                             type="password"
-                            required
-                            requiredMessage="Vui lòng nhập mật khẩu."
                             placeholder="Mật khẩu"
                             tooltip="Mật khẩu phải có ít nhất 8 kí tự, bao gồm cả chữ và số."
                             rules={passwordRules}
@@ -119,8 +109,6 @@ const Inner = memo(({ handleRegister }) => {
                             name="confirmPassword"
                             label="Nhập lại mật khẩu"
                             type="password"
-                            required
-                            requiredMessage="Vui lòng nhập lại mật khẩu."
                             placeholder="Nhập lại mật khẩu"
                             rules={confirmPasswordRules}
                         />

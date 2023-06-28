@@ -7,7 +7,6 @@ const Wrapper = memo(() => {
     const navigate = useNavigate();
     const handleRegister = useCallback(
         async data => {
-            //TODO: Implement register API
             const response = await userService.register(data);
             if (response.isSuccess) {
                 Popup.sendSuccess(
