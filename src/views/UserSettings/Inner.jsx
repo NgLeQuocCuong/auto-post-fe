@@ -41,19 +41,25 @@ const Inner = memo(
                                     {userInfo.username}
                                 </Typography.Text>
                                 <Space>
-                                    <Button
-                                        size="large"
-                                        className="form__btn-blue form__btn-border"
+                                    <NavLink to={routeConstants.USER_UPDATE}>
+                                        <Button
+                                            size="large"
+                                            className="form__btn-blue form__btn-border"
+                                        >
+                                            Chỉnh sửa
+                                        </Button>
+                                    </NavLink>
+                                    <NavLink
+                                        to={routeConstants.CHANGE_PASSWORD}
                                     >
-                                        Chỉnh sửa
-                                    </Button>
-                                    <Button
-                                        danger
-                                        size="large"
-                                        className="form__btn-big"
-                                    >
-                                        Đổi mật khẩu
-                                    </Button>
+                                        <Button
+                                            danger
+                                            size="large"
+                                            className="form__btn-big"
+                                        >
+                                            Đổi mật khẩu
+                                        </Button>
+                                    </NavLink>
                                 </Space>
                             </Form.Item>
                             <Form.Item
