@@ -17,7 +17,7 @@ class UserService extends ApiBase {
 
     logout = () => {
         const url = `${_USER_PATH}/logout`;
-        return this.post(url); 
+        return this.post(url);
     };
     changePassword = (requestBody: {
         current_password: string;

@@ -11,7 +11,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 350px;
         }
         &--search {
             position: relative;
@@ -49,9 +48,9 @@
             list-style: none;
             display: flex;
             align-items: center;
-            justify-content: center;
+            margin: auto;
+            margin-left: 10%;
             width: fit-content;
-            margin: 0 auto;
             padding: 0;
         }
         &--item {
