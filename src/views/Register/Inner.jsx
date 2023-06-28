@@ -49,7 +49,7 @@ const Inner = memo(({ handleRegister }) => {
     ];
     const handleFinish = values => {
         //Delete confirm password field before calling API
-        delete values.confirm_password;
+        delete values.confirmPassword;
         handleRegister(values);
     };
     return (
@@ -68,7 +68,7 @@ const Inner = memo(({ handleRegister }) => {
 
                         <div className="account-layout__input--vertical">
                             <AccountInput
-                                name="first_name"
+                                name="firstName"
                                 label="Họ"
                                 type="text"
                                 required
@@ -77,7 +77,7 @@ const Inner = memo(({ handleRegister }) => {
                                 rules={nameRules}
                             />
                             <AccountInput
-                                name="last_name"
+                                name="lastName"
                                 label="Tên"
                                 type="text"
                                 required
@@ -116,7 +116,7 @@ const Inner = memo(({ handleRegister }) => {
                             rules={passwordRules}
                         />
                         <AccountInput
-                            name="confirm_password"
+                            name="confirmPassword"
                             label="Nhập lại mật khẩu"
                             type="password"
                             required
