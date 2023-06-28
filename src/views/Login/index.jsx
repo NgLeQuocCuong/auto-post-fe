@@ -3,26 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, setToken } from 'reducers/token/function';
 import userService from 'services/userService';
 import Inner from 'views/Login/Inner';
-import Popup from 'components/Popup';
+import Message from 'components/Message';
+import routeConstants from 'route/routeConstant';
 const Wrapper = memo(() => {
     const navigate = useNavigate();
     useEffect(() => {
         const token = getToken();
         if (token) {
-            //Navigate to main page
+            navigate(routeConstants.HOME_PAGE);
         }
     }, [navigate]);
 
     const handleLogin = useCallback(async data => {
-        //TODO: Implement login API
         const response = await userService.login(data);
         if (response.isSuccess) {
-            // set token
             setToken(response.data.accessToken);
-            Popup.sendSuccess(
-                'Đăng nhập thành công.',
-                `Chào mừng ${data.email} đến với AutoPost!`
-            );
+            Message.sendSuccess('Đăng nhập thành công.');
         }
         return response;
     }, []);

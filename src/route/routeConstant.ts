@@ -4,6 +4,7 @@ const routeConstants = {
     FORGOT_PASSWORD: '/forgot-password',
     USER_SETTINGS: '/user-settings',
     CHANGE_PASSWORD: '/change-password',
+    HOME_PAGE: '/',
 };
 
 export default routeConstants;
