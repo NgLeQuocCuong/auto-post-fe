@@ -27,15 +27,6 @@
         }
     }
 
-    .ant-radio-group,
-    .ant-checkbox-group {
-        display: flex;
-        flex-direction: column;
-        > * {
-            margin: 8px 0;
-        }
-    }
-
     .ant-table-cell {
         max-width: 40rem;
         @include overflow-long-text;
@@ -43,5 +34,13 @@
 
     .ant-btn {
         height: 40px;
+    }
+}
+.ant-radio-group,
+.ant-checkbox-group {
+    display: flex;
+    flex-direction: column !important;
+    > * {
+        margin: 8px 0;
     }
 }
