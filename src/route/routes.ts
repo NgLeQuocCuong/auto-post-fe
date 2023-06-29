@@ -43,14 +43,14 @@ const routes: Array<Route> = [
         authorization: true,
     },
     {
-        name: '404',
-        path: '*',
-        redirect: routeConstants.LOGIN,
-    },
-    {
         name: 'Logout',
         path: routeConstants.LOGOUT,
         Component: commonLoadable(() => import('views/Logout')),
+    },
+    {
+        name: '404',
+        path: '*',
+        redirect: routeConstants.LOGIN,
     },
 ];
 
