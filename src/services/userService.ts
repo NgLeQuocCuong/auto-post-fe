@@ -15,8 +15,8 @@ class UserService extends ApiBase {
         return res;
     };
     changePassword = (requestBody: {
-        current_password: string;
-        new_password: string;
+        currentPassword: string;
+        newPassword: string;
     }) => {
         const url = `${_USER_PATH}/update/password`;
         const res = this.post(url, requestBody);
