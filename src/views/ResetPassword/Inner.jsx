@@ -4,6 +4,7 @@ import { memo } from 'react';
 import FormReset from 'views/ResetPassword/components/FormReset';
 
 const Inner = memo(({ handleResetPassword }) => {
+    // TODO: Add AccountLayout
     return (
         <div className="forgot">
             <div className="forgot__left">

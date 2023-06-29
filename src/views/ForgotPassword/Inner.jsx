@@ -4,6 +4,7 @@ import FooterText from 'components/FooterText/FooterText';
 import FormForgot from 'views/ForgotPassword/components/FormForgot';
 
 const ForgotPassword = memo(({ handleForgotPassword }) => {
+    // TODO: Add AccountLayout
     return (
         <div className="forgot">
             <div className="forgot__left">
