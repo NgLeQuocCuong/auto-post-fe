@@ -1,5 +1,6 @@
 import { FC, memo, useMemo } from 'react';
 import { Optional } from 'utils/commonType';
+import { useInputConfigContext } from './InputConfigContext';
 import './commonInput.scss';
 import AutoComplete from './components/AutoComplete';
 import Checkbox from './components/Checkbox';
@@ -9,11 +10,10 @@ import FileInput from './components/FileInput';
 import NumberInput from './components/NumberInput';
 import Radio from './components/Radio';
 import Select from './components/Select';
-import Textarea from './components/Textarea';
 import TextInput from './components/TextInput';
+import Textarea from './components/Textarea';
 import TimeInput from './components/TimeInput';
 import { Input } from './enums';
-import { useInputConfigContext } from './InputConfigContext';
 import { ICommonInputProps } from './type';
 
 interface ICommonInput extends FC<Optional<ICommonInputProps>> {

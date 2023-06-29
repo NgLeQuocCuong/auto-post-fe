@@ -1,6 +1,6 @@
 import { Select as SelectAntd } from 'antd';
-import ArrowIcon from '../icons/ArrowIcon';
 import { FC, memo, useCallback, useEffect, useRef, useState } from 'react';
+import ArrowIcon from '../icons/ArrowIcon';
 import { IInputProps } from '../type';
 
 const { Option } = SelectAntd;

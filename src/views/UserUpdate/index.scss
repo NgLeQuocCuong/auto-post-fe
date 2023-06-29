@@ -9,7 +9,7 @@
     margin: 72px auto;
 }
 
-.change-password-form {
+.user-update-form {
     &__title {
         @include font-24;
         @include fontSemibold;
@@ -23,17 +23,6 @@
             .ant-form-item-label {
                 @include fontSemibold;
             }
-        }
-    }
-    &__avatar {
-        &--round {
-            border-radius: 50%;
-            + .ant-image-mask {
-                border-radius: 50%;
-            }
-        }
-        &--fit {
-            object-fit: none;
         }
     }
     .ant-form-item-label > label.ant-form-item-required {
