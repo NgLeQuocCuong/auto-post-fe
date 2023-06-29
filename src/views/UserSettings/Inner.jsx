@@ -75,9 +75,11 @@ const Inner = memo(
                                 label="Ngày tham gia"
                                 className="user-settings-form__label--padding-bottom-0"
                             >
-                                {moment(new Date(userInfo.dateJoined)).format(
-                                    'DD/MM/YYYY'
-                                )}
+                                {userInfo.dateJoined
+                                    ? moment(
+                                          new Date(userInfo.dateJoined)
+                                      ).format('DD/MM/YYYY')
+                                    : ''}
                             </Form.Item>
                             <Form.Item className="user-settings-form__label--padding-bottom-0">
                                 <List size="small" bordered>
