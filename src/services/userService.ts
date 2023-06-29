@@ -61,6 +61,11 @@ class UserService extends ApiBase {
         const res = this.post(url, requestBody);
         return res;
     };
+    getmdetails = (uid: string) => {
+        const url = `${_POST_PATH}/post-management/${uid}/detail`;
+        const res = this.get(url);
+        return res;
+    };
 }
 
 const userService = new UserService();

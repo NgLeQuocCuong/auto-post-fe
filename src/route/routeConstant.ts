@@ -7,6 +7,8 @@ const routeConstants = {
     PAGEDETAILS: `/page-details/:uid`,
     USER_SETTINGS: '/user-settings',
     CHANGE_PASSWORD: '/change-password',
+    POSTS_MANAGEMENT: '/posts-management',
+    MANAGEMENT_DETAIL: '/posts-management/detail/:uid',
     RESET_PASSWORD: '/reset-password/:slug',
     HOME_PAGE: '/',
 };
