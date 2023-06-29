@@ -1,0 +1,132 @@
+@import 'scss/global';
+
+.wrapper {
+    padding: 120px 0;
+    &__content {
+        width: 90%;
+        height: 950px;
+        border-radius: 20px;
+        margin: 0 auto;
+        background-color: $color--light;
+    }
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 57px;
+        width: 240px;
+        padding: 20px 35px;
+        &--main {
+            text-transform: uppercase;
+            margin-block: 0;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        &--sub {
+            margin-block: 0;
+            font-weight: 300;
+            color: $color--subtext;
+        }
+    }
+    &__social {
+        padding: 20px 35px;
+        &--title {
+            margin-right: 30px;
+        }
+    }
+    &__checkList {
+        padding: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &--label {
+            font-weight: 600;
+        }
+    }
+    &__button {
+        float: right;
+        margin-right: 35px;
+    }
+}
+//css content wrapper
+.contentwrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    &__content {
+        margin: 0 35px;
+        padding-bottom: 44px;
+        background-color: $color-gray-light;
+        border-color: $color-gray-light;
+        border-radius: 12px;
+        overflow: hidden;
+        font-family: $font-inter;
+        font-size: 16px;
+    }
+}
+.ql-toolbar.ql-snow {
+    border: 0 !important;
+    border-bottom: 1px solid #bbabab !important;
+}
+.ql-container {
+    font-family: $font-inter !important;
+    .ql-editor {
+        font-size: 16px !important;
+    }
+}
+.ql-container.ql-snow {
+    border: 0 !important;
+    border-bottom: 1px solid #bbabab !important;
+    height: 450px;
+}
+/* Định nghĩa kiểu hiển thị của ảnh */
+.ql-editor img {
+    display: block;
+    margin: 0 auto; /* Đặt lề giữa ngang cho ảnh */
+}
+
+.checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: $color--light;
+    padding: 10px;
+    width: 180px;
+    height: 150px;
+    overflow-y: scroll;
+    border-radius: 10px;
+    border: 1px solid #e7e7e7;
+}
+
+.checkbox-item {
+    margin-bottom: 10px;
+    width: 100%;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.checkbox-container::-webkit-scrollbar {
+    width: 2px;
+}
+
+.checkbox-container::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $color--light;
+}
+
+.checkbox-container::-webkit-scrollbar-thumb {
+    background-color: #e7e7e7;
+    border-radius: 10px;
+}
+
+/* Định nghĩa kiểu hiển thị của văn bản */
+.ql-editor p {
+    margin-bottom: 10px; /* Đặt khoảng cách dưới cho đoạn văn bản */
+}
+
+//upload image
+.uploadwrapper {
+    margin: 0 35px;
+}
