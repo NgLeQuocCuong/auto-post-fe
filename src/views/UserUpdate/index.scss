@@ -9,7 +9,7 @@
     margin: 72px auto;
 }
 
-.form {
+.user-update-form {
     &__title {
         @include font-24;
         @include fontSemibold;
@@ -19,7 +19,7 @@
         }
     }
     &__label {
-        &-fw-600 {
+        &--fw-600 {
             .ant-form-item-label {
                 @include fontSemibold;
             }

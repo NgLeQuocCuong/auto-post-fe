@@ -12,13 +12,13 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
     useEffect(() => {
         form.setFieldsValue(userInfo);
     }, [form, userInfo]);
-    const usernameTooltip = 'Tên đăng nhập tối thiểu 8 ký tự gồm chữ hoặc số';
-    const rules = [
+    const rulesName = [
         {
             pattern: /^[^\d]+$/,
             message: 'Không hợp lệ',
         },
     ];
+    const usernameTooltip = 'Tên đăng nhập tối thiểu 8 ký tự gồm chữ hoặc số';
     const rulesUsername = [
         {
             pattern: /^[a-zA-Z\d]{8,}$/,
@@ -30,20 +30,23 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
         handleUserUpdate(values);
     };
     const onFinishFailed = () => {
-        Message.sendError('Vui lòng kiểm tra lại thông tin');
+        Message.sendError('Vui lòng kiểm tra lại thông tin.');
     };
     return (
         <AccountLayout title="User Update">
             <Form
                 form={form}
                 layout="vertical"
-                className="container form"
+                className="container user-update-form"
                 initialValues={userInfo}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
                 <Form.Item>
-                    <Typography.Text className="form__title">
+                    <Typography.Text
+                        component="div"
+                        className="user-update-form__title"
+                    >
                         Chỉnh sửa thông tin
                     </Typography.Text>
                 </Form.Item>
@@ -51,16 +54,16 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                     <Form.Item
                         name="firstName"
                         label="Họ"
-                        className="form__label-fw-600"
-                        rules={rules}
+                        className="user-update-form__label--fw-600"
+                        rules={rulesName}
                     >
                         <TextInput size="large" placeholder="Nhập họ" />
                     </Form.Item>
                     <Form.Item
                         name="lastName"
                         label="Tên"
-                        className="form__label-fw-600"
-                        rules={rules}
+                        className="user-update-form__label--fw-600"
+                        rules={rulesName}
                     >
                         <TextInput size="large" placeholder="Nhập tên" />
                     </Form.Item>
@@ -68,7 +71,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                 <Form.Item
                     name="username"
                     label="Tên đăng nhập"
-                    className="form__label-fw-600"
+                    className="user-update-form__label--fw-600"
                     tooltip={usernameTooltip}
                     rules={rulesUsername}
                 >
@@ -77,7 +80,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                 <Form.Item
                     name="email"
                     label="Email"
-                    className="form__label-fw-600"
+                    className="user-update-form__label--fw-600"
                 >
                     <TextInput size="large" placeholder="Nhập email" disabled />
                 </Form.Item>
