@@ -61,6 +61,27 @@ class UserService extends ApiBase {
         const res = this.post(url, requestBody);
         return res;
     };
+
+    linkFacebook = (requestBody: { token: string }) => {
+        const url = `${_USER_PATH}/connect/facebook`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+    unlinkFacebook = () => {
+        const url = `${_USER_PATH}/disconnect/facebook`;
+        const res = this.put(url);
+        return res;
+    };
+    linkZalo = (requestBody: { oathCode: string }) => {
+        const url = `${_USER_PATH}/connect/zalo`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+    unlinkZalo = () => {
+        const url = `${_USER_PATH}/disconnect/zalo`;
+        const res = this.put(url);
+        return res;
+
     getmdetails = (uid: string) => {
         const url = `${_POST_PATH}/post-management/${uid}/detail`;
         const res = this.get(url);

@@ -71,6 +71,7 @@ const routes: Array<Route> = [
         path: routeConstants.USER_SETTINGS,
         authorization: true,
         Component: commonLoadable(() => import('views/UserSettings')),
+        authorization: true,
     },
     {
         name: 'Management Detail',
