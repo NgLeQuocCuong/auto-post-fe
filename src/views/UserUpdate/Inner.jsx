@@ -19,6 +19,10 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
     const usernameTooltip = 'Tên đăng nhập tối thiểu 8 ký tự gồm chữ hoặc số';
     const rulesUsername = [
         {
+            required: true,
+            message: 'Không được để trống',
+        },
+        {
             pattern: /^[a-zA-Z\d]{8,}$/,
             message: 'Không hợp lệ',
         },
