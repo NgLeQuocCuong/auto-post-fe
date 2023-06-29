@@ -4,7 +4,7 @@ const routeConstants = {
     USER_SETTINGS: '/user-settings',
     CHANGE_PASSWORD: '/change-password',
     POSTS_MANAGEMENT: '/posts-management',
-    MANAGEMENT_DETAIL: '/posts-m-detail/:uid',
+    MANAGEMENT_DETAIL: '/posts-management/detail/:uid',
 };
 
 export default routeConstants;

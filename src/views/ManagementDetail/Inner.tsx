@@ -22,7 +22,7 @@ const Inner: FC<Props> = memo(
         // const navigate = useNavigate();
         const reacts = reaction ? reaction.toString() : '0';
         const comments = comment ? comment.toString() : '0';
-        const imgpath = 'http://192.168.1.24:8000';
+        const imgpath = 'http://192.168.30.109:8000';
         // const handleremove = useCallback(async () => {
         //     const response = await userService.remove(uid);
         //     if (response.isSuccess) {
