@@ -47,10 +47,20 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/ChangePassword')),
     },
     {
+        name: 'Reset Password',
+        path: routeConstants.RESET_PASSWORD,
+        Component: commonLoadable(() => import('views/ResetPassword')),
+    },
+    {
         name: 'User Settings',
         path: routeConstants.USER_SETTINGS,
         authorization: true,
         Component: commonLoadable(() => import('views/UserSettings')),
+    },
+    {
+        name: 'Forgot Password',
+        path: routeConstants.FORGOT_PASSWORD,
+        Component: commonLoadable(() => import('views/ForgotPassword')),
     },
     {
         name: '404',

@@ -16,6 +16,18 @@ class UserService extends ApiBase {
         return res;
     };
 
+    forgotPass = (requestBody: any) => {
+        const url = `${_USER_PATH}/forgot-password`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+
+    resetPass = (requestBody: { email: string }) => {
+        const url = `${_USER_PATH}/reset-password`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+
     register = (requestBody: {
         first_name: string;
         last_name: string;
@@ -42,8 +54,8 @@ class UserService extends ApiBase {
         return this.post(url);
     };
     changePassword = (requestBody: {
-        current_password: string;
-        new_password: string;
+        currentPassword: string;
+        newPassword: string;
     }) => {
         const url = `${_USER_PATH}/update/password`;
         const res = this.post(url, requestBody);
