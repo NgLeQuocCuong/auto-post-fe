@@ -1,10 +1,10 @@
-import { memo, useCallback } from 'react';
-import Inner from 'views/UserUpdate/Inner';
-import { useNavigate } from 'react-router-dom';
-import userService from 'services/userService';
-import routeConstants from 'route/routeConstant';
 import Message from 'components/Message';
+import { memo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { setUserProfile, useUserProfile } from 'reducers/profile/function';
+import routeConstants from 'route/routeConstant';
+import userService from 'services/userService';
+import Inner from 'views/UserUpdate/Inner';
 
 const Wrapper = memo(() => {
     const navigate = useNavigate();

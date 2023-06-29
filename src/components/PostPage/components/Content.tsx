@@ -1,9 +1,9 @@
-import { memo, FC } from 'react';
+import usePostPageContext from 'components/PostPage/components/Context';
+import { modules } from 'components/PostPage/config';
+import { FC, memo } from 'react';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../style.scss';
-import { modules } from 'components/PostPage/config';
-import usePostPageContext from 'components/PostPage/components/Context';
-import ReactQuill from 'react-quill';
 
 const Content: FC = memo(() => {
     const { data, setValue } = usePostPageContext();

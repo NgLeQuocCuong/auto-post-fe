@@ -1,9 +1,9 @@
+import Message from 'components/Message';
 import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import routeConstants from 'route/routeConstant';
 import userService from 'services/userService';
 import Inner from 'views/Register/Inner';
-import routeConstants from 'route/routeConstant';
-import Message from 'components/Message';
 const Wrapper = memo(() => {
     const navigate = useNavigate();
     const handleRegister = useCallback(

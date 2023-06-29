@@ -1,17 +1,16 @@
-import './index.scss';
-import { Button, Tag, Tooltip } from 'antd';
 import {
-    EyeOutlined,
-    EditOutlined,
     DeleteOutlined,
+    EditOutlined,
+    EyeOutlined,
     HistoryOutlined,
 } from '@ant-design/icons';
-import { memo, useCallback, useEffect, useState } from 'react';
-import routeConstants from 'route/routeConstant';
-import { generatePath } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
+import { memo, useCallback, useEffect, useState } from 'react';
+import { generatePath, useNavigate } from 'react-router-dom';
+import routeConstants from 'route/routeConstant';
 import PostTable from 'views/PostsTable/PostsTable';
+import './index.scss';
 const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);

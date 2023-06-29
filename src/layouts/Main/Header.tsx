@@ -1,12 +1,12 @@
-import './index.scss';
-import { NavLink, useLocation } from 'react-router-dom';
-import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import LogoSmall from 'components/CommonInput/icons/LogoSmall';
-import routeConstants from 'route/routeConstant';
-import { memo, useState, FC } from 'react';
-import Logout from './Logout';
 import Searchbar from 'layouts/Main/Searchbar';
+import { FC, memo, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import routeConstants from 'route/routeConstant';
+import Logout from './Logout';
+import './index.scss';
 
 interface Props {
     firstName: string;

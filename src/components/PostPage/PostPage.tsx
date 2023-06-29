@@ -1,13 +1,13 @@
+import Content from 'components/PostPage/components/Content';
+import { Context, IContext } from 'components/PostPage/components/Context';
+import DropButton from 'components/PostPage/components/DropButton';
+import CheckList from 'components/PostPage/components/DropDown';
+import Social from 'components/PostPage/components/Social';
+import Title from 'components/PostPage/components/Title';
+import UploadImage from 'components/PostPage/components/UploadImage';
+import Wrapper from 'components/PostPage/components/Wrapper';
 import { FC, memo, useCallback, useMemo, useState } from 'react';
 import './style.scss';
-import Wrapper from 'components/PostPage/components/Wrapper';
-import Title from 'components/PostPage/components/Title';
-import Social from 'components/PostPage/components/Social';
-import Content from 'components/PostPage/components/Content';
-import CheckList from 'components/PostPage/components/DropDown';
-import DropButton from 'components/PostPage/components/DropButton';
-import UploadImage from 'components/PostPage/components/UploadImage';
-import { Context, IContext } from 'components/PostPage/components/Context';
 
 interface Props {
     handlePost: any;
