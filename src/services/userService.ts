@@ -52,6 +52,16 @@ class UserService extends ApiBase {
         return res;
     };
 
+    updateUser = (requestBody: {
+        firstName: string;
+        lastName: string;
+        username: string;
+    }) => {
+        const url = `${_USER_PATH}/update/info`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+
     linkFacebook = (requestBody: { token: string }) => {
         const url = `${_USER_PATH}/connect/facebook`;
         const res = this.post(url, requestBody);
@@ -71,6 +81,15 @@ class UserService extends ApiBase {
         const url = `${_USER_PATH}/disconnect/zalo`;
         const res = this.put(url);
         return res;
+<<<<<<< HEAD
+=======
+    };
+
+    getmdetails = (uid: string) => {
+        const url = `${_POST_PATH}/post-management/${uid}/detail`;
+        const res = this.get(url);
+        return res;
+>>>>>>> 3653907148418aa9748a1cc215f9323d8cefcafd
     };
 }
 
