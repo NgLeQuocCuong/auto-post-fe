@@ -16,8 +16,6 @@ const Wrapper = memo(() => {
                 setUserProfile(data);
                 Message.sendSuccess('Cập nhật thành công!');
                 navigate(routeConstants.USER_SETTINGS);
-            } else {
-                Message.sendError('Có lỗi xảy ra');
             }
             return response;
         },
