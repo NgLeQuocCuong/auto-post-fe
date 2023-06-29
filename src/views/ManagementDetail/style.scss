@@ -1,24 +1,26 @@
 @import 'scss/global';
 .container-mdetail {
-    background-color: $color-detail-bg;
-    max-height: auto;
+    background-color: $color--light;
+    padding: 30px;
 }
 
 .mdetails-view-container {
     width: 83.33%;
-    margin: 0 auto;
-    height: 730px;
     padding: 35px;
-    padding-top: 65px;
+    margin: 30px auto;
+    border: $color-detail-border solid 1px;
+    border-radius: 6px;
     background-color: $color-detail-bg;
     .header {
         display: flex;
         margin-bottom: 20px;
         align-items: end;
+
         .left-section {
             display: flex;
             align-items: center;
             background-color: $color--light;
+            border: $color-detail-border solid 1px;
             width: 27%;
             height: 110px;
             border-radius: 6px;
@@ -61,6 +63,7 @@
             display: flex;
             justify-items: center;
             background-color: $color--light;
+            border: $color-detail-border solid 1px;
             width: 20%;
             height: 110px;
             border-radius: 6px;

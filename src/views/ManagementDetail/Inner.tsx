@@ -20,8 +20,8 @@ interface Props {
 const Inner: FC<Props> = memo(
     ({ date, time, content, imageurls, platform, reaction, comment }) => {
         // const navigate = useNavigate();
-        const reacts = reaction.toString();
-        const comments = comment.toString();
+        const reacts = reaction ? reaction.toString() : '0';
+        const comments = comment ? comment.toString() : '0';
         const imgpath = 'http://192.168.1.24:8000';
         // const handleremove = useCallback(async () => {
         //     const response = await userService.remove(uid);
