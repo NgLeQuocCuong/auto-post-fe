@@ -2,6 +2,7 @@ import ApiBase from 'modules/apis/apiBase';
 
 const _USER_PATH = '/users';
 const _OAUTH_PATH = '/oauth';
+const _POST_PATH = '/posts';
 
 class UserService extends ApiBase {
     me = () => {
@@ -10,7 +11,7 @@ class UserService extends ApiBase {
     };
 
     login = (requestBody: any) => {
-        const url = `${_OAUTH_PATH}/login`;
+        const url = `${_USER_PATH}/login`;
         const res = this.post(url, requestBody);
         return res;
     };
@@ -20,6 +21,11 @@ class UserService extends ApiBase {
     }) => {
         const url = `${_USER_PATH}/update/password`;
         const res = this.post(url, requestBody);
+        return res;
+    };
+    getmdetails = (uid: string) => {
+        const url = `${_POST_PATH}/post-management/${uid}/detail`;
+        const res = this.get(url);
         return res;
     };
 }

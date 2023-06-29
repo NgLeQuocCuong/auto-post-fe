@@ -36,10 +36,20 @@ const routes: Array<Route> = [
         path: routeConstants.CHANGE_PASSWORD,
         Component: commonLoadable(() => import('views/ChangePassword')),
     },
+    // {
+    //     name: 'test',
+    //     path: routeConstants.USER_SETTINGS,
+    //     Component: commonLoadable(() => import('views/test')),
+    // },
     {
         name: 'User Settings',
         path: routeConstants.USER_SETTINGS,
         Component: commonLoadable(() => import('views/UserSettings')),
+    },
+    {
+        name: 'Management Detail',
+        path: routeConstants.MANAGEMENT_DETAIL,
+        Component: commonLoadable(() => import('views/ManagementDetail')),
     },
     {
         name: '404',
