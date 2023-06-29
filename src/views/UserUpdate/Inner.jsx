@@ -1,5 +1,5 @@
 import { Button, Form, Typography, Space } from 'antd';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import AccountLayout from 'layouts/Account';
 import routeConstants from 'route/routeConstant';
 import { NavLink } from 'react-router-dom';
@@ -9,9 +9,7 @@ import './index.scss';
 
 const Inner = memo(({ handleUserUpdate, userInfo }) => {
     const [form] = Form.useForm();
-    useEffect(() => {
-        form.setFieldsValue(userInfo);
-    }, [form, userInfo]);
+    form.setFieldsValue(userInfo);
     const rulesName = [
         {
             pattern: /^[^\d]+$/,
