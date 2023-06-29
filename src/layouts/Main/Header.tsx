@@ -12,7 +12,7 @@ const items = [
     {
         id: 1,
         name: 'TRANG CHỦ',
-        url: routeConstants.MAINPAGE,
+        url: routeConstants.HOMEPAGE,
     },
     {
         id: 2,

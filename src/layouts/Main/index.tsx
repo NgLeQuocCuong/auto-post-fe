@@ -1,9 +1,6 @@
-import { FC, PropsWithChildren, memo, useState, useEffect } from 'react';
-import './index.scss';
-import { useToken } from 'reducers/token/function';
+import { FC, PropsWithChildren, memo } from 'react';
 import Header from './Header';
-import routeConstants from 'route/routeConstant';
-import { useNavigate } from 'react-router-dom';
+
 import { useUserProfile } from 'reducers/profile/function';
 
 const MainLayout: FC<PropsWithChildren> = memo(({ children }) => {
