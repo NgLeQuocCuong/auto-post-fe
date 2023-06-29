@@ -22,6 +22,16 @@ class UserService extends ApiBase {
         const res = this.post(url, requestBody);
         return res;
     };
+    getGroupUID = () => {
+        const url = `${_USER_PATH}/get/facebook/page_id`;
+        const res = this.get(url);
+        return res;
+    };
+    upImg = (requestBody: any, options: any) => {
+        const url = '/images/upload';
+        const res = this.post(url, requestBody, options);
+        return res;
+    };
 }
 
 const userService = new UserService();
