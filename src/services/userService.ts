@@ -9,8 +9,20 @@ class UserService extends ApiBase {
         return this.get(url);
     };
 
-    login = (requestBody: any) => {
-        const url = `${_OAUTH_PATH}/login`;
+    login = (requestBody: { email: string; password: string }) => {
+        const url = `${_USER_PATH}/login`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+
+    register = (requestBody: {
+        first_name: string;
+        last_name: string;
+        email: string;
+        username: string;
+        password: string;
+    }) => {
+        const url = `${_USER_PATH}/register`;
         const res = this.post(url, requestBody);
         return res;
     };
