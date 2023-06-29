@@ -45,17 +45,17 @@ const Inner = memo(({ handleChangePassword }) => {
         <AccountLayout title="Change Password">
             <Form
                 layout="vertical"
-                className="container form"
+                className="container change-password-form"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
                 <Form.Item>
-                    <Typography.Text className="form__title">
+                    <Typography.Text className="change-password-form__title">
                         Đổi mật khẩu
                     </Typography.Text>
                 </Form.Item>
                 <Form.Item
-                    className="form__label-fw-600"
+                    className="change-password-form__label--fw-600"
                     name="currentPassword"
                     label="Mật khẩu hiện tại"
                     rules={rulesPasswordCurrent}
@@ -67,7 +67,7 @@ const Inner = memo(({ handleChangePassword }) => {
                     />
                 </Form.Item>
                 <Form.Item
-                    className="form__label-fw-600"
+                    className="change-password-form__label--fw-600"
                     name="newPassword"
                     label="Mật khẩu mới"
                     hasFeedback
@@ -81,7 +81,7 @@ const Inner = memo(({ handleChangePassword }) => {
                     />
                 </Form.Item>
                 <Form.Item
-                    className="form__label-fw-600"
+                    className="change-password-form__label--fw-600"
                     name="newPasswordRetype"
                     label="Xác nhận mật khẩu mới"
                     dependencies={['newPassword']}
