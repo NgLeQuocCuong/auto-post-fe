@@ -10,8 +10,10 @@ $color--black_6: rgba(
     $alpha: 0.06,
 );
 $color-gray: #e7e7e7;
+
 $color-gray-light: #f5f5f5;
 $color-bg-input: #ececec;
+
 
 // text color
 
@@ -31,7 +33,11 @@ $color--text-disabled: #868686;
 
 $color--primary: #212460;
 
+
 $color--subtext: #bbabab;
+
+$color--text4: #bbabab;
+
 
 // border color
 $color--border: #e2e2e2;
@@ -45,6 +51,7 @@ $color--red: #ff5f73;
 $color-button--green: #34ab71;
 $color-button--green-hover: #29946f;
 $color-button--green-disabled: #c8e8d8;
+$color-button--lightblue: #dde7fd;
 
 // status color
 $color-status--configuring: #eeeeee;
@@ -57,3 +64,36 @@ $color-modal--header-bg: #2c2c2c;
 // button
 $color-button--primary: #1890ff;
 $color-button--primary-hover: #2a2e7b;
+
+// button link color
+$color-button-link: #1677ff;
+$color-button-link-hover: #69b1ff;
+
+//header
+$color-hborder: #dde7fd;
+
+//header-search
+$color-hsbg: #ececec;
+$color-hstext: #686868;
+
+//header-link
+$color-htext-hover: #0042ed;
+
+//css content wrapper
+$color-cont-bg: #f5f5f5;
+
+//header-drop border
+$color-hdborder: #d8d8d8;
+
+//dropdown-detail
+$color-hdrop: #007bff;
+$color-hlogout: #fa4d56;
+
+//acc-color
+$color-accname: #155df5;
+$color-hov-acc: #0042ed;
+
+//details
+$color-detail-bg: #f5f5f5;
+$color-detail-border: #c4c4c4;
+$color-detail-item: #777;

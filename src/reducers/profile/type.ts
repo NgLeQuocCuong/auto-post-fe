@@ -1,28 +1,28 @@
 import { Optional } from 'utils/commonType';
 
-interface IProfile {
-    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'REVIEWING';
-}
+// interface IProfile {
+//     status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'REVIEWING';
+// }
 
 export class ProfileState {
     email: string;
     firstName: string;
     lastName: string;
-    fullName: string;
-    phoneNumber: string;
     username: string;
-    profile: IProfile;
-    country: string;
+    dateJoined: string;
+    facebookStatus: boolean;
+    zaloStatus: boolean;
+    // profile: IProfile;
 
     constructor(data?: IProfileState) {
         this.email = data?.email || '';
         this.firstName = data?.firstName || '';
         this.lastName = data?.lastName || '';
-        this.fullName = data?.fullName || '';
-        this.phoneNumber = data?.phoneNumber || '';
         this.username = data?.username || '';
-        this.profile = data?.profile || { status: 'PENDING' };
-        this.country = data?.country || '';
+        this.dateJoined = data?.dateJoined || '';
+        this.facebookStatus = data?.facebookStatus || false;
+        this.zaloStatus = data?.zaloStatus || false;
+        // this.profile = data?.profile || { status: 'PENDING' };
     }
 }
 
