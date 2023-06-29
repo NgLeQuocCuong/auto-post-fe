@@ -13,8 +13,10 @@ const Inner = memo(
         userInfo,
         handleLinkFacebook,
         handleUnlinkFacebook,
+        facebookProcessing,
         handleLinkZalo,
         handleUnlinkZalo,
+        zaloProcessing,
     }) => {
         const appId = '283990164019980';
         const facebookPermissions =
@@ -106,17 +108,24 @@ const Inner = memo(
                                                         userInfo.facebookStatus
                                                     }
                                                     onClick={
-                                                        !userInfo.facebookStatus
-                                                            ? renderProps.onClick
-                                                            : handleUnlinkFacebook
+                                                        userInfo.facebookStatus
+                                                            ? handleUnlinkFacebook
+                                                            : renderProps.onClick
                                                     }
                                                     onChange={
-                                                        !userInfo.facebookStatus
-                                                            ? renderProps.callback
-                                                            : null
+                                                        userInfo.facebookStatus
+                                                            ? null
+                                                            : renderProps.callback
+                                                    }
+                                                    disabled={
+                                                        renderProps.isProcessing ||
+                                                        facebookProcessing
                                                     }
                                                 >
-                                                    {userInfo.facebookStatus
+                                                    {renderProps.isProcessing ||
+                                                    facebookProcessing
+                                                        ? 'Đang xử lý...'
+                                                        : userInfo.facebookStatus
                                                         ? 'Hủy liên kết Facebook'
                                                         : 'Liên kết Facebook'}
                                                 </Button>
@@ -137,12 +146,14 @@ const Inner = memo(
                                             className="user-settings-form__btn--padding-x-0"
                                             danger={userInfo.zaloStatus}
                                             onClick={
-                                                !userInfo.zaloStatus
-                                                    ? handleLinkZalo
-                                                    : handleUnlinkZalo
+                                                userInfo.zaloStatus
+                                                    ? handleUnlinkZalo
+                                                    : handleLinkZalo
                                             }
                                         >
-                                            {userInfo.zaloStatus
+                                            {zaloProcessing
+                                                ? 'Đang xử lý...'
+                                                : userInfo.zaloStatus
                                                 ? 'Hủy liên kết Zalo'
                                                 : 'Liên kết Zalo'}
                                         </Button>
