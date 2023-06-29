@@ -19,10 +19,12 @@ const Inner = memo(({ handleAllPosts, tableData }) => {
         });
         //Format date time
         if (values.min_time) {
-            values.min_time = values.min_time.format('YYYY-MM-DD');
+            values.min_time =
+                values.min_time.format('YYYY-MM-DD') + 'T00:00:00';
         }
         if (values.min_time) {
-            values.max_time = values.max_time.format('YYYY-MM-DD');
+            values.max_time =
+                values.max_time.format('YYYY-MM-DD') + 'T23:59:59';
         }
         handleAllPosts(values);
     };
