@@ -1,8 +1,8 @@
-import { LanguageEnum } from 'translation/enums';
 import _get from 'lodash/get';
 import { localeActions } from 'reducers/locale';
 import { setLanguage } from 'reducers/locale/function';
 import { dispatch } from 'store/Store';
+import { LanguageEnum } from 'translation/enums';
 import {
     TranslationLanguage,
     TranslationNamespace,
