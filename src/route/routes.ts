@@ -45,6 +45,8 @@ const routes: Array<Route> = [
         name: 'All Posts',
         path: routeConstants.ALL_POSTS,
         Component: commonLoadable(() => import('views/AllPosts')),
+        //TODO: Uncomment this when login is implemented
+        //authorization: true,
     },
     {
         name: '404',
