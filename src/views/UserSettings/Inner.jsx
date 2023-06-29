@@ -22,21 +22,21 @@ const Inner = memo(
         const facebookGetFields = 'name,email,picture,groups.limit(100)';
         return (
             <AccountLayout title="User Settings">
-                <Row className="container">
+                <Row className="container user-settings-form">
                     <Col span={6}>
                         <Image
                             width={94}
                             height={94}
                             src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSSlr2_vaXAWXtDCZ627ItaZLtIXDXSDOA60uLfvcBnhnPnBCXs"
-                            className="form__avatar-round"
+                            className="user-settings-form__avatar--round"
                         />
                     </Col>
                     <Col span={18}>
-                        <Form layout="vertical" className="form">
+                        <Form layout="vertical">
                             <Form.Item>
                                 <Typography.Text
                                     component="div"
-                                    className="form__title"
+                                    className="user-settings-form__title"
                                 >
                                     {userInfo.username}
                                 </Typography.Text>
@@ -44,7 +44,7 @@ const Inner = memo(
                                     <NavLink to={routeConstants.USER_UPDATE}>
                                         <Button
                                             size="large"
-                                            className="form__btn-blue form__btn-border"
+                                            className="user-settings-form__btn--blue user-settings-form__btn--border"
                                         >
                                             Chỉnh sửa
                                         </Button>
@@ -52,11 +52,7 @@ const Inner = memo(
                                     <NavLink
                                         to={routeConstants.CHANGE_PASSWORD}
                                     >
-                                        <Button
-                                            danger
-                                            size="large"
-                                            className="form__btn-big"
-                                        >
+                                        <Button danger size="large">
                                             Đổi mật khẩu
                                         </Button>
                                     </NavLink>
@@ -64,29 +60,29 @@ const Inner = memo(
                             </Form.Item>
                             <Form.Item
                                 label="Họ và tên"
-                                className="form__label-padding-bottom-0"
+                                className="user-settings-form__label--padding-bottom-0"
                             >
                                 {userInfo.firstName}&nbsp;
                                 {userInfo.lastName}
                             </Form.Item>
                             <Form.Item
                                 label="Email"
-                                className="form__label-padding-bottom-0"
+                                className="user-settings-form__label--padding-bottom-0"
                             >
                                 {userInfo.email}
                             </Form.Item>
                             <Form.Item
                                 label="Ngày tham gia"
-                                className="form__label-padding-bottom-0"
+                                className="user-settings-form__label--padding-bottom-0"
                             >
                                 {moment(new Date(userInfo.dateJoined)).format(
                                     'DD/MM/YYYY'
                                 )}
                             </Form.Item>
-                            <Form.Item className="form__label-padding-bottom-0">
+                            <Form.Item className="user-settings-form__label--padding-bottom-0">
                                 <List size="small" bordered>
                                     <List.Item>
-                                        <Typography.Text className="list-icon-group">
+                                        <Typography.Text className="user-settings-form__list--icon-group">
                                             Facebook
                                             {userInfo.facebookStatus ? (
                                                 <CheckIcon />
@@ -103,7 +99,7 @@ const Inner = memo(
                                             render={renderProps => (
                                                 <Button
                                                     type="link"
-                                                    className="form__btn-padding-x-0"
+                                                    className="user-settings-form__btn--padding-x-0"
                                                     danger={
                                                         userInfo.facebookStatus
                                                     }
@@ -126,7 +122,7 @@ const Inner = memo(
                                         />
                                     </List.Item>
                                     <List.Item>
-                                        <Typography.Text className="list-icon-group">
+                                        <Typography.Text className="user-settings-form__list--icon-group">
                                             Zalo
                                             {userInfo.zaloStatus ? (
                                                 <CheckIcon />
@@ -136,7 +132,7 @@ const Inner = memo(
                                         </Typography.Text>
                                         <Button
                                             type="link"
-                                            className="form__btn-padding-x-0"
+                                            className="user-settings-form__btn--padding-x-0"
                                             danger={userInfo.zaloStatus}
                                             onClick={
                                                 !userInfo.zaloStatus
@@ -151,12 +147,12 @@ const Inner = memo(
                                     </List.Item>
                                 </List>
                             </Form.Item>
-                            <Form.Item className="form__label-padding-bottom-0">
+                            <Form.Item className="user-settings-form__label--padding-bottom-0">
                                 <NavLink to={routeConstants.LOGOUT}>
                                     <Button
                                         type="link"
                                         danger
-                                        className="form__btn-padding-x-0"
+                                        className="user-settings-form__btn--padding-x-0"
                                     >
                                         Đăng xuất
                                     </Button>

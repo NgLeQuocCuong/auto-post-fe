@@ -9,7 +9,7 @@
     margin: 72px auto;
 }
 
-.form {
+.user-settings-form {
     &__title {
         @include font-24;
         @include fontSemibold;
@@ -19,7 +19,7 @@
         }
     }
     &__label {
-        &-padding-bottom-0 .ant-form-item-label {
+        &--padding-bottom-0 .ant-form-item-label {
             padding-bottom: 0;
             label {
                 color: $color--text-disabled;
@@ -27,40 +27,40 @@
         }
     }
     &__btn {
-        &-blue {
+        &--blue {
             color: $color-button-link;
             &:not(:disabled):hover,
             &:not(:disabled):active {
                 color: $color-button-link-hover;
             }
         }
-        &-border {
+        &--border {
             border-color: $color-button-link;
             &:not(:disabled):hover,
             &:not(:disabled):active {
                 border-color: $color-button-link-hover;
             }
         }
-        &-padding-x-0 {
+        &--padding-x-0 {
             padding-left: 0;
             padding-right: 0;
         }
     }
     /* Avatar */
     &__avatar {
-        &-round {
+        &--round {
             border-radius: 50%;
             + .ant-image-mask {
                 border-radius: 50%;
             }
         }
-        &-fit {
+        &--fit {
             object-fit: none;
         }
     }
     /* CheckIcon container */
-    .list {
-        &-icon-group {
+    &__list {
+        &--icon-group {
             display: flex;
             align-items: center;
             gap: 8px;
