@@ -32,9 +32,40 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
+        name: 'PageDetails',
+        path: routeConstants.PAGEDETAILS,
+        Component: commonLoadable(() => import('views/ViewPageDetails')),
+    },
+    {
+        name: 'Register',
+        path: routeConstants.REGISTER,
+        Component: commonLoadable(() => import('views/Register')),
+    },
+    {
         name: 'Change Password',
         path: routeConstants.CHANGE_PASSWORD,
         Component: commonLoadable(() => import('views/ChangePassword')),
+        authorization: true,
+    },
+    // {
+    //     name: 'test',
+    //     path: routeConstants.USER_SETTINGS,
+    //     Component: commonLoadable(() => import('views/test')),
+    // },
+    {
+        name: 'Reset Password',
+        path: routeConstants.RESET_PASSWORD,
+        Component: commonLoadable(() => import('views/ResetPassword')),
+    },
+    {
+        name: 'Reset Password',
+        path: routeConstants.RESET_PASSWORD,
+        Component: commonLoadable(() => import('views/ResetPassword')),
+    },
+    {
+        name: 'Reset Password',
+        path: routeConstants.RESET_PASSWORD,
+        Component: commonLoadable(() => import('views/ResetPassword')),
     },
     {
         name: 'User Settings',
@@ -46,6 +77,16 @@ const routes: Array<Route> = [
         name: 'Logout',
         path: routeConstants.LOGOUT,
         Component: commonLoadable(() => import('views/Logout')),
+    },
+    {
+        name: 'Management Detail',
+        path: routeConstants.MANAGEMENT_DETAIL,
+        Component: commonLoadable(() => import('views/ManagementDetail')),
+    },
+    {
+        name: 'Forgot Password',
+        path: routeConstants.FORGOT_PASSWORD,
+        Component: commonLoadable(() => import('views/ForgotPassword')),
     },
     {
         name: '404',
