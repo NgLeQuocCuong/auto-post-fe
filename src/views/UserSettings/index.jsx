@@ -24,13 +24,11 @@ const Wrapper = memo(() => {
                     setUserProfile(userInfo);
                     setFacebookToken(data.accessToken);
                     Message.sendSuccess('Liên kết Facebook thành công!');
-                } else {
-                    Message.sendError('Lỗi kết nối đến máy chủ.');
                 }
                 setFacebookProcessing(false);
                 return response;
             } else {
-                Message.sendError('Vui lòng đăng nhập Facebook để liên kết.');
+                Message.sendError('Liên kết Facebook không thành công.');
             }
             setFacebookProcessing(false);
         },
@@ -48,8 +46,6 @@ const Wrapper = memo(() => {
             setUserProfile(userInfo);
             setFacebookToken('');
             Message.sendInfo('Hủy liên kết Facebook thành công!');
-        } else {
-            Message.sendError('Lỗi kết nối đến máy chủ.');
         }
         setFacebookProcessing(false);
         return response;
@@ -69,7 +65,6 @@ const Wrapper = memo(() => {
                 // setZaloToken(data.oathCode);
                 Message.sendSuccess('Liên kết Zalo thành công!');
             } else {
-                // Message.sendError('Lỗi kết nối đến máy chủ.');
                 Message.sendWarning(
                     'Chức năng đang phát triển. Vui lòng thử lại sau.'
                 );
@@ -91,8 +86,6 @@ const Wrapper = memo(() => {
             setUserProfile(userInfo);
             // setZaloToken('');
             Message.sendInfo('Hủy liên kết Zalo thành công!');
-        } else {
-            Message.sendError('Lỗi kết nối đến máy chủ.');
         }
         setZaloProcessing(false);
         return response;
