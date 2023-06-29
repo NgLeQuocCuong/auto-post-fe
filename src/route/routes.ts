@@ -32,6 +32,11 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
+        name: 'PageDetails',
+        path: routeConstants.PAGEDETAILS,
+        Component: commonLoadable(() => import('views/ViewPageDetails')),
+    },
+    {
         name: 'Register',
         path: routeConstants.REGISTER,
         Component: commonLoadable(() => import('views/Register')),
@@ -44,6 +49,7 @@ const routes: Array<Route> = [
     {
         name: 'User Settings',
         path: routeConstants.USER_SETTINGS,
+        authorization: true,
         Component: commonLoadable(() => import('views/UserSettings')),
     },
     {
