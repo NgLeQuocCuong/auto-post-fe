@@ -13,12 +13,16 @@ const routeConstants = {
 
     LOGOUT: '/logout',
     CHANGE_PASSWORD: '/change-password',
+
+    POST_PAGE: '/post-page',
+
     USER_UPDATE: '/user-update',
 
     POSTS_MANAGEMENT: '/posts-management',
     MANAGEMENT_DETAIL: '/posts-management/detail/:uid',
     RESET_PASSWORD: '/reset-password/:slug',
     HOME_PAGE: '/',
+
 
 };
 
