@@ -89,6 +89,12 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/ForgotPassword')),
     },
     {
+        name: 'User Update',
+        path: routeConstants.USER_UPDATE,
+        Component: commonLoadable(() => import('views/UserUpdate')),
+        authorization: true,
+    },
+    {
         name: '404',
         path: '*',
         redirect: routeConstants.LOGIN,
