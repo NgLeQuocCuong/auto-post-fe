@@ -1,5 +1,5 @@
 import './index.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import LogoSmall from 'components/CommonInput/icons/LogoSmall';
@@ -8,18 +8,6 @@ import { memo, useState, FC } from 'react';
 import Logout from './Logout';
 import Searchbar from 'layouts/Main/Searchbar';
 
-const items = [
-    {
-        id: 1,
-        name: 'TRANG CHỦ',
-        url: routeConstants.HOMEPAGE,
-    },
-    {
-        id: 2,
-        name: 'BÀI VIẾT',
-        url: routeConstants.ALL_POSTS,
-    },
-];
 interface Props {
     firstName: string;
 }
@@ -28,6 +16,9 @@ const Header: FC<Props> = memo(({ firstName }) => {
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
+    const location = useLocation();
+    const isPostPage = location.pathname === routeConstants.POST;
+    const isHomePage = location.pathname === routeConstants.HOMEPAGE;
     return (
         <header className="header">
             <div className="header__wrap">
@@ -38,16 +29,27 @@ const Header: FC<Props> = memo(({ firstName }) => {
                     <Searchbar></Searchbar>
                 </div>
                 <ul className="header__wrap--items">
-                    {items.map(item => (
-                        <li className="header__wrap--item" key={item.id}>
-                            <NavLink
-                                to={item.url}
-                                className="header__wrap--link"
-                            >
-                                {item.name}
-                            </NavLink>
-                        </li>
-                    ))}
+                    <li className="header__wrap--item">
+                        <NavLink
+                            to={routeConstants.HOMEPAGE}
+                            className={`header__wrap--link ${
+                                isHomePage ? 'active' : ''
+                            }`}
+                        >
+                            TRANG CHỦ
+                        </NavLink>
+                    </li>
+                    <li className="header__wrap--item">
+                        <NavLink
+                            to={routeConstants.POST}
+                            className={`header__wrap--link ${
+                                isPostPage ? 'active' : ''
+                            }`}
+                            aria-disabled={isPostPage}
+                        >
+                            BÀI VIẾT
+                        </NavLink>
+                    </li>
                 </ul>
                 <div className="header__wrap--button">
                     <NavLink to={routeConstants.POST}>

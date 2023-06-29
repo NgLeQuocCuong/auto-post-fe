@@ -67,6 +67,10 @@
                 color: $color-htext-hover;
                 background-color: $color-hborder;
             }
+            &.active {
+                color: $color-htext-hover;
+                background-color: $color-hborder;
+            }
         }
         &--button {
             display: flex;
@@ -80,6 +84,7 @@
             .user-dropdown {
                 position: relative;
                 z-index: 1;
+                transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 
                 .dropdown {
                     margin-left: 20px;
