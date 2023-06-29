@@ -17,6 +17,11 @@ class PostService extends ApiBase {
         });
         return res;
     };
+    removePost = (params: { uid: string }) => {
+        const url = `${_POST_PATH}/${params.uid}/remove`;
+        const res = this.post(url);
+        return res;
+    };
 }
 
 const postService = new PostService();

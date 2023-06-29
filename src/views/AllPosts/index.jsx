@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import postService from 'services/postService';
 import Inner from 'views/AllPosts/Inner';
 
@@ -18,11 +18,20 @@ const Wrapper = memo(() => {
         }
         return response;
     }, []);
-    //Load table data on first render
-    useEffect(() => {
-        handleAllPosts({});
-    }, [handleAllPosts]);
-    return <Inner handleAllPosts={handleAllPosts} tableData={tableData} />;
+    const handleRemovePost = useCallback(async uid => {
+        const response = await postService.removePost(uid);
+        if (response.isSuccess) {
+            window.location.reload();
+        }
+        return response;
+    }, []);
+    return (
+        <Inner
+            handleAllPosts={handleAllPosts}
+            handleRemovePost={handleRemovePost}
+            tableData={tableData}
+        />
+    );
 });
 
 Wrapper.displayName = 'All Posts';

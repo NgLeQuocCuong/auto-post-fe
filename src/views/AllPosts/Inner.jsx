@@ -12,7 +12,7 @@ import { generatePath } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import PostTable from 'views/PostsTable/PostsTable';
-const Inner = memo(({ handleAllPosts, tableData }) => {
+const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
     const toggleFilters = useCallback(() => {
@@ -99,7 +99,18 @@ const Inner = memo(({ handleAllPosts, tableData }) => {
                         </Button>
                     </Tooltip>
                     <Tooltip placement="top" title="Sửa bài viết">
-                        <Button type="text" onClick={() => {}}>
+                        <Button
+                            type="text"
+                            onClick={() => {
+                                const path = generatePath(
+                                    routeConstants.UPDATE_POST,
+                                    {
+                                        uid: uid.uid,
+                                    }
+                                );
+                                navigate(path);
+                            }}
+                        >
                             <EditOutlined />
                         </Button>
                     </Tooltip>
@@ -123,6 +134,8 @@ const Inner = memo(({ handleAllPosts, tableData }) => {
                             //         }
                             //     )
                             // }
+                            // TODO: Remove this when popup is ready
+                            onClick={() => handleRemovePost(uid)}
                         >
                             <DeleteOutlined />
                         </Button>
@@ -132,7 +145,7 @@ const Inner = memo(({ handleAllPosts, tableData }) => {
                             type="text"
                             onClick={() => {
                                 const path = generatePath(
-                                    routeConstants.POST_MANAGEMENT,
+                                    routeConstants.POST_MANAGEMENT_OF_POST,
                                     {
                                         uid: uid.uid,
                                     }
