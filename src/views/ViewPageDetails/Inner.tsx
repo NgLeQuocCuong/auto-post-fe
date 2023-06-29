@@ -44,7 +44,8 @@ const Inner: FC<Props> = memo(
                 break;
         }
         const navigate = useNavigate();
-        const imgpath = 'http://192.168.1.24:8000';
+        const imgpath = 'http://192.168.30.109:8000';
+        console.log('img', imageurls);
         const handleremove = useCallback(async () => {
             const response = await userService.remove(uid);
             if (response.isSuccess) {
