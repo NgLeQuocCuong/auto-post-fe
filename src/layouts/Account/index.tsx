@@ -3,11 +3,10 @@ import './index.scss';
 import AutopostLogo48 from 'assets/images/AutopostLogo48';
 interface Props {
     title?: string;
-    subTitle?: string;
 }
 
 const AccountLayout: FC<PropsWithChildren<Props>> = memo(
-    ({ children, title, subTitle }) => {
+    ({ children, title }) => {
         return (
             <div className="account-layout-container">
                 <div className="account-layout__left">

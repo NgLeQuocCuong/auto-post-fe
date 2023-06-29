@@ -1,26 +1,35 @@
 import { Button, Form } from 'antd';
 import AccountLayout from 'layouts/Account';
-import { memo } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import AccountInput from 'layouts/Account/AccountInput';
 const Inner = memo(({ handleLogin }) => {
     //Validate rules
-    const emailRules = [
-        {
-            type: 'email',
-            message: 'Định dạng email không hợp lệ.',
+    const emailRules = useMemo(
+        () => [
+            {
+                type: 'email',
+                message: 'Định dạng email không hợp lệ.',
+            },
+        ],
+        []
+    );
+    const passwordRules = useMemo(
+        () => [
+            {
+                pattern: /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
+                message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
+            },
+        ],
+        []
+    );
+    const handleFinish = useCallback(
+        values => {
+            handleLogin(values);
         },
-    ];
-    const passwordRules = [
-        {
-            pattern: /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
-            message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
-        },
-    ];
-    const handleFinish = values => {
-        handleLogin(values);
-    };
+        [handleLogin]
+    );
     return (
         <AccountLayout title="Đăng nhập">
             <Form

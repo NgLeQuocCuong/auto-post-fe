@@ -1,6 +1,6 @@
 import { Button, Form } from 'antd';
 import AccountLayout from 'layouts/Account';
-import { memo } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import 'layouts/Account/index.scss';
@@ -8,48 +8,70 @@ import AccountInput from 'layouts/Account/AccountInput';
 
 const Inner = memo(({ handleRegister }) => {
     //Validate rules
-    const nameRules = [
-        {
-            pattern: /^[^\d]+$/,
-            message: 'Họ và tên không được chứa số.',
-        },
-    ];
-    const usernameRules = [
-        {
-            min: 8,
-            message: 'Tên đăng nhập phải có ít nhất 8 ký tự.',
-        },
-    ];
-    const emailRules = [
-        {
-            type: 'email',
-            message: 'Định dạng email không hợp lệ.',
-        },
-    ];
-    const passwordRules = [
-        {
-            pattern: /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
-            message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
-        },
-    ];
-    const confirmPasswordRules = [
-        ...passwordRules,
-        ({ getFieldValue }) => ({
-            validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                    return Promise.resolve();
-                }
-                return Promise.reject(
-                    new Error('Mật khẩu nhập lại không trùng khớp.')
-                );
+    const nameRules = useMemo(
+        () => [
+            {
+                pattern: /^[^0-9]*$/,
+                message: 'Họ và tên không được chứa số.',
             },
-        }),
-    ];
-    const handleFinish = values => {
-        //Delete confirm password field before calling API
-        delete values.confirmPassword;
-        handleRegister(values);
-    };
+        ],
+        []
+    );
+
+    const usernameRules = useMemo(
+        () => [
+            {
+                min: 8,
+                message: 'Tên đăng nhập phải có ít nhất 8 ký tự.',
+            },
+        ],
+        []
+    );
+
+    const emailRules = useMemo(
+        () => [
+            {
+                type: 'email',
+                message: 'Định dạng email không hợp lệ.',
+            },
+        ],
+        []
+    );
+
+    const passwordRules = useMemo(
+        () => [
+            {
+                pattern: /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
+                message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
+            },
+        ],
+        []
+    );
+
+    const confirmPasswordRules = useMemo(
+        () => [
+            ...passwordRules,
+            ({ getFieldValue }) => ({
+                validator(_, value) {
+                    if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                    }
+                    return Promise.reject(
+                        new Error('Mật khẩu nhập lại không trùng khớp.')
+                    );
+                },
+            }),
+        ],
+        [passwordRules]
+    );
+    const handleFinish = useCallback(
+        values => {
+            //Delete confirm password field before calling API
+            delete values.confirmPassword;
+            handleRegister(values);
+        },
+        [handleRegister]
+    );
     return (
         <AccountLayout title="Đăng ký">
             <Form
