@@ -2,7 +2,7 @@ import './index.scss';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import LogoSmall from 'components/HomePage/icons/LogoSmall';
+import LogoSmall from 'components/CommonInput/icons/LogoSmall';
 import routeConstants from 'route/routeConstant';
 import { memo, useState, FC } from 'react';
 import Logout from './Logout';
