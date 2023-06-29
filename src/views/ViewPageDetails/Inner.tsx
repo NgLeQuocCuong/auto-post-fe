@@ -25,6 +25,24 @@ interface Props {
 
 const Inner: FC<Props> = memo(
     ({ postType, date, time, content, uid, imageurls }) => {
+        let postTypeVi = '';
+        switch (postType) {
+            case 'COMMERCIAL':
+                postTypeVi = 'QUẢNG CÁO';
+                break;
+            case 'ARTICLE':
+                postTypeVi = 'BÁO CHÍ';
+                break;
+            case 'RECRUITMENT':
+                postTypeVi = 'TUYỂN DỤNG';
+                break;
+            case 'EDUCATION':
+                postTypeVi = 'HỌC THUẬT';
+                break;
+            default:
+                postTypeVi = 'MARKETING';
+                break;
+        }
         const navigate = useNavigate();
         const imgpath = 'http://192.168.1.24:8000';
         const handleremove = useCallback(async () => {
@@ -66,7 +84,7 @@ const Inner: FC<Props> = memo(
                                         </div>
                                         <div className="content">
                                             <div className="type">
-                                                {postType}
+                                                {postTypeVi}
                                             </div>
                                             <br></br>
                                             <span>
