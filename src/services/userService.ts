@@ -81,6 +81,7 @@ class UserService extends ApiBase {
         const url = `${_USER_PATH}/disconnect/zalo`;
         const res = this.put(url);
         return res;
+    };
 
     getmdetails = (uid: string) => {
         const url = `${_POST_PATH}/post-management/${uid}/detail`;

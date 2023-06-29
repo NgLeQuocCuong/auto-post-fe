@@ -10,12 +10,11 @@ import {
     useRef,
     useState,
 } from 'react';
+import { useInputConfigContext } from '../InputConfigContext';
 import { FileStatus } from '../enums';
 import IconRemoveItem from '../icons/IconRemoveItem';
 import UploadFileIcon from '../icons/UploadFileIcon';
-import { FileItem } from '../type';
-import { useInputConfigContext } from '../InputConfigContext';
-import { IInputProps } from '../type';
+import { FileItem, IInputProps } from '../type';
 
 interface IFileInputProps extends FileItem {
     onRemove: (uid: string) => void;
