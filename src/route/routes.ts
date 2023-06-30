@@ -89,6 +89,24 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/ForgotPassword')),
     },
     {
+        name: 'User Update',
+        path: routeConstants.USER_UPDATE,
+        Component: commonLoadable(() => import('views/UserUpdate')),
+        authorization: true,
+    },
+    {
+        name: 'All Posts',
+        path: routeConstants.ALL_POSTS,
+        Component: commonLoadable(() => import('views/AllPosts')),
+        //TODO: Uncomment this when login is implemented
+        //authorization: true,
+    },
+    {
+        name: 'Post Page',
+        path: routeConstants.POST_PAGE,
+        Component: commonLoadable(() => import('views/PostPage')),
+    },
+    {
         name: '404',
         path: '*',
         redirect: routeConstants.LOGIN,

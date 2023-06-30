@@ -1,0 +1,44 @@
+@import 'scss/global.scss';
+
+*[class^='ant'] {
+    font-family: $font-inter;
+}
+
+.container {
+    max-width: 448px;
+    margin: 72px auto;
+}
+
+.user-update-form {
+    &__title {
+        @include font-24;
+        @include fontSemibold;
+        display: inline-block;
+        &:has(+ .ant-space) {
+            margin-bottom: 16px;
+        }
+    }
+    &__label {
+        &--fw-600 {
+            .ant-form-item-label {
+                @include fontSemibold;
+            }
+        }
+    }
+    .ant-form-item-label > label.ant-form-item-required {
+        &::after {
+            display: inline-block;
+            color: $color--red;
+            content: '*';
+        }
+        &::before {
+            content: none !important;
+        }
+    }
+    .float-right {
+        float: right;
+    }
+    .clear-both {
+        clear: both;
+    }
+}

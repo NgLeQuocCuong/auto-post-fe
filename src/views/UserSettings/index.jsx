@@ -1,9 +1,9 @@
-import { memo, useCallback, useState } from 'react';
-import userService from 'services/userService';
-import Inner from 'views/UserSettings/Inner';
 import Message from 'components/Message';
+import { memo, useCallback, useState } from 'react';
 import { setUserProfile, useUserProfile } from 'reducers/profile/function';
 import { setFacebookToken } from 'reducers/token/function';
+import userService from 'services/userService';
+import Inner from 'views/UserSettings/Inner';
 
 const Wrapper = memo(() => {
     const [userInfo, setUserInfo] = useState(useUserProfile());
