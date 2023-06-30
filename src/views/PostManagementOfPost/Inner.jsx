@@ -2,11 +2,13 @@ import 'views/AllPosts/index.scss';
 import { Button, Tag, Tooltip } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import { memo, useCallback, useEffect, useState } from 'react';
-// import routeConstants from 'route/routeConstant';
+import routeConstants from 'route/routeConstant';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import PostsTable from 'views/PostsTable/PostsTable';
 import WebLayout from 'layouts/Web/WebLayout';
+import { generatePath, useNavigate } from 'react-router-dom';
 const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
+    const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
     const toggleFilters = useCallback(() => {
         setIsFilterShown(!isFilterShown);
@@ -25,7 +27,7 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
     useEffect(() => {
         handleViewPostManagement(filterParams);
     }, [filterParams, handleViewPostManagement]);
-    const filterLists = [
+    const filtersList = [
         {
             title: 'Ngày đăng',
             name: 'postDate',
@@ -120,7 +122,18 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
             render: () => (
                 <>
                     <Tooltip placement="top" title="Xem chi tiết">
-                        <Button type="text" onClick={() => {}}>
+                        <Button
+                            type="text"
+                            onClick={() => {
+                                const path = generatePath(
+                                    routeConstants.PAGE_DETAILS,
+                                    {
+                                        uid: uid.uid,
+                                    }
+                                );
+                                navigate(path);
+                            }}
+                        >
                             <EyeOutlined />
                         </Button>
                     </Tooltip>
@@ -157,7 +170,7 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                     pageSize={tableData.pageSize}
                     totalRows={tableData.totalRows}
                     totalPages={tableData.totalPages}
-                    filterLists={filterLists}
+                    filtersList={filtersList}
                     isFilterShown={isFilterShown}
                     onFilters={filterValues => {
                         //Remove undefined fields

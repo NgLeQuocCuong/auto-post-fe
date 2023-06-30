@@ -5,10 +5,11 @@ import {
     EditOutlined,
     DeleteOutlined,
     HistoryOutlined,
+    CaretRightOutlined,
 } from '@ant-design/icons';
 import { memo, useCallback, useEffect, useState } from 'react';
 import routeConstants from 'route/routeConstant';
-import { generatePath } from 'react-router-dom';
+import { generatePath, NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import PostsTable from 'views/PostsTable/PostsTable';
@@ -96,23 +97,22 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             render: uid => (
                 <>
                     <Tooltip placement="top" title="Xem chi tiết">
-                        <Button type="text" onClick={() => {}}>
-                            <EyeOutlined />
+                        <Button type="text">
+                            <EyeOutlined
+                                onClick={() => {
+                                    const path = generatePath(
+                                        routeConstants.PAGE_DETAILS,
+                                        {
+                                            uid: uid.uid,
+                                        }
+                                    );
+                                    navigate(path);
+                                }}
+                            />
                         </Button>
                     </Tooltip>
                     <Tooltip placement="top" title="Sửa bài viết">
-                        <Button
-                            type="text"
-                            onClick={() => {
-                                const path = generatePath(
-                                    routeConstants.PAGE_DETAILS,
-                                    {
-                                        uid: uid.uid,
-                                    }
-                                );
-                                navigate(path);
-                            }}
-                        >
+                        <Button type="text" onClick={() => {}}>
                             <EditOutlined />
                         </Button>
                     </Tooltip>
@@ -136,8 +136,6 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                                     }
                                 )
                             }
-                            // TODO: Remove this when popup is ready
-                            //onClick={() => handleRemovePost(uid)}
                         >
                             <DeleteOutlined />
                         </Button>
@@ -167,10 +165,13 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             <div className="all-posts-container">
                 <div className="all-posts__header">
                     <div className="all-posts__header__title">
-                        Tất cả bài đăng
+                        Tất cả bài viết
                         <span className="posts-number">
                             ({tableData?.totalRows ?? 0})
                         </span>
+                        <NavLink to={routeConstants.POST_MANAGEMENT_ALL}>
+                            <CaretRightOutlined />
+                        </NavLink>
                     </div>
                     <Button
                         onClick={toggleFilters}

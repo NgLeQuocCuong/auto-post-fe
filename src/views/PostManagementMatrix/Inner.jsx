@@ -1,12 +1,14 @@
 import 'views/AllPosts/index.scss';
 import { Button, Tag, Tooltip } from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
+import { EyeOutlined, CaretLeftOutlined } from '@ant-design/icons';
 import { memo, useCallback, useEffect, useState } from 'react';
-// import routeConstants from 'route/routeConstant';
+import routeConstants from 'route/routeConstant';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import PostsTable from 'views/PostsTable/PostsTable';
 import WebLayout from 'layouts/Web/WebLayout';
-const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
+import { NavLink, generatePath, useNavigate } from 'react-router-dom';
+const Inner = memo(({ handleViewPostManagement, tableData }) => {
+    const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
     const toggleFilters = useCallback(() => {
         setIsFilterShown(!isFilterShown);
@@ -117,10 +119,22 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
         {
             title: 'Hành động',
             key: 'action',
-            render: () => (
+            render: (text, record, index) => (
                 <>
                     <Tooltip placement="top" title="Xem chi tiết">
-                        <Button type="text" onClick={() => {}}>
+                        <Button
+                            type="text"
+                            onClick={() => {
+                                console.log('index', index);
+                                const path = generatePath(
+                                    routeConstants.MANAGEMENT_DETAIL,
+                                    {
+                                        uid: record.uid,
+                                    }
+                                );
+                                navigate(path);
+                            }}
+                        >
                             <EyeOutlined />
                         </Button>
                     </Tooltip>
@@ -133,7 +147,10 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
             <div className="all-posts-container">
                 <div className="all-posts__header">
                     <div className="all-posts__header__title">
-                        Tất cả bài đăng
+                        <NavLink to={routeConstants.ALL_POSTS}>
+                            <CaretLeftOutlined />
+                        </NavLink>
+                        Tất cả bài đã đăng
                         <span className="posts-number">
                             ({tableData?.totalRows ?? 0})
                         </span>
@@ -148,7 +165,6 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                         Bộ lọc
                     </Button>
                 </div>
-
                 <PostsTable
                     columns={columns}
                     content={tableData?.content}
