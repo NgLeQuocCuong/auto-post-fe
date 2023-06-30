@@ -47,11 +47,6 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/ChangePassword')),
         authorization: true,
     },
-    // {
-    //     name: 'test',
-    //     path: routeConstants.USER_SETTINGS,
-    //     Component: commonLoadable(() => import('views/test')),
-    // },
     {
         name: 'Reset Password',
         path: routeConstants.RESET_PASSWORD,
@@ -98,8 +93,7 @@ const routes: Array<Route> = [
         name: 'All Posts',
         path: routeConstants.ALL_POSTS,
         Component: commonLoadable(() => import('views/AllPosts')),
-        //TODO: Uncomment this when login is implemented
-        //authorization: true,
+        authorization: true,
     },
     {
         name: 'Post Page',

@@ -10,7 +10,7 @@ import AccountLayout from 'layouts/Account';
 import PencilIcon from 'components/CommonInput/icons/PencilIcon';
 import TrashIcon from 'components/CommonInput/icons/TrashIcon';
 import { FC, useCallback } from 'react';
-import userService from 'services/userService';
+import postService from 'services/postService';
 import { useNavigate } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import Message from 'components/Message';
@@ -45,9 +45,8 @@ const Inner: FC<Props> = memo(
         }
         const navigate = useNavigate();
         const imgpath = 'http://192.168.30.109:8000';
-        console.log('img', imageurls);
         const handleremove = useCallback(async () => {
-            const response = await userService.remove(uid);
+            const response = await postService.remove(uid);
             if (response.isSuccess) {
                 Message.sendSuccess('Xóa bài viết thành công!', 2);
                 navigate(routeConstants.ALL_POSTS);

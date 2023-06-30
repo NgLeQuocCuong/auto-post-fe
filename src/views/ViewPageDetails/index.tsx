@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 import Inner from 'views/ViewPageDetails/Inner';
 import { useState } from 'react';
 import './style.scss';
-import userService from 'services/userService';
+import postService from 'services/postService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useToken } from 'reducers/token/function';
 import routeConstants from 'route/routeConstant';
@@ -28,7 +28,7 @@ const Wrapper: FC<Props> = memo(() => {
     const fuid = uid ? uid : '';
     useEffect(() => {
         if (token) {
-            userService.getdetails(fuid).then(res => {
+            postService.getDetails(fuid).then(res => {
                 if (res.isSuccess) {
                     setpostType(res.data.postType);
                     setcreateAt(res.data.createdAt);

@@ -18,7 +18,7 @@ const Header: FC<Props> = memo(({ firstName }) => {
     };
     const location = useLocation();
     const isPostPage = location.pathname === routeConstants.POST;
-    const isHomePage = location.pathname === routeConstants.HOMEPAGE;
+    const isHomePage = location.pathname === routeConstants.HOME_PAGE;
     return (
         <header className="header">
             <div className="header__wrap">
@@ -31,7 +31,7 @@ const Header: FC<Props> = memo(({ firstName }) => {
                 <ul className="header__wrap--items">
                     <li className="header__wrap--item">
                         <NavLink
-                            to={routeConstants.HOMEPAGE}
+                            to={routeConstants.HOME_PAGE}
                             className={`header__wrap--link ${
                                 isHomePage ? 'active' : ''
                             }`}
