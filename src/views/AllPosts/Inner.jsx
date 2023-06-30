@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
+import { NavLink } from 'react-router-dom';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
@@ -115,7 +116,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                             type="text"
                             onClick={() => {
                                 const path = generatePath(
-                                    routeConstants.POST_DETAILS,
+                                    routeConstants.PAGE_DETAILS,
                                     {
                                         uid: uid.uid,
                                     }

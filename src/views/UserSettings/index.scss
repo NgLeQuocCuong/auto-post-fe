@@ -5,16 +5,12 @@
 }
 
 .user-settings-form {
-    margin: 24px auto;
-    .ant-form-item-control-input-content {
-        display: flex;
-        flex-direction: column;
-    }
-
+    max-width: 448px;
+    margin: 72px auto;
     &__title {
         @include font-24;
         @include fontSemibold;
-        display: inline-block;
+        display: block;
         &:has(+ .ant-space) {
             margin-bottom: 16px;
         }
