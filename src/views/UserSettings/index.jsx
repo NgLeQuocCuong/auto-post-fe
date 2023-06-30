@@ -55,7 +55,7 @@ const Wrapper = memo(() => {
         async data => {
             setZaloProcessing(true);
             // const response = await userService.linkZalo({oathCode: data.oathCode});
-            const response = { isSuccess: false }; // Mock response
+            const response = { ...data, isSuccess: false }; // Mock response
             if (response.isSuccess) {
                 setUserInfo(prevState => ({
                     ...prevState,

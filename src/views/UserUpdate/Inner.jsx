@@ -1,7 +1,7 @@
 import { Button, Form, Space, Typography } from 'antd';
 import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
-import AccountLayout from 'layouts/Account';
+import WebLayout from 'layouts/Web/WebLayout';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
@@ -35,11 +35,11 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
         Message.sendError('Vui lòng kiểm tra lại thông tin.');
     };
     return (
-        <AccountLayout title="User Update">
+        <WebLayout title="User Update">
             <Form
                 form={form}
                 layout="vertical"
-                className="container user-update-form"
+                className="user-update-form"
                 initialValues={userInfo}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -102,7 +102,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                     </Button>
                 </Form.Item>
             </Form>
-        </AccountLayout>
+        </WebLayout>
     );
 });
 

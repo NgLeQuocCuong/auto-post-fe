@@ -75,7 +75,7 @@ const Wrapper: FC<Props> = memo(() => {
         />
     );
 });
-Wrapper.displayName = 'PageDetails';
+Wrapper.displayName = 'PAGE_DETAILS';
 
 const ViewPageDetails = Wrapper;
 

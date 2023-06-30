@@ -29,7 +29,7 @@ const Wrapper: FC<Props> = memo(() => {
     const fuid = uid ? uid : '';
     useEffect(() => {
         if (token) {
-            postService.getMDetails(fuid).then(res => {
+            postService.getManagementDetails(fuid).then(res => {
                 if (res.isSuccess) {
                     setcreateAt(res.data.timePosting);
                     setPlatform(res.data.platform);
@@ -79,7 +79,7 @@ const Wrapper: FC<Props> = memo(() => {
         />
     );
 });
-Wrapper.displayName = 'PageDetails';
+Wrapper.displayName = 'PAGE_DETAILS';
 
 const ViewPageDetails = Wrapper;
 

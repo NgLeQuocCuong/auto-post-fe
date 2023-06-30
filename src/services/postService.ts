@@ -1,7 +1,7 @@
 import ApiBase from 'modules/apis/apiBase';
 
 const _POST_PATH = '/posts';
-
+const _POST_MANAGEMENT_PATH = '/post-management';
 class PostService extends ApiBase {
     filterPosts = (params: {
         page?: number;
@@ -26,14 +26,41 @@ class PostService extends ApiBase {
         const url = `${_POST_PATH}/${uid}/detail`;
         return this.get(url);
     };
-    getMDetails = (uid: string) => {
+    getManagementDetails = (uid: string) => {
         const url = `${_POST_PATH}/post-management/${uid}/detail`;
         const res = this.get(url);
         return res;
     };
-    remove = (uid: string) => {
-        const url = `${_POST_PATH}/${uid}/remove`;
-        return this.post(url, uid);
+    filterPostManagement = (
+        params: {
+            page?: number;
+            pageSize?: number;
+            platform?: string;
+            status?: string;
+            minTime?: string;
+            maxTime?: string;
+        },
+        uid: string
+    ) => {
+        const url = `${_POST_PATH}/${uid}${_POST_MANAGEMENT_PATH}`;
+        const res = this.get(url, {
+            params: params,
+        });
+        return res;
+    };
+    getManagementMatrix = (params: {
+        page?: number;
+        pageSize?: number;
+        platform?: string;
+        status?: string;
+        minTime?: string;
+        maxTime?: string;
+    }) => {
+        const url = `${_POST_PATH}${_POST_MANAGEMENT_PATH}/matrix`;
+        const res = this.get(url, {
+            params: params,
+        });
+        return res;
     };
 }
 
