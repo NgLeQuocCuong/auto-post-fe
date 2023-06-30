@@ -111,6 +111,13 @@ const routes: Array<Route> = [
         name: 'Post Page',
         path: routeConstants.POST_PAGE,
         Component: commonLoadable(() => import('views/PostPage')),
+        authorization: true,
+    },
+    {
+        name: 'Home Page',
+        path: routeConstants.HOME_PAGE,
+        Component: commonLoadable(() => import('views/HomePage')),
+        authorization: true,
     },
     {
         name: '404',

@@ -119,16 +119,17 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
         {
             title: 'Hành động',
             key: 'action',
-            render: () => (
+            render: (text, record, index) => (
                 <>
                     <Tooltip placement="top" title="Xem chi tiết">
                         <Button
                             type="text"
                             onClick={() => {
+                                console.log('index', index);
                                 const path = generatePath(
-                                    routeConstants.PAGE_DETAILS,
+                                    routeConstants.MANAGEMENT_DETAIL,
                                     {
-                                        uid: uid.uid,
+                                        uid: record.uid,
                                     }
                                 );
                                 navigate(path);

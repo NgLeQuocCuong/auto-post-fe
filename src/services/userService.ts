@@ -94,6 +94,16 @@ class UserService extends ApiBase {
         const res = this.put(url);
         return res;
     };
+    newpost = (requestBody: any, options: any) => {
+        const url = '/posts/create';
+        const res = this.post(url, requestBody, options);
+        return res;
+    };
+    postNow = (uid: string) => {
+        const url = `/posts/post-management/${uid}/publish`;
+        const res = this.post(url);
+        return res;
+    };
 }
 
 const userService = new UserService();

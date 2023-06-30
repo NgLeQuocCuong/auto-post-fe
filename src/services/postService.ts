@@ -27,7 +27,7 @@ class PostService extends ApiBase {
         return this.get(url);
     };
     getManagementDetails = (uid: string) => {
-        const url = `${_POST_PATH}/post-management/${uid}/detail`;
+        const url = `${_POST_PATH}${_POST_MANAGEMENT_PATH}/${uid}/detail`;
         const res = this.get(url);
         return res;
     };

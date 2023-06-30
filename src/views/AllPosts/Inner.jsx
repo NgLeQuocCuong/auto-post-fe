@@ -7,7 +7,6 @@ import {
 } from '@ant-design/icons';
 import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
-import { NavLink } from 'react-router-dom';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
@@ -15,6 +14,7 @@ import './index.scss';
 import PostsTable from 'views/PostsTable/PostsTable';
 import Popup from 'components/Popup';
 import WebLayout from 'layouts/Web/WebLayout';
+import { NavLink } from 'react-router-dom';
 const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
@@ -101,7 +101,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                             <EyeOutlined
                                 onClick={() => {
                                     const path = generatePath(
-                                        routeConstants.PAGE_DETAILS,
+                                        routeConstants.POST_DETAILS,
                                         {
                                             uid: uid.uid,
                                         }
@@ -116,7 +116,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                             type="text"
                             onClick={() => {
                                 const path = generatePath(
-                                    routeConstants.PAGE_DETAILS,
+                                    routeConstants.POST_DETAILS,
                                     {
                                         uid: uid.uid,
                                     }

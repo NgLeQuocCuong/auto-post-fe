@@ -1,4 +1,4 @@
-function FacebookIcon() {
+function FacebookIcon(props: any) {
     return (
         <svg
             width={24}
@@ -7,6 +7,7 @@ function FacebookIcon() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
+            {...props}
         >
             <path fill="url(#pattern0)" d="M0 0H24V24H0z" />
             <defs>
