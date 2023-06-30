@@ -1,6 +1,6 @@
+import FooterText from 'components/FooterText/FooterText';
 import LargeLogo from 'icons/LargeLogo';
 import { memo } from 'react';
-import FooterText from 'components/FooterText/FooterText';
 import FormForgot from 'views/ForgotPassword/components/FormForgot';
 
 const ForgotPassword = memo(({ handleForgotPassword }) => {

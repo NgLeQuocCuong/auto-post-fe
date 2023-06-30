@@ -9,7 +9,7 @@
     margin: 72px auto;
 }
 
-.form {
+.change-password-form {
     &__title {
         @include font-24;
         @include fontSemibold;
@@ -19,20 +19,20 @@
         }
     }
     &__label {
-        &-fw-600 {
+        &--fw-600 {
             .ant-form-item-label {
                 @include fontSemibold;
             }
         }
     }
     &__avatar {
-        &-round {
+        &--round {
             border-radius: 50%;
             + .ant-image-mask {
                 border-radius: 50%;
             }
         }
-        &-fit {
+        &--fit {
             object-fit: none;
         }
     }
@@ -45,5 +45,11 @@
         &::before {
             content: none !important;
         }
+    }
+    .float-right {
+        float: right;
+    }
+    .clear-both {
+        clear: both;
     }
 }
