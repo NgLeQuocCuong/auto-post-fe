@@ -35,6 +35,7 @@ const routes: Array<Route> = [
         name: 'POST_DETAILS',
         path: routeConstants.POST_DETAILS,
         Component: commonLoadable(() => import('views/ViewPageDetails')),
+        authorization: true,
     },
     {
         name: 'Register',
@@ -67,6 +68,7 @@ const routes: Array<Route> = [
         name: 'Management Detail',
         path: routeConstants.MANAGEMENT_DETAIL,
         Component: commonLoadable(() => import('views/ManagementDetail')),
+        authorization: true,
     },
     {
         name: 'Forgot Password',
