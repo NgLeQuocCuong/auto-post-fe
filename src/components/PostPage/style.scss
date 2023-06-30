@@ -1,7 +1,8 @@
 @import 'scss/global';
 
 .wrapper {
-    padding: 120px 0;
+    background-color: $color-gray-light;
+    padding-top: 24px;
     &__content {
         width: 90%;
         height: 950px;

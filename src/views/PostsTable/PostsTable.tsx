@@ -2,6 +2,7 @@ import { FC, memo, useMemo, useEffect, useState, useCallback } from 'react';
 import { Table, Form } from 'antd';
 import moment from 'moment';
 import Filters from './Filters';
+import './index.scss';
 interface RowData {
     uid?: string;
     //Data for All posts matrix
@@ -107,7 +108,7 @@ const PostsTable: FC<TableProps> = memo(
                 });
             }, [storedTableData, translateValue]) || [];
         return (
-            <>
+            <div className="posts-table-container">
                 <Form
                     className={`all-posts__filters ${
                         isFilterShown && 'show-filters'
@@ -133,7 +134,7 @@ const PostsTable: FC<TableProps> = memo(
                         },
                     }}
                 />
-            </>
+            </div>
         );
     }
 );
