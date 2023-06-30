@@ -1,10 +1,10 @@
-import { Button, Form, Typography, Space } from 'antd';
-import { memo } from 'react';
-import AccountLayout from 'layouts/Account';
-import routeConstants from 'route/routeConstant';
-import { NavLink } from 'react-router-dom';
+import { Button, Form, Space, Typography } from 'antd';
 import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
+import AccountLayout from 'layouts/Account';
+import { memo } from 'react';
+import { NavLink } from 'react-router-dom';
+import routeConstants from 'route/routeConstant';
 import './index.scss';
 
 const Inner = memo(({ handleUserUpdate, userInfo }) => {

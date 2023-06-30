@@ -1,8 +1,8 @@
-import { memo, FC } from 'react';
 import { DatePicker, Space } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { FC, memo } from 'react';
 
 dayjs.extend(customParseFormat);
 

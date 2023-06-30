@@ -1,17 +1,16 @@
-import './index.scss';
-import { Button, Tag, Tooltip } from 'antd';
 import {
-    EyeOutlined,
-    EditOutlined,
     DeleteOutlined,
+    EditOutlined,
+    EyeOutlined,
     HistoryOutlined,
     CaretRightOutlined,
 } from '@ant-design/icons';
-import { memo, useCallback, useEffect, useState } from 'react';
-import routeConstants from 'route/routeConstant';
-import { generatePath, NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
+import { memo, useCallback, useEffect, useState } from 'react';
+import { generatePath, useNavigate } from 'react-router-dom';
+import routeConstants from 'route/routeConstant';
+import './index.scss';
 import PostsTable from 'views/PostsTable/PostsTable';
 import Popup from 'components/Popup';
 import WebLayout from 'layouts/Web/WebLayout';
@@ -112,7 +111,18 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                         </Button>
                     </Tooltip>
                     <Tooltip placement="top" title="Sửa bài viết">
-                        <Button type="text" onClick={() => {}}>
+                        <Button
+                            type="text"
+                            onClick={() => {
+                                const path = generatePath(
+                                    routeConstants.POST_DETAILS,
+                                    {
+                                        uid: uid.uid,
+                                    }
+                                );
+                                navigate(path);
+                            }}
+                        >
                             <EditOutlined />
                         </Button>
                     </Tooltip>

@@ -2,6 +2,7 @@ import ApiBase from 'modules/apis/apiBase';
 
 const _USER_PATH = '/users';
 const _OAUTH_PATH = '/oauth';
+const _POST_PATH = '/posts';
 
 class UserService extends ApiBase {
     me = () => {

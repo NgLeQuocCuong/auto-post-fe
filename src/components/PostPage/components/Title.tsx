@@ -1,6 +1,6 @@
+import PenIcon from 'icons/PenIcon';
 import { FC, memo } from 'react';
 import '../style.scss';
-import PenIcon from 'icons/PenIcon';
 
 interface Props {
     title?: string;

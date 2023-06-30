@@ -1,20 +1,18 @@
-import {FC, PropsWithChildren, memo} from 'react';
-import './index.scss';
-import Header from 'layouts/Web/components/Header';
+import { FC, PropsWithChildren, memo } from 'react';
+import Header from 'layouts/Web/Header';
 
-const WebLayout: FC<PropsWithChildren> = memo(
-    ({children}) => {
-        return (
-            <div className='container'>
-                <div className='wrap--menu'>
-                    <Header></Header>
-                </div>
-                {children}
-            </div>
-        )
-    }
-)
+import { useUserProfile } from 'reducers/profile/function';
 
-WebLayout.displayName = 'Web Layout';
+const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
+    const user = useUserProfile();
+    return (
+        <div>
+            <Header firstName={user.firstName ? user.firstName : 'default'} />
+            {children}
+        </div>
+    );
+});
+
+WebLayout.displayName = 'WebLayout';
 
 export default WebLayout;

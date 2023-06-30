@@ -1,10 +1,10 @@
-import { FC, memo } from 'react';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Button, Form, Input, Space } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { useNavigate } from 'react-router-dom';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import '../style.scss';
 import Message from 'components/Message';
+import { FC, memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../style.scss';
 
 interface Props {
     handleResetPassword: any;
@@ -19,7 +19,7 @@ const FormReset: FC<Props> = memo(({ handleResetPassword }) => {
         Message.sendSuccess('Đổi mật khẩu thành công. Đăng nhập ngay');
         navgate('/login');
     };
-    const validatePassword = (_:any, value: any, callback: any) => {
+    const validatePassword = (_: any, value: any, callback: any) => {
         const password = form.getFieldValue('newpass');
         if (value && value !== password) {
             callback('Xác nhận mật khẩu không khớp!');

@@ -1,4 +1,4 @@
-import { useContext, createContext } from "react";
+import { createContext, useContext } from 'react';
 
 interface Option {
     name: string;
@@ -7,18 +7,17 @@ interface Option {
 }
 export interface IContext {
     data: {
-        value: string,
-        postType: string,
-        images: string[],
-        groupUID: Option[],
-        // time: 
-
-    },
-    setValue: any,
-    setPostType: any,
-    setImages: any,
-    setGroupUID: any,
-    removeGroupUID: any,
+        value: string;
+        postType: string;
+        images: string[];
+        groupUID: Option[];
+        // time:
+    };
+    setValue: any;
+    setPostType: any;
+    setImages: any;
+    setGroupUID: any;
+    removeGroupUID: any;
 }
 
 export const Context = createContext<IContext>({
@@ -33,7 +32,7 @@ export const Context = createContext<IContext>({
     setImages: () => {},
     setGroupUID: () => {},
     removeGroupUID: () => {},
-})
+});
 
 const usePostPageContext = () => useContext(Context);
 

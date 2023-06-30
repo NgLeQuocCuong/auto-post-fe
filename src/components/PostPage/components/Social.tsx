@@ -1,10 +1,10 @@
-import { FC, memo, useEffect, useState } from 'react';
-import '../style.scss';
 import { Button, Checkbox, Dropdown } from 'antd';
-import userService from 'services/userService';
-import { useNavigate } from 'react-router-dom';
 import Message from 'components/Message';
 import usePostPageContext from 'components/PostPage/components/Context';
+import { FC, memo, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import userService from 'services/userService';
+import '../style.scss';
 interface Option {
     name: string;
     page_id: string;

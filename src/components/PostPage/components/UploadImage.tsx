@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
-import userService from 'services/userService';
-import { BodyType } from 'modules/apis';
 import usePostPageContext from 'components/PostPage/components/Context';
+import { BodyType } from 'modules/apis';
+import React, { useState } from 'react';
+import userService from 'services/userService';
 
 const getBase64 = (file: RcFile): Promise<string> =>
     new Promise((resolve, reject) => {

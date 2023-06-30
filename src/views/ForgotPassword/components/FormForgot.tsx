@@ -1,7 +1,7 @@
-import { FC, memo } from 'react';
 import { Button, Form, Input, Space } from 'antd';
-import '../style.scss';
 import { useForm } from 'antd/es/form/Form';
+import { FC, memo } from 'react';
+import '../style.scss';
 
 interface Props {
     handleForgotPassword: any;

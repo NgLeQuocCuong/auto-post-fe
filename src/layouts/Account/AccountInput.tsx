@@ -1,5 +1,5 @@
-import { memo, FC } from 'react';
 import { Form, Input } from 'antd';
+import { FC, memo } from 'react';
 import './index.scss';
 
 interface AccountInputProps {

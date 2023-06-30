@@ -1,8 +1,8 @@
-import { FC, memo } from 'react';
-import { Button, Dropdown, Menu } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import '../style.scss';
+import { Button, Dropdown, Menu } from 'antd';
 import usePostPageContext from 'components/PostPage/components/Context';
+import { FC, memo } from 'react';
+import '../style.scss';
 
 interface Props {
     handlePost: any;

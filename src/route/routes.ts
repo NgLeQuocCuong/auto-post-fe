@@ -32,8 +32,8 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
-        name: 'PAGE_DETAILS',
-        path: routeConstants.PAGE_DETAILS,
+        name: 'POST_DETAILS',
+        path: routeConstants.POST_DETAILS,
         Component: commonLoadable(() => import('views/ViewPageDetails')),
     },
     {
@@ -47,11 +47,6 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/ChangePassword')),
         authorization: true,
     },
-    // {
-    //     name: 'test',
-    //     path: routeConstants.USER_SETTINGS,
-    //     Component: commonLoadable(() => import('views/test')),
-    // },
     {
         name: 'Reset Password',
         path: routeConstants.RESET_PASSWORD,
