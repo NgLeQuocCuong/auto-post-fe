@@ -1,6 +1,7 @@
 import { memo, FC } from 'react';
 import { Form, Button, Input } from 'antd';
 import Dropdown from 'views/AllPosts/Dropdown/components/Dropdown';
+import './index.scss';
 interface FilterProps {
     filtersList?: {
         title: string | 'Lọc';
@@ -11,7 +12,7 @@ interface FilterProps {
 }
 const Filters: FC<FilterProps> = memo(({ filtersList }) => {
     return (
-        <>
+        <div className="filters-container">
             {filtersList?.map(item => {
                 switch (item.type) {
                     case 'text':
@@ -60,7 +61,7 @@ const Filters: FC<FilterProps> = memo(({ filtersList }) => {
             <Button danger htmlType="reset">
                 Bỏ chọn tất cả
             </Button>
-        </>
+        </div>
     );
 });
 

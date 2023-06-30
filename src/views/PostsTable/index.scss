@@ -1,0 +1,7 @@
+@import 'scss/global.scss';
+
+.posts-table-container {
+    *[class^='ant-'] {
+        font-family: $font-inter;
+    }
+}
