@@ -1,0 +1,55 @@
+@import 'scss/global.scss';
+@import 'OverrideAntd';
+
+.all-posts-container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    > * {
+        margin-bottom: 24px;
+    }
+}
+
+.all-posts {
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        &__title {
+            @include font-32;
+            @include fontSemibold;
+        }
+    }
+    &__filters {
+        display: none;
+        &.show-filters {
+            display: flex;
+            justify-content: space-between;
+            width: max-content;
+            height: 40px;
+            *:not(:last-child) {
+                margin-right: 24px;
+            }
+        }
+    }
+}
+
+.posts-number {
+    margin-left: 8px;
+    color: $color--text3;
+}
+
+.show-filters-btn {
+    border-radius: 24px;
+    background: $color--black_6;
+    display: flex;
+    align-items: center;
+    &.btn-shown {
+        background: $color-button--lightblue;
+        color: $color--black;
+    }
+}

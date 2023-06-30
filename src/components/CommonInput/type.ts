@@ -1,6 +1,6 @@
 import { KeyboardEventHandler, ReactNode } from 'react';
-import { FileStatusEnum, Input, InputType } from './enums';
 import { IContext } from './InputConfigContext';
+import { FileStatusEnum, Input, InputType } from './enums';
 
 // for specific input
 export interface IInputOption {
