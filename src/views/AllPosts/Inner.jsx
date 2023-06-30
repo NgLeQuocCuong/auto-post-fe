@@ -14,7 +14,6 @@ import './index.scss';
 import PostsTable from 'views/PostsTable/PostsTable';
 import Popup from 'components/Popup';
 import WebLayout from 'layouts/Web/WebLayout';
-
 const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);

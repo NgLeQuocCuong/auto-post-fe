@@ -1,7 +1,7 @@
 import { Button, Form, Typography, Space, List, Col, Row, Image } from 'antd';
 import { memo } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import MainLayout from 'layouts/Main';
+import WebLayout from 'layouts/Web/WebLayout';
 import moment from 'moment';
 import './index.scss';
 import CheckIcon from 'components/CommonInput/icons/CheckIcon';
@@ -23,7 +23,7 @@ const Inner = memo(
             'public_profile,publish_to_groups,pages_manage_metadata,pages_manage_posts,pages_manage_engagement,pages_show_list';
         const facebookGetFields = 'name,email,picture,groups.limit(100)';
         return (
-            <MainLayout title="User Settings">
+            <WebLayout title="User Settings">
                 <Row className="user-settings-form">
                     <Col span={6}>
                         <Image
@@ -174,7 +174,7 @@ const Inner = memo(
                         </Form>
                     </Col>
                 </Row>
-            </MainLayout>
+            </WebLayout>
         );
     }
 );

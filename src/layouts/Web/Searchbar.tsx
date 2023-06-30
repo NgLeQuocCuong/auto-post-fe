@@ -6,7 +6,6 @@ import './index.scss';
 
 const Searchbar = memo(() => {
     const navigate = useNavigate();
-
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchs, setSearch] = useState('');
     const location = useLocation();
