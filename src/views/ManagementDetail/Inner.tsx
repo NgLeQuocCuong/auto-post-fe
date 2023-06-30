@@ -24,7 +24,7 @@ const Inner: FC<Props> = memo(
         const comments = comment ? comment.toString() : '0';
         const imgpath = 'http://192.168.30.109:8000';
         // const handleremove = useCallback(async () => {
-        //     const response = await userService.remove(uid);
+        //     const response = await postService.removePost(uid);
         //     if (response.isSuccess) {
         //         Message.sendSuccess('Xóa bài viết thành công!', 2);
         //         navigate(routeConstants.ALL_POSTS);
@@ -104,6 +104,6 @@ const Inner: FC<Props> = memo(
     }
 );
 
-Inner.displayName = 'PageDetails Inner';
+Inner.displayName = 'PAGE_DETAILS Inner';
 
 export default Inner;

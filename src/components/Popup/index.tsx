@@ -40,14 +40,12 @@ class Popup {
     public static sendConfirm = (
         title: string | undefined,
         content: string | undefined,
-        handleOk?: () => void,
-        handleCancel?: () => void
+        { ...props }
     ) => {
         Modal.confirm({
             title: title,
             content: content,
-            onOk: handleOk,
-            onCancel: handleCancel,
+            ...props,
         });
     };
 }

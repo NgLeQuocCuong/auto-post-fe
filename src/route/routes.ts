@@ -32,8 +32,8 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
-        name: 'PageDetails',
-        path: routeConstants.PAGEDETAILS,
+        name: 'PAGE_DETAILS',
+        path: routeConstants.PAGE_DETAILS,
         Component: commonLoadable(() => import('views/ViewPageDetails')),
     },
     {
@@ -98,8 +98,19 @@ const routes: Array<Route> = [
         name: 'All Posts',
         path: routeConstants.ALL_POSTS,
         Component: commonLoadable(() => import('views/AllPosts')),
-        //TODO: Uncomment this when login is implemented
-        //authorization: true,
+        authorization: true,
+    },
+    {
+        name: 'Post Management Of Post',
+        path: routeConstants.POST_MANAGEMENT_OF_POST,
+        Component: commonLoadable(() => import('views/PostManagementOfPost')),
+        authorization: true,
+    },
+    {
+        name: 'Post Management Matrix',
+        path: routeConstants.POST_MANAGEMENT_ALL,
+        Component: commonLoadable(() => import('views/PostManagementMatrix')),
+        authorization: true,
     },
     {
         name: 'Post Page',
