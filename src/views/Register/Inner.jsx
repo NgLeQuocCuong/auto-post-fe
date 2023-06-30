@@ -1,10 +1,10 @@
 import { Button, Form } from 'antd';
 import AccountLayout from 'layouts/Account';
-import { memo, useMemo, useCallback } from 'react';
+import AccountInput from 'layouts/Account/AccountInput';
+import 'layouts/Account/index.scss';
+import { memo, useCallback, useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
-import 'layouts/Account/index.scss';
-import AccountInput from 'layouts/Account/AccountInput';
 
 const Inner = memo(({ handleRegister }) => {
     //Validate rules
