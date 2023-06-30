@@ -116,58 +116,10 @@ const Inner: FC<Props> = memo(
                                 >
                                     <TrashIcon /> <p>Xóa bài viết</p>
                                 </button>
-                                {/* <div className="actions">
-                                    <h2>Nền tảng đã đăng</h2>
-                                    <div className="social-stats">
-                                        <div className="FB-stat">
-                                            <div className="platfrom-F">
-                                                <FBIcon />
-                                            </div>
-                                            <div className="platform">
-                                                <ViewIcon />
-                                                <span>1000</span>
-                                            </div>
-                                            <div className="platform">
-                                                <LikeIcon />
-                                                <span>100</span>
-                                            </div>
-                                            <div className="platform">
-                                                <CommentIcon />
-                                                <span>50</span>
-                                            </div>
-                                            <div className="platform">
-                                                <ShareIcon />
-                                                <span>21</span>
-                                            </div>
-                                        </div>
-                                        <div className="Zalo-stat">
-                                            <div className="platfrom-Z">
-                                                <ZaloIcon />
-                                            </div>
-
-                                            <div className="platform">
-                                                <ViewIcon />
-                                                <span>1000</span>
-                                            </div>
-                                            <div className="platform">
-                                                <LikeIcon />
-                                                <span>100</span>
-                                            </div>
-                                            <div className="platform">
-                                                <CommentIcon />
-                                                <span>50</span>
-                                            </div>
-                                            <div className="platform">
-                                                <ShareIcon />
-                                                <span>21</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
                         <div className="post-content">
-                            <h2>Nội dung bài đăng</h2>
+                            <h2>Nội dung bài viết</h2>
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: content,

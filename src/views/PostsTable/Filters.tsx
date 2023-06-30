@@ -1,6 +1,7 @@
 import { memo, FC } from 'react';
 import { Form, Button, Input } from 'antd';
 import Dropdown from 'views/AllPosts/Dropdown/components/Dropdown';
+import './index.scss';
 interface FilterProps {
     filtersList?: {
         title: string | 'Lọc';

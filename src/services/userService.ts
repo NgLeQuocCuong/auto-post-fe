@@ -2,7 +2,6 @@ import ApiBase from 'modules/apis/apiBase';
 
 const _USER_PATH = '/users';
 const _OAUTH_PATH = '/oauth';
-const _POST_PATH = '/posts';
 
 class UserService extends ApiBase {
     me = () => {
@@ -92,16 +91,6 @@ class UserService extends ApiBase {
     unlinkZalo = () => {
         const url = `${_USER_PATH}/disconnect/zalo`;
         const res = this.put(url);
-        return res;
-    };
-    newpost = (requestBody: any, options: any) => {
-        const url = '/posts/create';
-        const res = this.post(url, requestBody, options);
-        return res;
-    };
-    postNow = (uid: string) => {
-        const url = `/posts/post-management/${uid}/publish`;
-        const res = this.post(url);
         return res;
     };
 }
