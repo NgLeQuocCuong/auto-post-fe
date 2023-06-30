@@ -1,6 +1,6 @@
 import { Button, Form, Typography } from 'antd';
 import PasswordInput from 'components/CommonInput/components/PasswordInput';
-import AccountLayout from 'layouts/Account';
+import WebLayout from 'layouts/Web/WebLayout';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
@@ -42,10 +42,10 @@ const Inner = memo(({ handleChangePassword }) => {
     };
 
     return (
-        <AccountLayout title="Change Password">
+        <WebLayout title="Change Password">
             <Form
                 layout="vertical"
-                className="container change-password-form"
+                className="change-password-form"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
@@ -110,7 +110,7 @@ const Inner = memo(({ handleChangePassword }) => {
                     </Button>
                 </Form.Item>
             </Form>
-        </AccountLayout>
+        </WebLayout>
     );
 });
 

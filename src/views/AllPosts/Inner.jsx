@@ -3,14 +3,18 @@ import {
     EditOutlined,
     EyeOutlined,
     HistoryOutlined,
+    CaretRightOutlined,
 } from '@ant-design/icons';
 import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
-import PostTable from 'views/PostsTable/PostsTable';
 import './index.scss';
+import PostsTable from 'views/PostsTable/PostsTable';
+import Popup from 'components/Popup';
+import WebLayout from 'layouts/Web/WebLayout';
+import { NavLink } from 'react-router-dom';
 const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
@@ -93,8 +97,18 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             render: uid => (
                 <>
                     <Tooltip placement="top" title="Xem chi tiết">
-                        <Button type="text" onClick={() => {}}>
-                            <EyeOutlined />
+                        <Button type="text">
+                            <EyeOutlined
+                                onClick={() => {
+                                    const path = generatePath(
+                                        routeConstants.POST_DETAILS,
+                                        {
+                                            uid: uid.uid,
+                                        }
+                                    );
+                                    navigate(path);
+                                }}
+                            />
                         </Button>
                     </Tooltip>
                     <Tooltip placement="top" title="Sửa bài viết">
@@ -102,7 +116,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                             type="text"
                             onClick={() => {
                                 const path = generatePath(
-                                    routeConstants.UPDATE_POST,
+                                    routeConstants.POST_DETAILS,
                                     {
                                         uid: uid.uid,
                                     }
@@ -117,24 +131,22 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                         <Button
                             type="text"
                             // TODO: Uncomment this when popup is ready
-                            // onClick={() =>
-                            //     Popup.sendConfirm(
-                            //         'Bạn có chắc chắn muốn xóa bài viết này?',
-                            //         'Thao tác này không thể hoàn tác!',
-                            //         {
-                            //             onOk: () => {
-                            //                 handleRemovePost(uid).then(res => {
-                            //                     if (res.isSuccess) {
-                            //                         window.location.reload();
-                            //                     }
-                            //                 });
-                            //             },
-                            //             onCancel: () => {},
-                            //         }
-                            //     )
-                            // }
-                            // TODO: Remove this when popup is ready
-                            onClick={() => handleRemovePost(uid)}
+                            onClick={() =>
+                                Popup.sendConfirm(
+                                    'Bạn có chắc chắn muốn xóa bài viết này?',
+                                    'Thao tác này không thể hoàn tác!',
+                                    {
+                                        onOk: () => {
+                                            handleRemovePost(uid).then(res => {
+                                                if (res.isSuccess) {
+                                                    window.location.reload();
+                                                }
+                                            });
+                                        },
+                                        onCancel: () => {},
+                                    }
+                                )
+                            }
                         >
                             <DeleteOutlined />
                         </Button>
@@ -160,57 +172,62 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
         },
     ];
     return (
-        <div className="all-posts-container">
-            <div className="all-posts__header">
-                <div className="all-posts__header__title">
-                    Tất cả bài đăng
-                    <span className="posts-number">
-                        ({tableData?.totalRows ?? 0})
-                    </span>
+        <WebLayout>
+            <div className="all-posts-container">
+                <div className="all-posts__header">
+                    <div className="all-posts__header__title">
+                        Tất cả bài viết
+                        <span className="posts-number">
+                            ({tableData?.totalRows ?? 0})
+                        </span>
+                        <NavLink to={routeConstants.POST_MANAGEMENT_ALL}>
+                            <CaretRightOutlined />
+                        </NavLink>
+                    </div>
+                    <Button
+                        onClick={toggleFilters}
+                        className={`show-filters-btn ${
+                            isFilterShown && 'btn-shown'
+                        }`}
+                    >
+                        <ToggleFilterIcon />
+                        Bộ lọc
+                    </Button>
                 </div>
-                <Button
-                    onClick={toggleFilters}
-                    className={`show-filters-btn ${
-                        isFilterShown && 'btn-shown'
-                    }`}
-                >
-                    <ToggleFilterIcon />
-                    Bộ lọc
-                </Button>
-            </div>
 
-            <PostTable
-                columns={columns}
-                content={tableData?.content}
-                currentPage={tableData?.currentPage}
-                pageSize={tableData?.pageSize}
-                totalRows={tableData?.totalRows}
-                totalPages={tableData?.totalPages}
-                filtersList={filtersList}
-                isFilterShown={isFilterShown}
-                onFilters={filterValues => {
-                    //Remove undefined fields
-                    Object.keys(filterValues).forEach(key => {
-                        if (
-                            filterValues[key] === undefined ||
-                            !filterValues[key]
-                        ) {
-                            delete filterValues[key];
-                        }
-                    });
-                    handleFinish({
-                        ...filterValues,
-                    });
-                }}
-                onPaginate={(page, pageSize) =>
-                    handleFinish({
-                        ...filterParams,
-                        page: page,
-                        pageSize: pageSize,
-                    })
-                }
-            />
-        </div>
+                <PostsTable
+                    columns={columns}
+                    content={tableData?.content}
+                    currentPage={tableData?.currentPage}
+                    pageSize={tableData?.pageSize}
+                    totalRows={tableData?.totalRows}
+                    totalPages={tableData?.totalPages}
+                    filtersList={filtersList}
+                    isFilterShown={isFilterShown}
+                    onFilters={filterValues => {
+                        //Remove undefined fields
+                        Object.keys(filterValues).forEach(key => {
+                            if (
+                                filterValues[key] === undefined ||
+                                !filterValues[key]
+                            ) {
+                                delete filterValues[key];
+                            }
+                        });
+                        handleFinish({
+                            ...filterValues,
+                        });
+                    }}
+                    onPaginate={(page, pageSize) =>
+                        handleFinish({
+                            ...filterParams,
+                            page: page,
+                            pageSize: pageSize,
+                        })
+                    }
+                />
+            </div>
+        </WebLayout>
     );
 });
 

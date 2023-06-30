@@ -32,9 +32,10 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
-        name: 'PageDetails',
-        path: routeConstants.PAGEDETAILS,
+        name: 'POST_DETAILS',
+        path: routeConstants.POST_DETAILS,
         Component: commonLoadable(() => import('views/ViewPageDetails')),
+        authorization: true,
     },
     {
         name: 'Register',
@@ -46,21 +47,6 @@ const routes: Array<Route> = [
         path: routeConstants.CHANGE_PASSWORD,
         Component: commonLoadable(() => import('views/ChangePassword')),
         authorization: true,
-    },
-    // {
-    //     name: 'test',
-    //     path: routeConstants.USER_SETTINGS,
-    //     Component: commonLoadable(() => import('views/test')),
-    // },
-    {
-        name: 'Reset Password',
-        path: routeConstants.RESET_PASSWORD,
-        Component: commonLoadable(() => import('views/ResetPassword')),
-    },
-    {
-        name: 'Reset Password',
-        path: routeConstants.RESET_PASSWORD,
-        Component: commonLoadable(() => import('views/ResetPassword')),
     },
     {
         name: 'Reset Password',
@@ -83,6 +69,7 @@ const routes: Array<Route> = [
         name: 'Management Detail',
         path: routeConstants.MANAGEMENT_DETAIL,
         Component: commonLoadable(() => import('views/ManagementDetail')),
+        authorization: true,
     },
     {
         name: 'Forgot Password',
@@ -99,13 +86,31 @@ const routes: Array<Route> = [
         name: 'All Posts',
         path: routeConstants.ALL_POSTS,
         Component: commonLoadable(() => import('views/AllPosts')),
-        //TODO: Uncomment this when login is implemented
-        //authorization: true,
+        authorization: true,
+    },
+    {
+        name: 'Post Management Of Post',
+        path: routeConstants.POST_MANAGEMENT_OF_POST,
+        Component: commonLoadable(() => import('views/PostManagementOfPost')),
+        authorization: true,
+    },
+    {
+        name: 'Post Management Matrix',
+        path: routeConstants.POST_MANAGEMENT_ALL,
+        Component: commonLoadable(() => import('views/PostManagementMatrix')),
+        authorization: true,
     },
     {
         name: 'Post Page',
         path: routeConstants.POST_PAGE,
         Component: commonLoadable(() => import('views/PostPage')),
+        authorization: true,
+    },
+    {
+        name: 'Home Page',
+        path: routeConstants.HOME_PAGE,
+        Component: commonLoadable(() => import('views/HomePage')),
+        authorization: true,
     },
     {
         name: '404',

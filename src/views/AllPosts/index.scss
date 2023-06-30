@@ -2,8 +2,9 @@
 @import 'OverrideAntd';
 
 .all-posts-container {
-    width: 75%;
+    width: 90%;
     margin: 0 auto;
+    margin-top: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -27,7 +28,8 @@
         display: none;
         &.show-filters {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            width: max-content;
             height: 40px;
             *:not(:last-child) {
                 margin-right: 24px;

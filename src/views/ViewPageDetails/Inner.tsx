@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import './style.scss';
-import AccountLayout from 'layouts/Account';
+import WebLayout from 'layouts/Web/WebLayout';
 // import ZaloIcon from 'components/CommonInput/icons/ZaloIcon';
 // import FBIcon from 'components/CommonInput/icons/FBIcon';
 // import ViewIcon from 'components/CommonInput/icons/ViewIcon';
@@ -10,10 +10,11 @@ import AccountLayout from 'layouts/Account';
 import PencilIcon from 'components/CommonInput/icons/PencilIcon';
 import TrashIcon from 'components/CommonInput/icons/TrashIcon';
 import { FC, useCallback } from 'react';
-import userService from 'services/userService';
+import postService from 'services/postService';
 import { useNavigate } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import Message from 'components/Message';
+import Popup from 'components/Popup';
 interface Props {
     postType: string;
     date: string;
@@ -45,18 +46,17 @@ const Inner: FC<Props> = memo(
         }
         const navigate = useNavigate();
         const imgpath = 'http://192.168.30.109:8000';
-        console.log('img', imageurls);
-        const handleremove = useCallback(async () => {
-            const response = await userService.remove(uid);
+        const handleRemove = useCallback(async () => {
+            const response = await postService.removePost({ uid });
             if (response.isSuccess) {
-                Message.sendSuccess('Xóa bài viết thành công!', 2);
+                Message.sendSuccess('Xóa bài viết thành công!');
                 navigate(routeConstants.ALL_POSTS);
             }
             return response;
         }, [navigate, uid]);
         return (
             <div className="container-detail">
-                <AccountLayout>
+                <WebLayout>
                     <div className="details-view-container">
                         <div className="upper">
                             {/* <button className="edit-button">
@@ -101,7 +101,18 @@ const Inner: FC<Props> = memo(
                                 </button>
                                 <button
                                     className="del-button"
-                                    onClick={handleremove}
+                                    onClick={() =>
+                                        Popup.sendConfirm(
+                                            'Bạn có chắc chắn muốn xóa bài viết này?',
+                                            'Thao tác này không thể hoàn tác!',
+                                            {
+                                                onOk: () => {
+                                                    handleRemove();
+                                                },
+                                                onCancel: () => {},
+                                            }
+                                        )
+                                    }
                                 >
                                     <TrashIcon /> <p>Xóa bài viết</p>
                                 </button>
@@ -174,12 +185,12 @@ const Inner: FC<Props> = memo(
                             </div>
                         </div>
                     </div>
-                </AccountLayout>
+                </WebLayout>
             </div>
         );
     }
 );
 
-Inner.displayName = 'PageDetails Inner';
+Inner.displayName = 'PAGE_DETAILS Inner';
 
 export default Inner;

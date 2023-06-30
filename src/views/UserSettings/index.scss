@@ -4,16 +4,13 @@
     font-family: $font-inter;
 }
 
-.container {
-    max-width: 448px;
-    margin: 72px auto;
-}
-
 .user-settings-form {
+    max-width: 448px;
+    margin: 70px auto;
     &__title {
         @include font-24;
         @include fontSemibold;
-        display: inline-block;
+        display: block;
         &:has(+ .ant-space) {
             margin-bottom: 16px;
         }
