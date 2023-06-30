@@ -3,7 +3,7 @@ const routeConstants = {
     REGISTER: '/register',
     FORGOT_PASSWORD: '/forgot-password',
     ALL_POSTS: '/posts',
-    PAGE_DETAILS: `/page-details/:uid`,
+    POST_DETAILS: `/post-details/:uid`,
     USER_SETTINGS: '/user-settings',
     POST_MANAGEMENT_ALL: '/post-management', //TODO
     POST_MANAGEMENT_OF_POST: '/post-management/:uid', //TODO
