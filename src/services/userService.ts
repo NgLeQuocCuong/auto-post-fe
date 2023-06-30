@@ -40,15 +40,6 @@ class UserService extends ApiBase {
         return res;
     };
 
-    getdetails = (uid: string) => {
-        const url = `${_POST_PATH}/${uid}/detail`;
-        return this.get(url);
-    };
-
-    remove = (uid: string) => {
-        const url = `${_POST_PATH}/${uid}/remove`;
-        return this.post(url, uid);
-    };
     logout = () => {
         const url = `${_USER_PATH}/logout`;
         return this.post(url);
@@ -101,12 +92,6 @@ class UserService extends ApiBase {
     unlinkZalo = () => {
         const url = `${_USER_PATH}/disconnect/zalo`;
         const res = this.put(url);
-        return res;
-    };
-
-    getmdetails = (uid: string) => {
-        const url = `${_POST_PATH}/post-management/${uid}/detail`;
-        const res = this.get(url);
         return res;
     };
 }

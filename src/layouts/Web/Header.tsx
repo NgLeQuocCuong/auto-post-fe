@@ -1,11 +1,11 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import LogoSmall from 'components/CommonInput/icons/LogoSmall';
-import Searchbar from 'layouts/Main/Searchbar';
+import Searchbar from 'layouts/Web/Searchbar';
 import { FC, memo, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
-import Logout from './Logout';
+import Logout from 'layouts/Web/Logout';
 import './index.scss';
 
 interface Props {
@@ -17,7 +17,7 @@ const Header: FC<Props> = memo(({ firstName }) => {
         setIsDropdownOpen(!isDropdownOpen);
     };
     const location = useLocation();
-    const isPostPage = location.pathname === routeConstants.POST;
+    const isALL_POSTS = location.pathname === routeConstants.ALL_POSTS;
     const isHOME_PAGE = location.pathname === routeConstants.HOME_PAGE;
     return (
         <header className="header">
@@ -41,18 +41,17 @@ const Header: FC<Props> = memo(({ firstName }) => {
                     </li>
                     <li className="header__wrap--item">
                         <NavLink
-                            to={routeConstants.POST}
+                            to={routeConstants.ALL_POSTS}
                             className={`header__wrap--link ${
-                                isPostPage ? 'active' : ''
+                                isALL_POSTS ? 'active' : ''
                             }`}
-                            aria-disabled={isPostPage}
                         >
                             BÀI VIẾT
                         </NavLink>
                     </li>
                 </ul>
                 <div className="header__wrap--button">
-                    <NavLink to={routeConstants.POST}>
+                    <NavLink to={routeConstants.POST_PAGE}>
                         <Button icon={<PlusOutlined />} type="primary">
                             Đăng bài
                         </Button>

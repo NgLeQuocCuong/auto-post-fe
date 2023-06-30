@@ -4,12 +4,13 @@
     font-family: $font-inter;
 }
 
-.container {
-    max-width: 448px;
-    margin: 72px auto;
-}
-
 .user-settings-form {
+    margin: 24px auto;
+    .ant-form-item-control-input-content {
+        display: flex;
+        flex-direction: column;
+    }
+
     &__title {
         @include font-24;
         @include fontSemibold;
