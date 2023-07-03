@@ -18,7 +18,7 @@ const Inner = memo(({ handleLogin }) => {
     const passwordRules = useMemo(
         () => [
             {
-                pattern: /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
+                pattern: /^(?=.*\d)(?=.*\D)[^\s]{8,}$/,
                 message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
             },
         ],
@@ -40,7 +40,7 @@ const Inner = memo(({ handleLogin }) => {
                 <AccountInput
                     name="email"
                     label="Email"
-                    type="email"
+                    type="text"
                     placeholder="Email"
                     rules={emailRules}
                 />

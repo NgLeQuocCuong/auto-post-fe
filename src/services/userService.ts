@@ -19,7 +19,6 @@ class UserService extends ApiBase {
         first_name: string;
         last_name: string;
         email: string;
-        username: string;
         password: string;
     }) => {
         const url = `${_USER_PATH}/register`;
@@ -27,15 +26,27 @@ class UserService extends ApiBase {
         return res;
     };
 
-    forgotPass = (requestBody: any) => {
+    sendVerifyEmail = (requestBody: { email: string }) => {
+        const url = `${_USER_PATH}/email-verify`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+
+    checkVerifyEmail = (requestBody: { token: string }) => {
+        const url = `${_USER_PATH}/register-check`;
+        const res = this.put(url, requestBody);
+        return res;
+    };
+
+    forgotPassword = (requestBody: { email: string }) => {
         const url = `${_USER_PATH}/forgot-password`;
         const res = this.post(url, requestBody);
         return res;
     };
 
-    resetPass = (requestBody: { email: string }) => {
+    resetPassword = (requestBody: { token: string; email: string }) => {
         const url = `${_USER_PATH}/reset-password`;
-        const res = this.post(url, requestBody);
+        const res = this.put(url, requestBody);
         return res;
     };
     logout = () => {

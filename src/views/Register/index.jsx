@@ -11,9 +11,10 @@ const Wrapper = memo(() => {
             const response = await userService.register(data);
             if (response.isSuccess) {
                 Message.sendSuccess(
-                    'Đăng ký thành công. Vui lòng đăng nhập để tiếp tục.'
+                    'Đăng ký thành công. Vui lòng xác thực email.'
                 );
-                navigate(routeConstants.LOGIN);
+                navigate(routeConstants.VERIFY_EMAIL);
+                localStorage.setItem('verifyEmail', data.email);
             }
             return response;
         },
