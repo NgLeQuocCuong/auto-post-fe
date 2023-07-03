@@ -4,79 +4,74 @@
     font-family: $font-inter;
 }
 
-.container {
+.user-settings-form {
     max-width: 448px;
-    margin: 72px auto;
-}
-
-/* Override ant design  */
-.ant-list-split .ant-list-item {
-    border-block-end: 1px solid #d9d9d9;
-}
-.ant-form-item-control-input-content {
-    @include font-16;
-    font-weight: 500;
-}
-.ant-form-item {
-    margin-bottom: 12px;
-}
-.ant-image-mask {
-    border-radius: 50%;
-}
-
-.form {
+    margin: 70px auto;
     &__title {
-        font-weight: 500;
         @include font-24;
+        @include fontSemibold;
+        display: block;
+        &:has(+ .ant-space) {
+            margin-bottom: 16px;
+        }
     }
     &__label {
-        &-padding-bottom-0 .ant-form-item-label {
+        &--padding-bottom-0 .ant-form-item-label {
             padding-bottom: 0;
             label {
-                color: #727272;
+                color: $color--text-disabled;
             }
         }
     }
     &__btn {
-        &-big {
-            height: 40px;
-            @include font-16;
-        }
-        &-blue {
-            color: #155df5;
+        &--blue {
+            color: $color-button-link;
             &:not(:disabled):hover,
             &:not(:disabled):active {
-                color: #4096ff;
+                color: $color-button-link-hover;
             }
         }
-        &-border {
-            border-color: #155df5;
+        &--border {
+            border-color: $color-button-link;
             &:not(:disabled):hover,
             &:not(:disabled):active {
-                border-color: #4096ff;
+                border-color: $color-button-link-hover;
             }
         }
-        &-noborder {
-            border: none;
-            &:not(:disabled):hover,
-            &:not(:disabled):active {
-                border: none;
-            }
+        &--padding-x-0 {
+            padding-left: 0;
+            padding-right: 0;
         }
     }
     /* Avatar */
     &__avatar {
-        &-round {
+        &--round {
             border-radius: 50%;
+            + .ant-image-mask {
+                border-radius: 50%;
+            }
+        }
+        &--fit {
+            object-fit: none;
         }
     }
-}
-
-/* CheckIcon container */
-.list {
-    &-icon-group {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+    /* CheckIcon container */
+    &__list {
+        &--icon-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    }
+    /* Override ant design  */
+    .ant-list-split .ant-list-item:not(:last-child) {
+        border-block-end: 1px solid $color--line;
+    }
+    .ant-form-item-control-input-content {
+        @include font-16;
+        @include fontSemibold;
+    }
+    .ant-form-item:not(:first-child) {
+        margin-bottom: 12px;
     }
 }

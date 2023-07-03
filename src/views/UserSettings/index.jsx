@@ -1,85 +1,105 @@
-import { memo, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getToken } from 'reducers/token/function';
-
-import Inner from 'views/UserSettings/inner';
 import Message from 'components/Message';
+import { memo, useCallback, useState } from 'react';
+import { setUserProfile, useUserProfile } from 'reducers/profile/function';
+import { setFacebookToken } from 'reducers/token/function';
+import userService from 'services/userService';
+import Inner from 'views/UserSettings/Inner';
 
 const Wrapper = memo(() => {
-    const navigate = useNavigate();
-    useEffect(() => {
-        const token = getToken();
-        if (token) {
-            // navigate to the main page
-        }
-    }, [navigate]);
-
-    const [facebookLinked, setFacebookLinked] = useState(true);
-    const [zaloLinked, setZaloLinked] = useState(false);
-
-    const handleToggleFacebookLink = useCallback(
+    const [userInfo, setUserInfo] = useState(useUserProfile());
+    const [facebookProcessing, setFacebookProcessing] = useState(false);
+    const [zaloProcessing, setZaloProcessing] = useState(false);
+    const handleLinkFacebook = useCallback(
         async data => {
-            if (facebookLinked) {
-                // Handle unlink Facebook
-                // const response = await userService.unlinkFacebook();
-                const response = { isSuccess: true }; // Mock response
+            setFacebookProcessing(true);
+            if (data.accessToken) {
+                const response = await userService.linkFacebook({
+                    token: data.accessToken,
+                });
                 if (response.isSuccess) {
-                    setFacebookLinked(false);
-                    // Perform other actions after successful Facebook unlink
+                    setUserInfo(prevState => ({
+                        ...prevState,
+                        facebookStatus: true,
+                    }));
+                    setUserProfile(userInfo);
+                    setFacebookToken(data.accessToken);
+                    Message.sendSuccess('Liên kết Facebook thành công!');
                 }
+                setFacebookProcessing(false);
+                return response;
             } else {
-                // Handle link Facebook
-                // const response = await userService.linkFacebook();
-                const response = { isSuccess: true }; // Mock response
-                if (response.isSuccess) {
-                    setFacebookLinked(true);
-                    // Perform other actions after successful Facebook link
-                }
+                Message.sendError('Liên kết Facebook không thành công.');
             }
+            setFacebookProcessing(false);
         },
-        [facebookLinked]
+        [userInfo]
     );
 
-    const handleToggleZaloLink = useCallback(
-        async data => {
-            if (zaloLinked) {
-                // Handle unlink Zalo
-                // const response = await userService.unlinkZalo();
-                const response = { isSuccess: true }; // Mock response
-                if (response.isSuccess) {
-                    setZaloLinked(false);
-                    // Perform other actions after successful Zalo unlink
-                }
-            } else {
-                // Handle link Zalo
-                // const response = await userService.linkZalo();
-                const response = { isSuccess: true }; // Mock response
-                if (response.isSuccess) {
-                    setZaloLinked(true);
-                    // Perform other actions after successful Zalo link
-                }
-            }
-        },
-        [zaloLinked]
-    );
-
-    const handleLogout = useCallback(async data => {
-        // const response = await userService.logout();
-        const response = { isSuccess: true }; // Mock response
+    const handleUnlinkFacebook = useCallback(async () => {
+        setFacebookProcessing(true);
+        const response = await userService.unlinkFacebook();
         if (response.isSuccess) {
-            return Message.sendSuccess('Đang đăng xuất', 2);
-        } else {
-            return Message.sendError('Có lỗi xảy ra', 2);
+            setUserInfo(prevState => ({
+                ...prevState,
+                facebookStatus: false,
+            }));
+            setUserProfile(userInfo);
+            setFacebookToken('');
+            Message.sendInfo('Hủy liên kết Facebook thành công!');
         }
-    }, []);
+        setFacebookProcessing(false);
+        return response;
+    }, [userInfo]);
+
+    const handleLinkZalo = useCallback(
+        async data => {
+            setZaloProcessing(true);
+            // const response = await userService.linkZalo({oathCode: data.oathCode});
+            const response = { ...data, isSuccess: false }; // Mock response
+            if (response.isSuccess) {
+                setUserInfo(prevState => ({
+                    ...prevState,
+                    zaloStatus: true,
+                }));
+                setUserProfile(userInfo);
+                // setZaloToken(data.oathCode);
+                Message.sendSuccess('Liên kết Zalo thành công!');
+            } else {
+                Message.sendWarning(
+                    'Chức năng đang phát triển. Vui lòng thử lại sau.'
+                );
+            }
+            setZaloProcessing(false);
+            return response;
+        },
+        [userInfo]
+    );
+
+    const handleUnlinkZalo = useCallback(async () => {
+        setZaloProcessing(true);
+        const response = await userService.unlinkZalo();
+        if (response.isSuccess) {
+            setUserInfo(prevState => ({
+                ...prevState,
+                zaloStatus: false,
+            }));
+            setUserProfile(userInfo);
+            // setZaloToken('');
+            Message.sendInfo('Hủy liên kết Zalo thành công!');
+        }
+        setZaloProcessing(false);
+        return response;
+    }, [userInfo]);
 
     return (
         <Inner
-            facebookLinked={facebookLinked}
-            zaloLinked={zaloLinked}
-            handleToggleFacebookLink={handleToggleFacebookLink}
-            handleToggleZaloLink={handleToggleZaloLink}
-            handleLogout={handleLogout}
+            userInfo={userInfo}
+            handleLinkFacebook={handleLinkFacebook}
+            handleUnlinkFacebook={handleUnlinkFacebook}
+            facebookProcessing={facebookProcessing}
+            handleLinkZalo={handleLinkZalo}
+            handleUnlinkZalo={handleUnlinkZalo}
+            zaloProcessing={zaloProcessing}
         />
     );
 });

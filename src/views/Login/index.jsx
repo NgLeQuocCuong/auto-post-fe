@@ -14,14 +14,18 @@ const Wrapper = memo(() => {
         }
     }, [navigate]);
 
-    const handleLogin = useCallback(async data => {
-        const response = await userService.login(data);
-        if (response.isSuccess) {
-            setToken(response.data.accessToken);
-            Message.sendSuccess('Đăng nhập thành công.');
-        }
-        return response;
-    }, []);
+    const handleLogin = useCallback(
+        async data => {
+            const response = await userService.login(data);
+            if (response.isSuccess) {
+                setToken(response.data.accessToken);
+                Message.sendSuccess('Đăng nhập thành công.');
+                navigate(routeConstants.HOME_PAGE);
+            }
+            return response;
+        },
+        [navigate]
+    );
 
     return <Inner handleLogin={handleLogin} />;
 });
