@@ -46,7 +46,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
         {
             title: 'Loại bài viết',
             name: 'postType',
-            type: 'radio',
+            type: 'checkbox',
             options: [
                 {
                     label: 'Quảng cáo',
