@@ -9,9 +9,9 @@ const Wrapper = memo(() => {
         async data => {
             const newData = {
                 token: slug,
-                password: data.newpass,
+                password: data.newPassword,
             };
-            const response = await userService.resetPass(newData);
+            const response = await userService.resetPassword(newData);
             return response;
         },
         [slug]

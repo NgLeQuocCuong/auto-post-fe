@@ -1,19 +1,26 @@
 import Message from 'components/Message';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import userService from 'services/userService';
 import Inner from 'views/ForgotPassword/Inner';
 
 const Wrapper = memo(() => {
+    const [loading, setLoading] = useState(false);
+
     const handleForgotPassword = useCallback(async data => {
-        const response = await userService.forgotPass(data);
+        setLoading(true);
+        const response = await userService.forgotPassword(data);
+        setLoading(false);
         if (response.isSuccess) {
-            Message.sendSuccess('Vui lòng kiểm tra Email của bạn!');
-        } else {
-            Message.sendSuccess('Đã có lỗi xãy ra!');
+            Message.sendSuccess('Vui lòng kiểm tra email của bạn.');
         }
         return response;
     }, []);
-    return <Inner handleForgotPassword={handleForgotPassword} />;
+    return (
+        <Inner
+            handleForgotPassword={handleForgotPassword}
+            onLoading={loading}
+        />
+    );
 });
 Wrapper.displayName = 'Forgot Password';
 

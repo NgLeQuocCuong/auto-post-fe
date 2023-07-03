@@ -1,25 +1,54 @@
-import FooterText from 'components/FooterText/FooterText';
-import LargeLogo from 'icons/LargeLogo';
-import { memo } from 'react';
-import FormForgot from 'views/ForgotPassword/components/FormForgot';
+import { Button, Form, Spin } from 'antd';
+import AccountLayout from 'layouts/Account';
+import { memo, useMemo, useCallback } from 'react';
+import AccountInput from 'layouts/Account/AccountInput';
+const Inner = memo(({ handleForgotPassword, onLoading }) => {
+    // Validate rules
+    const emailRules = useMemo(
+        () => [
+            {
+                type: 'email',
+                message: 'Định dạng email không hợp lệ.',
+            },
+        ],
+        []
+    );
 
-const ForgotPassword = memo(({ handleForgotPassword }) => {
-    // TODO: Add AccountLayout
+    const handleFinish = useCallback(
+        values => {
+            handleForgotPassword(values);
+        },
+        [handleForgotPassword]
+    );
     return (
-        <div className="forgot">
-            <div className="forgot__left">
-                <div>
-                    <LargeLogo className="forgot__left--logo" />
-                    <h2 className="forgot__left--title">Đặt lại mật khẩu</h2>
-                    <FormForgot handleForgotPassword={handleForgotPassword} />
-                </div>
-                <FooterText />
-            </div>
-            <div className="forgot__right"></div>
-        </div>
+        <Spin spinning={onLoading} size="large">
+            <AccountLayout title="Lấy lại mật khẩu">
+                <Form
+                    className="account-layout__input"
+                    onFinish={handleFinish}
+                    layout="vertical"
+                >
+                    <AccountInput
+                        name="email"
+                        label="Email đã đăng ký"
+                        type="email"
+                        placeholder="Email đã đăng ký"
+                        rules={emailRules}
+                        required
+                    />
+                    <Button
+                        className="account-layout-button"
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        Gửi email
+                    </Button>
+                </Form>
+            </AccountLayout>
+        </Spin>
     );
 });
 
-ForgotPassword.displayName = 'Forgot Password Page';
+Inner.displayName = 'Forgot Password Inner';
 
-export default ForgotPassword;
+export default Inner;
