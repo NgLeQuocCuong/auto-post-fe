@@ -94,12 +94,6 @@ const routes: Array<Route> = [
         authorization: true,
     },
     {
-        name: 'Post Management Matrix',
-        path: routeConstants.POST_MANAGEMENT_ALL,
-        Component: commonLoadable(() => import('views/PostManagementMatrix')),
-        authorization: true,
-    },
-    {
         name: 'Post Page',
         path: routeConstants.POST_PAGE,
         Component: commonLoadable(() => import('views/PostPage')),
