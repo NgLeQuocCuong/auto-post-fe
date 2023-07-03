@@ -1,22 +1,39 @@
-import FooterText from 'components/FooterText/FooterText';
-import LargeLogo from 'icons/LargeLogo';
+import AccountLayout from 'layouts/Account';
 import { memo } from 'react';
-import FormReset from 'views/ResetPassword/components/FormReset';
+import { Form, Button } from 'antd';
+import AccountInput from 'layouts/Account/AccountInput';
 
 const Inner = memo(({ handleResetPassword }) => {
     // TODO: Add AccountLayout
     return (
-        <div className="forgot">
-            <div className="forgot__left">
-                <div>
-                    <LargeLogo className="forgot__left--logo" />
-                    <h2 className="forgot__left--title">Đặt lại mật khẩu</h2>
-                    <FormReset handleResetPassword={handleResetPassword} />
-                </div>
-                <FooterText />
+        <AccountLayout title="Đặt lại mật khẩu">
+            <div className="forgot">
+                <Form
+                    className="forgot__left"
+                    layout="vertical"
+                    onFinish={values => handleResetPassword(values)}
+                >
+                    <AccountInput
+                        title="Mật khẩu mới"
+                        label="Mật khẩu mới"
+                        name="password"
+                        type="password"
+                        placeholder="Nhập mật khẩu mới"
+                    />
+                    <AccountInput
+                        title="Xác nhận mật khẩu mới"
+                        label="Xác nhận mật khẩu mới"
+                        name="confirmPassword"
+                        type="password"
+                        placeholder="Nhập lại mật khẩu mới"
+                    />
+                    <Button type="primary" htmlType="submit">
+                        Đặt lại mật khẩu
+                    </Button>
+                </Form>
+                <div className="forgot__right"></div>
             </div>
-            <div className="forgot__right"></div>
-        </div>
+        </AccountLayout>
     );
 });
 

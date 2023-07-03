@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import './style.scss';
-import AccountLayout from 'layouts/Account';
+import WebLayout from 'layouts/Web/WebLayout';
 // import ZaloIcon from 'components/CommonInput/icons/ZaloIcon';
 // import FBIcon from 'components/CommonInput/icons/FBIcon';
 // import ViewIcon from 'components/CommonInput/icons/ViewIcon';
@@ -10,10 +10,11 @@ import AccountLayout from 'layouts/Account';
 import PencilIcon from 'components/CommonInput/icons/PencilIcon';
 import TrashIcon from 'components/CommonInput/icons/TrashIcon';
 import { FC, useCallback } from 'react';
-import userService from 'services/userService';
+import postService from 'services/postService';
 import { useNavigate } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import Message from 'components/Message';
+import Popup from 'components/Popup';
 interface Props {
     postType: string;
     date: string;
@@ -45,18 +46,17 @@ const Inner: FC<Props> = memo(
         }
         const navigate = useNavigate();
         const imgpath = 'http://192.168.30.109:8000';
-        console.log('img', imageurls);
-        const handleremove = useCallback(async () => {
-            const response = await userService.remove(uid);
+        const handleRemove = useCallback(async () => {
+            const response = await postService.removePost({ uid });
             if (response.isSuccess) {
-                Message.sendSuccess('Xóa bài viết thành công!', 2);
+                Message.sendSuccess('Xóa bài viết thành công!');
                 navigate(routeConstants.ALL_POSTS);
             }
             return response;
         }, [navigate, uid]);
         return (
             <div className="container-detail">
-                <AccountLayout>
+                <WebLayout>
                     <div className="details-view-container">
                         <div className="upper">
                             {/* <button className="edit-button">
@@ -101,62 +101,25 @@ const Inner: FC<Props> = memo(
                                 </button>
                                 <button
                                     className="del-button"
-                                    onClick={handleremove}
+                                    onClick={() =>
+                                        Popup.sendConfirm(
+                                            'Bạn có chắc chắn muốn xóa bài viết này?',
+                                            'Thao tác này không thể hoàn tác!',
+                                            {
+                                                onOk: () => {
+                                                    handleRemove();
+                                                },
+                                                onCancel: () => {},
+                                            }
+                                        )
+                                    }
                                 >
                                     <TrashIcon /> <p>Xóa bài viết</p>
                                 </button>
-                                {/* <div className="actions">
-                                    <h2>Nền tảng đã đăng</h2>
-                                    <div className="social-stats">
-                                        <div className="FB-stat">
-                                            <div className="platfrom-F">
-                                                <FBIcon />
-                                            </div>
-                                            <div className="platform">
-                                                <ViewIcon />
-                                                <span>1000</span>
-                                            </div>
-                                            <div className="platform">
-                                                <LikeIcon />
-                                                <span>100</span>
-                                            </div>
-                                            <div className="platform">
-                                                <CommentIcon />
-                                                <span>50</span>
-                                            </div>
-                                            <div className="platform">
-                                                <ShareIcon />
-                                                <span>21</span>
-                                            </div>
-                                        </div>
-                                        <div className="Zalo-stat">
-                                            <div className="platfrom-Z">
-                                                <ZaloIcon />
-                                            </div>
-
-                                            <div className="platform">
-                                                <ViewIcon />
-                                                <span>1000</span>
-                                            </div>
-                                            <div className="platform">
-                                                <LikeIcon />
-                                                <span>100</span>
-                                            </div>
-                                            <div className="platform">
-                                                <CommentIcon />
-                                                <span>50</span>
-                                            </div>
-                                            <div className="platform">
-                                                <ShareIcon />
-                                                <span>21</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
                         <div className="post-content">
-                            <h2>Nội dung bài đăng</h2>
+                            <h2>Nội dung bài viết</h2>
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: content,
@@ -174,12 +137,12 @@ const Inner: FC<Props> = memo(
                             </div>
                         </div>
                     </div>
-                </AccountLayout>
+                </WebLayout>
             </div>
         );
     }
 );
 
-Inner.displayName = 'PageDetails Inner';
+Inner.displayName = 'PAGE_DETAILS Inner';
 
 export default Inner;
