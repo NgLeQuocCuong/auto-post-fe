@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import './style.scss';
-import AccountLayout from 'layouts/Account';
+import WebLayout from 'layouts/Web/WebLayout';
 import ZaloIcon from 'components/CommonInput/icons/ZaloIcon';
 import FBIcon from 'components/CommonInput/icons/FBIcon';
 import LikeIcon from 'components/CommonInput/icons/LikeIcon';
@@ -33,7 +33,7 @@ const Inner: FC<Props> = memo(
         // }, [navigate, uid]);
         return (
             <div className="container-mdetail">
-                <AccountLayout>
+                <WebLayout>
                     <div className="mdetails-view-container">
                         <div className="header">
                             <div className="left-section">
@@ -98,7 +98,7 @@ const Inner: FC<Props> = memo(
                             </div>
                         </div>
                     </div>
-                </AccountLayout>
+                </WebLayout>
             </div>
         );
     }

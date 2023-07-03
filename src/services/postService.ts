@@ -27,7 +27,7 @@ class PostService extends ApiBase {
         return this.get(url);
     };
     getManagementDetails = (uid: string) => {
-        const url = `${_POST_PATH}/post-management/${uid}/detail`;
+        const url = `${_POST_PATH}${_POST_MANAGEMENT_PATH}/${uid}/detail`;
         const res = this.get(url);
         return res;
     };
@@ -60,6 +60,16 @@ class PostService extends ApiBase {
         const res = this.get(url, {
             params: params,
         });
+        return res;
+    };
+    newPost = (requestBody: any, options: any) => {
+        const url = '/posts/create';
+        const res = this.post(url, requestBody, options);
+        return res;
+    };
+    postNow = (uid: string) => {
+        const url = `/posts/post-management/${uid}/publish`;
+        const res = this.post(url);
         return res;
     };
 }

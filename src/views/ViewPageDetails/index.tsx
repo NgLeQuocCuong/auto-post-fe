@@ -10,10 +10,7 @@ import { FC } from 'react';
 import showdown from 'showdown';
 
 declare module 'showdown';
-interface Props {
-    postType: string;
-    createAt: string;
-}
+interface Props {}
 
 const Wrapper: FC<Props> = memo(() => {
     const navigate = useNavigate();
@@ -27,7 +24,7 @@ const Wrapper: FC<Props> = memo(() => {
     const { uid } = useParams();
     const fuid = uid ? uid : '';
     useEffect(() => {
-        if (token) {
+        if (token && !createAt) {
             postService.getDetails(fuid).then(res => {
                 if (res.isSuccess) {
                     setpostType(res.data.postType);
@@ -60,7 +57,7 @@ const Wrapper: FC<Props> = memo(() => {
                     navigate(routeConstants.ALL_POSTS);
                 }
             });
-        } else {
+        } else if (!createAt) {
             navigate(routeConstants.LOGIN);
         }
     }, [createAt, navigate, token, fuid]);

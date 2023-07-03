@@ -11,7 +11,7 @@ const Wrapper = memo(() => {
         const token = getToken();
         if (token) {
             //navigate(routeConstants.HOME_PAGE);
-            navigate(routeConstants.ALL_POSTS);
+            navigate(routeConstants.HOME_PAGE);
         }
     }, [navigate]);
 
@@ -21,7 +21,7 @@ const Wrapper = memo(() => {
             if (response.isSuccess) {
                 setToken(response.data.accessToken);
                 Message.sendSuccess('Đăng nhập thành công.');
-                navigate(routeConstants.ALL_POSTS);
+                navigate(routeConstants.HOME_PAGE);
             }
             return response;
         },

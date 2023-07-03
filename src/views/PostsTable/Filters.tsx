@@ -1,6 +1,7 @@
 import { memo, FC } from 'react';
 import { Form, Button, Input } from 'antd';
 import Dropdown from 'views/AllPosts/Dropdown/components/Dropdown';
+import './index.scss';
 interface FilterProps {
     filtersList?: {
         title: string | 'Lọc';
@@ -9,7 +10,7 @@ interface FilterProps {
         type?: 'text' | 'checkbox' | 'radio' | 'dateRange';
     }[];
 }
-const Filter: FC<FilterProps> = memo(({ filtersList }) => {
+const Filters: FC<FilterProps> = memo(({ filtersList }) => {
     return (
         <>
             {filtersList?.map(item => {
@@ -64,5 +65,5 @@ const Filter: FC<FilterProps> = memo(({ filtersList }) => {
     );
 });
 
-Filter.displayName = 'Filter';
-export default Filter;
+Filters.displayName = 'Filters';
+export default Filters;

@@ -6,6 +6,7 @@ import { PlusOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import LogoSmall from 'components/CommonInput/icons/LogoSmall';
 import SearchIcon from 'icons/SearchIcon';
+import routeConstants from 'route/routeConstant';
 const items = [
     {
         id: 1,
@@ -15,7 +16,7 @@ const items = [
     {
         id: 2,
         name: 'BÀI VIẾT',
-        url: '/posts',
+        url: routeConstants.ALL_POSTS,
     },
 ];
 const itemsDropdown = [

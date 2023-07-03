@@ -7,7 +7,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
     const user = useUserProfile();
     return (
         <div>
-            <Header firstName={user.firstName ? user.firstName : 'default'} />
+            <Header firstName={user.lastName ? user.lastName : 'default'} />
             {children}
         </div>
     );

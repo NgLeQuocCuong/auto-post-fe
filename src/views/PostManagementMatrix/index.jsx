@@ -4,7 +4,6 @@ import { memo, useCallback, useState } from 'react';
 // import routeConstants from 'route/routeConstant';
 import postService from 'services/postService';
 import Inner from 'views/PostManagementMatrix/Inner';
-import { useParams } from 'react-router-dom';
 const Wrapper = memo(() => {
     //Create variable to store table data
     const [tableData, setTableData] = useState({
@@ -15,7 +14,6 @@ const Wrapper = memo(() => {
         totalRows: 0,
     });
     //Get uid from url
-    const { uid } = useParams();
     const handleViewPostManagement = useCallback(async data => {
         const response = await postService.getManagementMatrix(data);
         if (response.isSuccess) {
@@ -25,7 +23,6 @@ const Wrapper = memo(() => {
     }, []);
     return (
         <Inner
-            uid={uid}
             handleViewPostManagement={handleViewPostManagement}
             tableData={tableData}
         />
