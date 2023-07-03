@@ -1,5 +1,6 @@
 @import 'scss/global';
 .header {
+    height: 80px;
     &__wrap {
         display: flex;
         align-items: center;
@@ -11,57 +12,24 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-        }
-        &--search {
-            position: relative;
-            display: inline-block;
-            margin-left: 30px;
-            box-sizing: border-box;
-            input {
-                width: 240px;
-                padding: 10px 10px 10px 40px;
-                font-family: $font-inter;
-                background-color: $color-hsbg;
-                color: $color-hstext;
-                font-size: 16px;
-                border-radius: 16px;
-                border: 1px solid transparent;
-                outline: 0;
-                transition: all 0.25s linear;
-                &::placeholder {
-                    color: $color-hstext;
-                    font-family: $font-inter;
-                }
-                &:focus {
-                    background-color: $color--light;
-                    border: 1px solid $color-hstext;
-                }
-            }
-        }
-        &--icon {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
+            width: 215px;
         }
         &--items {
             list-style: none;
             display: flex;
             align-items: center;
             margin: auto;
-            margin-left: 10%;
             width: fit-content;
-            padding: 0;
         }
-        &--item {
-            padding: 0 16px;
-        }
+
         &--link {
             text-decoration: none;
             font-weight: 600;
             color: $color-hstext;
-            padding: 10px 15px;
-            border-radius: 12px;
+            padding: 16px 12px;
+            margin: 8px;
+            font-size: 16px;
+            border-radius: 24px;
             transition: all 0.2s linear;
             &:hover {
                 color: $color-htext-hover;
@@ -76,43 +44,61 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            width: 215px;
             Button {
                 font-size: 16px;
                 font-weight: 500;
                 margin-right: 20px;
             }
+            button {
+                color: $color-htext-hover;
+                border: $color-htext-hover 1px solid;
+                height: 48px;
+                border-radius: 24px;
+                width: 151px;
+            }
             .user-dropdown {
                 position: relative;
                 z-index: 1;
-                transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+
+                .header_avatar {
+                    height: 48px;
+                    width: 48px;
+                    border-radius: 50%;
+                    object-fit: fill;
+                }
 
                 .dropdown {
-                    margin-left: 20px;
                     cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 64px;
+                    width: 64px;
+                    border-radius: 50%;
+                    transition: all 0.2s linear;
+                    &:hover {
+                        background-color: $color-hborder;
+                    }
+                    &.active {
+                        border: $color-htext-hover 1px solid;
+                        &:hover {
+                            background-color: $color--light;
+                        }
+                    }
                 }
 
                 .dropdown-menu {
-                    display: none;
+                    display: flex;
+                    opacity: 0;
                     position: absolute;
+                    transition: all 0.15s linear;
                     background-color: $color--light;
                     border: $color-hborder solid 1px;
                     border-radius: 4px;
                     padding: 0;
                     list-style: none;
                     z-index: 2;
-                    li {
-                        padding: 0;
-
-                        &:last-child {
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-                .dropdown::after {
-                    content: '\25BC';
-                }
-                &.open .dropdown-menu {
-                    display: flex;
                     align-items: center;
                     flex-direction: column;
                     text-align: center;
@@ -124,31 +110,60 @@
                     li {
                         width: 150px;
                         padding: 5px;
+                        transition: 0.3s linear;
+
                         p {
                             &#logout {
                                 color: $color-hlogout;
                             }
                             color: $color-hdrop;
                         }
-                        &:hover {
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+
+                &.open {
+                    .dropdown-menu {
+                        display: flex;
+                        opacity: 1;
+                        align-items: center;
+                        flex-direction: column;
+                        text-align: center;
+                        right: 0;
+                        left: auto;
+                        .Drop-item {
+                            text-decoration: none;
+                        }
+                        li {
+                            width: 150px;
+                            padding: 5px;
+
                             p {
-                                color: $color--light;
                                 &#logout {
-                                    cursor: pointer;
-                                    color: $color--light;
+                                    color: $color-hlogout;
                                 }
+                                color: $color-hdrop;
                             }
-                            background-color: $color-hdrop;
-                            &:last-child {
-                                background-color: $color-hlogout;
+                            &:hover {
+                                p {
+                                    color: $color--light;
+                                    &#logout {
+                                        cursor: pointer;
+                                        color: $color--light;
+                                    }
+                                }
+                                background-color: $color-hdrop;
+                                &:last-child {
+                                    background-color: $color-hlogout;
+                                }
                             }
                         }
                     }
                 }
             }
-            .user-dropdown.open .dropdown::after {
-                content: '\25B2';
-            }
+
             .acc {
                 text-decoration: none;
                 color: $color-accname;
@@ -162,6 +177,55 @@
         }
         &--dropdown {
             margin-left: 30px;
+        }
+    }
+}
+.pop-up {
+    &--overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+    }
+
+    &--frame-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 80%;
+        background-color: $color--light;
+        border-radius: 15px;
+        z-index: 1000;
+        overflow: hidden;
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    &--close-button {
+        position: absolute;
+        top: 32px;
+        right: 32px;
+        z-index: 9999;
+        background-color: transparent;
+        color: $color--text4;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        height: 36px;
+        width: 36px;
+        border-radius: 50%;
+        border: $color-hdborder 1.5px solid;
+        transition: all 0.5s linear;
+        &:hover {
+            background-color: $color--red;
+            border: none;
+            color: $color--light;
         }
     }
 }

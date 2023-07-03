@@ -1,5 +1,6 @@
 import { FC, memo } from 'react';
 import { Spin } from 'antd';
+import './style.scss';
 interface ILoadingScreenProps {}
 
 const LoadingScreen: FC<ILoadingScreenProps> = memo(() => {
