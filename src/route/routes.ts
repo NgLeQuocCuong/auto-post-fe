@@ -32,7 +32,7 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
-        name: 'Post Details',
+        name: 'POST_DETAILS',
         path: routeConstants.POST_DETAILS,
         Component: commonLoadable(() => import('views/ViewPageDetails')),
         authorization: true,
@@ -96,6 +96,12 @@ const routes: Array<Route> = [
         name: 'Post Management Of Post',
         path: routeConstants.POST_MANAGEMENT_OF_POST,
         Component: commonLoadable(() => import('views/PostManagementOfPost')),
+        authorization: true,
+    },
+    {
+        name: 'Post Management Matrix',
+        path: routeConstants.POST_MANAGEMENT_ALL,
+        Component: commonLoadable(() => import('views/PostManagementMatrix')),
         authorization: true,
     },
     {

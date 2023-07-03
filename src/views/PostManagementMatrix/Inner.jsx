@@ -36,7 +36,7 @@ const Inner = memo(({ handleViewPostManagement, tableData }) => {
         {
             title: 'Nền tảng',
             name: 'platform',
-            type: 'checkbox',
+            type: 'radio',
             options: [
                 {
                     label: 'Facebook',
@@ -51,7 +51,7 @@ const Inner = memo(({ handleViewPostManagement, tableData }) => {
         {
             title: 'Cách đăng',
             name: 'autoPublish',
-            type: 'checkbox',
+            type: 'radio',
             options: [
                 {
                     label: 'Hẹn giờ',
@@ -66,7 +66,7 @@ const Inner = memo(({ handleViewPostManagement, tableData }) => {
         {
             title: 'Trạng thái',
             name: 'status',
-            type: 'checkbox',
+            type: 'radio',
             options: [
                 {
                     label: 'Đang chờ',
