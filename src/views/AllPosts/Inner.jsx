@@ -3,7 +3,6 @@ import {
     EditOutlined,
     EyeOutlined,
     HistoryOutlined,
-    CaretRightOutlined,
 } from '@ant-design/icons';
 import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
@@ -14,7 +13,7 @@ import './index.scss';
 import PostsTable from 'views/PostsTable/PostsTable';
 import Popup from 'components/Popup';
 import WebLayout from 'layouts/Web/WebLayout';
-import { NavLink } from 'react-router-dom';
+
 const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
@@ -37,9 +36,24 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     }, [filterParams, handleAllPosts]);
     const filtersList = [
         {
-            title: 'Tìm theo nội dung',
+            title: 'Tìm theo tiêu đề',
             name: 'search',
             type: 'text',
+        },
+        {
+            title: 'Sắp xếp',
+            name: 'sortType',
+            type: 'checkbox',
+            options: [
+                {
+                    label: 'Mới nhất',
+                    value: 'desc',
+                },
+                {
+                    label: 'Cũ nhất',
+                    value: 'asc',
+                },
+            ],
         },
         {
             title: 'Ngày đăng',
@@ -49,7 +63,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
         {
             title: 'Loại bài viết',
             name: 'postType',
-            type: 'radio',
+            type: 'checkbox',
             options: [
                 {
                     label: 'Quảng cáo',
@@ -81,9 +95,9 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             key: 'createdAt',
         },
         {
-            title: 'Nội dung',
-            dataIndex: 'content',
-            key: 'content',
+            title: 'Tiêu đề',
+            dataIndex: 'title',
+            key: 'title',
         },
         {
             title: 'Loại bài viết',
@@ -180,9 +194,6 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                         <span className="posts-number">
                             ({tableData?.totalRows ?? 0})
                         </span>
-                        <NavLink to={routeConstants.POST_MANAGEMENT_ALL}>
-                            <CaretRightOutlined />
-                        </NavLink>
                     </div>
                     <Button
                         onClick={toggleFilters}

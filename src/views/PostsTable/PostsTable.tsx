@@ -2,12 +2,14 @@ import { FC, memo, useMemo, useEffect, useState, useCallback } from 'react';
 import { Table, Form } from 'antd';
 import moment from 'moment';
 import Filters from './Filters';
+import routeConstants from 'route/routeConstant';
+import { useSearchParams } from 'react-router-dom';
 import './index.scss';
 interface RowData {
     uid?: string;
     //Data for All posts matrix
     createdAt?: string;
-    content?: string;
+    title?: string;
     postType?: string;
     images?: string[];
     //Data for Post management matrix
@@ -60,6 +62,7 @@ const PostsTable: FC<TableProps> = memo(
             onPaginate,
             onFilters,
         ]);
+        const [searchParams, setSearchParams] = useSearchParams();
         const translateValue = useCallback((value: string) => {
             switch (value) {
                 //Post type
@@ -81,7 +84,7 @@ const PostsTable: FC<TableProps> = memo(
                 case 'FAIL':
                     return 'THẤT BẠI';
                 default:
-                    return '';
+                    return 'KHÁC';
             }
         }, []);
         //Declare data for table rows
@@ -95,7 +98,7 @@ const PostsTable: FC<TableProps> = memo(
                         createdAt: moment(item.createdAt).format(
                             'HH:mm - DD/MM/YYYY'
                         ),
-                        content: item.content,
+                        title: item.title,
                         postType: translateValue(item.postType || ''),
                         //Post management matrix data
                         timePosting: moment(item.timePosting).format(
@@ -113,7 +116,10 @@ const PostsTable: FC<TableProps> = memo(
                     className={`all-posts__filters ${
                         isFilterShown && 'show-filters'
                     }`}
-                    onFinish={values => onFilters(values)}
+                    onFinish={values => {
+                        setSearchParams(values);
+                        onFilters(values);
+                    }}
                 >
                     <Filters filtersList={filtersList} />
                 </Form>

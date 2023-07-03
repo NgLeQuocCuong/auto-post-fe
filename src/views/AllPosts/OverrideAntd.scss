@@ -2,7 +2,8 @@
 
 .all-posts-container {
     .ant-dropdown-trigger {
-        width: 200px;
+        min-width: 100px;
+        max-width: 200px;
         height: 40px;
         display: flex;
         align-items: center;
