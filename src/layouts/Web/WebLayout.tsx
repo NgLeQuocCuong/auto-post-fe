@@ -21,10 +21,9 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
         setIsDropdownOpen(!isDropdownOpen);
     };
     const location = useLocation();
-    const is_all_posts = location.pathname === '/posts';
+    const is_all_posts = location.pathname.startsWith('/posts');
     const is_home_page = location.pathname === routeConstants.HOME_PAGE;
-    const is_user = location.pathname === '/user';
-
+    const is_user = location.pathname.startsWith('/users');
     return (
         <div>
             <header className="header">

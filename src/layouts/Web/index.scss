@@ -49,9 +49,13 @@
             font-size: 16px;
             border-radius: 24px;
             transition: all 0.2s linear;
-            &-active {
-                color: $color--text5;
-                background-color: $color--border2;
+            &:hover {
+                color: $color-htext-hover;
+                background-color: $color-hborder;
+            }
+            &.active {
+                color: $color-htext-hover;
+                background-color: $color-hborder;
             }
         }
         &--button {
