@@ -65,8 +65,9 @@ class UserService extends ApiBase {
 
     updateUser = (
         requestBody: {
-            avatar?: any;
-            data: { firstName: string; lastName: string };
+            avatar?: Blob;
+            firstName: string;
+            lastName: string;
         },
         options: any
     ) => {
