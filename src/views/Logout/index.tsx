@@ -3,12 +3,14 @@ import { memo, useCallback, useEffect } from 'react';
 import userService from 'services/userService';
 import { useNavigate } from 'react-router-dom';
 import { setToken } from 'reducers/token/function';
+import Message from 'components/Message';
 
 const Logout = memo(() => {
     const navigate = useNavigate();
     const handleLogout = useCallback(async () => {
         const response = await userService.logout();
         setToken('');
+        Message.sendSuccess('Đăng xuất thành công.', 2);
         navigate(routeConstants.LOGIN);
         return response;
     }, [navigate]);
