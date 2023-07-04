@@ -4,7 +4,7 @@ import { memo, useMemo, useCallback, useState, useEffect } from 'react';
 import AccountInput from 'layouts/Account/AccountInput';
 
 const { Countdown } = Statistic;
-const Inner = memo(({ handleForgotPassword, onLoading }) => {
+const Inner = memo(({ handleForgotPassword, loading }) => {
     const COOLDOWN_TIME = 60; //In seconds
     const [remainingTime, setRemainingTime] = useState(
         parseInt(localStorage.getItem('remainingTime')) || COOLDOWN_TIME
@@ -59,7 +59,7 @@ const Inner = memo(({ handleForgotPassword, onLoading }) => {
     }, [remainingTime]);
 
     return (
-        <Spin spinning={onLoading} size="large">
+        <Spin spinning={loading} size="large">
             <AccountLayout title="Lấy lại mật khẩu">
                 <Form
                     className="account-layout__input"

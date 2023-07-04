@@ -1,7 +1,7 @@
 const routeConstants = {
     LOGIN: '/login',
     REGISTER: '/register',
-    VERIFY_EMAIL: '/verify-email',
+    VERIFY_ACCOUNT: '/verify-account/:code',
     FORGOT_PASSWORD: '/forgot-password',
     ALL_POSTS: '/posts',
     POST_DETAILS: `/post-details/:uid`,

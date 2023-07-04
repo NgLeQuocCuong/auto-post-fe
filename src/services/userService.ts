@@ -16,23 +16,16 @@ class UserService extends ApiBase {
     };
 
     register = (requestBody: {
-        first_name: string;
-        last_name: string;
+        firstName: string;
+        lastName: string;
         email: string;
-        password: string;
     }) => {
         const url = `${_USER_PATH}/register`;
         const res = this.post(url, requestBody);
         return res;
     };
 
-    sendVerifyEmail = (requestBody: { email: string }) => {
-        const url = `${_USER_PATH}/email-verify`;
-        const res = this.post(url, requestBody);
-        return res;
-    };
-
-    checkVerifyEmail = (requestBody: { token: string }) => {
+    verifyAccount = (requestBody: { token: string; password: string }) => {
         const url = `${_USER_PATH}/register-check`;
         const res = this.put(url, requestBody);
         return res;

@@ -16,10 +16,7 @@ const Wrapper = memo(() => {
         return response;
     }, []);
     return (
-        <Inner
-            handleForgotPassword={handleForgotPassword}
-            onLoading={loading}
-        />
+        <Inner handleForgotPassword={handleForgotPassword} loading={loading} />
     );
 });
 Wrapper.displayName = 'Forgot Password';
