@@ -1,11 +1,7 @@
-import {
-    DeleteOutlined,
-    EditOutlined,
-    HistoryOutlined,
-} from '@ant-design/icons';
+import { DeleteOutlined, HistoryOutlined } from '@ant-design/icons';
 import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { generatePath, useNavigate, useSearchParams } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import './index.scss';

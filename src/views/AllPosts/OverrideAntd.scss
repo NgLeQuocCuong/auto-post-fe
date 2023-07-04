@@ -2,7 +2,7 @@
 
 .all-posts-container {
     .ant-dropdown-trigger {
-        min-width: 100px;
+        min-width: 120px;
         max-width: 200px;
         height: 40px;
         display: flex;
@@ -26,11 +26,6 @@
         .ant-input-suffix {
             height: 40px;
         }
-    }
-
-    .ant-table-cell {
-        max-width: 40rem;
-        @include overflow-long-text;
     }
 
     .ant-btn {

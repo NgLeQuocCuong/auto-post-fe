@@ -31,7 +31,7 @@ const Dropdown: FC<DropdownProps> = memo(
                 switch (type) {
                     case 'checkbox':
                         return (
-                            <Form.Item name={name}>
+                            <Form.Item name={name} initialValue={undefined}>
                                 <Checkbox.Group options={options} />
                             </Form.Item>
                         );
@@ -85,7 +85,12 @@ const Dropdown: FC<DropdownProps> = memo(
                 open={open}
                 trigger={['click']}
             >
-                <button onClick={e => e.preventDefault()}>
+                <button
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }}
+                >
                     <span>{title}</span> <ArrowIcon />
                 </button>
             </AntdDropdown>

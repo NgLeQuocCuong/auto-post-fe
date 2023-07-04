@@ -3,7 +3,7 @@ import { Table, Form } from 'antd';
 import moment from 'moment';
 import Filters from './Filters';
 import routeConstants from 'route/routeConstant';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, generatePath } from 'react-router-dom';
 import './index.scss';
 interface RowData {
     uid?: string;
@@ -42,6 +42,7 @@ const PostsTable: FC<TableProps> = memo(
         onPaginate,
         onFilters,
     }) => {
+        const navigate = useNavigate();
         const [storedTableData, setStoredTableData] = useState<TableProps>();
         useEffect(() => {
             setStoredTableData({
@@ -62,20 +63,8 @@ const PostsTable: FC<TableProps> = memo(
             onPaginate,
             onFilters,
         ]);
-        const [searchParams, setSearchParams] = useSearchParams();
-        const translateValue = useCallback((value: string) => {
+        const translateStatus = useCallback((value: string) => {
             switch (value) {
-                //Post type
-                case 'COMMERCIAL':
-                    return 'QUẢNG CÁO';
-                case 'ARTICLE':
-                    return 'BÁO CHÍ';
-                case 'RECRUITMENT':
-                    return 'TUYỂN DỤNG';
-                case 'EDUCATION':
-                    return 'HỌC THUẬT';
-                case 'MARKETING':
-                    return 'MARKETING';
                 //Status
                 case 'PENDING':
                     return 'ĐANG CHỜ';
@@ -99,17 +88,18 @@ const PostsTable: FC<TableProps> = memo(
                             'HH:mm - DD/MM/YYYY'
                         ),
                         title: item.title,
-                        postType: translateValue(item.postType || ''),
+                        postType: item.postType,
                         //Post management matrix data
                         timePosting: moment(item.timePosting).format(
                             'HH:mm - DD/MM/YYYY'
                         ),
-                        status: translateValue(item.status || ''),
+                        status: translateStatus(item.status || ''),
                         platform: item.platform,
                         autoPublish: item.autoPublish ? 'Hẹn giờ' : 'Thủ công',
                     };
                 });
-            }, [storedTableData, translateValue]) || [];
+            }, [storedTableData, translateStatus]) || [];
+        const [searchParams, setSearchParams] = useSearchParams();
         return (
             <div className="posts-table-container">
                 <Form
@@ -124,6 +114,7 @@ const PostsTable: FC<TableProps> = memo(
                     <Filters filtersList={filtersList} />
                 </Form>
                 <Table
+                    className="posts-table"
                     columns={columns}
                     dataSource={data}
                     pagination={{
@@ -138,6 +129,20 @@ const PostsTable: FC<TableProps> = memo(
                         onChange: (page, pageSize) => {
                             onPaginate(page || 1, pageSize || 10);
                         },
+                    }}
+                    onRow={record => {
+                        return {
+                            onClick: e => {
+                                e.stopPropagation();
+                                const path = generatePath(
+                                    routeConstants.POST_DETAILS,
+                                    {
+                                        uid: record.uid,
+                                    }
+                                );
+                                navigate(path);
+                            },
+                        };
                     }}
                 />
             </div>

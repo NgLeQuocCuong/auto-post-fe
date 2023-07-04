@@ -1,7 +1,7 @@
 import 'views/AllPosts/index.scss';
 import { Button, Tag, Tooltip } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import routeConstants from 'route/routeConstant';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import PostsTable from 'views/PostsTable/PostsTable';
@@ -112,13 +112,12 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
         {
             title: 'Hành động',
             key: 'action',
-            render: (text, record, index) => (
+            render: (text, record) => (
                 <>
                     <Tooltip placement="top" title="Xem chi tiết">
                         <Button
                             type="text"
                             onClick={() => {
-                                console.log('index', index);
                                 const path = generatePath(
                                     routeConstants.MANAGEMENT_DETAIL,
                                     {

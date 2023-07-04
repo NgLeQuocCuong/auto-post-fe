@@ -1,11 +1,12 @@
 import { memo, useCallback, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
-// import { getToken } from 'reducers/token/function';
 // import routeConstants from 'route/routeConstant';
 import postService from 'services/postService';
 import Inner from 'views/PostManagementOfPost/Inner';
 import { useParams } from 'react-router-dom';
+import { Spin } from 'antd';
 const Wrapper = memo(() => {
+    const [isLoading, setIsLoading] = useState(false);
     //Create variable to store table data
     const [tableData, setTableData] = useState({
         content: [],
@@ -18,7 +19,9 @@ const Wrapper = memo(() => {
     const { uid } = useParams();
     const handleViewPostManagement = useCallback(
         async data => {
+            setIsLoading(true);
             const response = await postService.filterPostManagement(data, uid);
+            setIsLoading(false);
             if (response.isSuccess) {
                 setTableData(response.data);
             }
@@ -27,11 +30,13 @@ const Wrapper = memo(() => {
         [uid]
     );
     return (
-        <Inner
-            uid={uid}
-            handleViewPostManagement={handleViewPostManagement}
-            tableData={tableData}
-        />
+        <Spin spinning={isLoading} size="large">
+            <Inner
+                uid={uid}
+                handleViewPostManagement={handleViewPostManagement}
+                tableData={tableData}
+            />
+        </Spin>
     );
 });
 

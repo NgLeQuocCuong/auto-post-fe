@@ -2,7 +2,9 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import postService from 'services/postService';
 import Inner from 'views/AllPosts/Inner';
 import { useSearchParams } from 'react-router-dom';
+import { Spin } from 'antd';
 const Wrapper = memo(() => {
+    const [isLoading, setIsLoading] = useState(false);
     //Create variable to store table data
     const [tableData, setTableData] = useState({
         content: [],
@@ -15,7 +17,9 @@ const Wrapper = memo(() => {
     //Create function to handle filter
 
     const handleAllPosts = useCallback(async data => {
+        setIsLoading(true);
         const response = await postService.filterPosts(data);
+        setIsLoading(false);
         if (response.isSuccess) {
             setTableData(response.data);
         }
@@ -28,7 +32,10 @@ const Wrapper = memo(() => {
         const params = {
             page: searchParams.get('page') || undefined,
             pageSize: searchParams.get('pageSize') || undefined,
-            search: searchParams.get('search') || undefined,
+            search:
+                searchParams.get('search') === 'undefined'
+                    ? undefined
+                    : searchParams.get('search'),
             title: searchParams.get('title') || undefined,
             postType: searchParams.get('postType') || undefined,
             sortType: searchParams.get('sortType') || undefined,
@@ -44,18 +51,22 @@ const Wrapper = memo(() => {
         handleAllPosts(params);
     }, [handleAllPosts, searchParams]);
     const handleRemovePost = useCallback(async uid => {
+        setIsLoading(true);
         const response = await postService.removePost(uid);
+        setIsLoading(false);
         if (response.isSuccess) {
             window.location.reload();
         }
         return response;
     }, []);
     return (
-        <Inner
-            handleAllPosts={handleAllPosts}
-            handleRemovePost={handleRemovePost}
-            tableData={tableData}
-        />
+        <Spin spinning={isLoading} size="large">
+            <Inner
+                handleAllPosts={handleAllPosts}
+                handleRemovePost={handleRemovePost}
+                tableData={tableData}
+            />
+        </Spin>
     );
 });
 
