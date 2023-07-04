@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, memo, useState } from 'react';
-import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import LogoSmall from 'components/CommonInput/icons/LogoSmall';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -8,35 +8,22 @@ import Logout from 'layouts/Web/Logout';
 import { Image } from 'antd';
 import './index.scss';
 import { useUserProfile } from 'reducers/profile/function';
+import PostPage from 'views/PostPage';
 
 const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
     const user = useUserProfile();
-    const [showIframe, setShowIframe] = useState(false);
+    const [item, setItem] = useState(false);
+    const handleCreatePost = () => {
+        setItem(() => !item);
+    };
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
     const location = useLocation();
-    const isALL_POSTS =
-        location.pathname === routeConstants.ALL_POSTS ||
-        location.pathname === routeConstants.POST_MANAGEMENT_ALL ||
-        location.pathname === routeConstants.POST_MANAGEMENT_OF_POST ||
-        location.pathname === routeConstants.MANAGEMENT_DETAIL ||
-        location.pathname === routeConstants.POST_DETAILS;
-    const isHOME_PAGE = location.pathname === routeConstants.HOME_PAGE;
-    const isUSER =
-        location.pathname === routeConstants.USER_SETTINGS ||
-        location.pathname === routeConstants.USER_UPDATE ||
-        location.pathname === routeConstants.CHANGE_PASSWORD;
-    const handleOpen = () => {
-        setShowIframe(true);
-        document.body.classList.add('modal-open');
-    };
-
-    const handleClose = () => {
-        setShowIframe(false);
-        document.body.classList.remove('modal-open');
-    };
+    const is_all_posts = location.pathname === '/posts';
+    const is_home_page = location.pathname === routeConstants.HOME_PAGE;
+    const is_user = location.pathname === '/user';
 
     return (
         <div>
@@ -52,7 +39,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                             <NavLink
                                 to={routeConstants.HOME_PAGE}
                                 className={`header__wrap--link ${
-                                    isHOME_PAGE ? 'active' : ''
+                                    is_home_page ? 'active' : ''
                                 }`}
                             >
                                 TRANG CHỦ
@@ -62,7 +49,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                             <NavLink
                                 to={routeConstants.ALL_POSTS}
                                 className={`header__wrap--link ${
-                                    isALL_POSTS ? 'active' : ''
+                                    is_all_posts ? 'active' : ''
                                 }`}
                             >
                                 BÀI ĐĂNG
@@ -73,7 +60,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                         <Button
                             icon={<PlusOutlined />}
                             className="header_wrap--buttonn"
-                            onClick={handleOpen}
+                            onClick={handleCreatePost}
                         >
                             Bài viết mới
                         </Button>
@@ -83,7 +70,9 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                             }`}
                         >
                             <div
-                                className={`dropdown ${isUSER ? 'active' : ''}`}
+                                className={`dropdown ${
+                                    is_user ? 'active' : ''
+                                }`}
                                 onClick={toggleDropdown}
                             >
                                 <Image
@@ -117,24 +106,9 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                         </div>
                     </div>
                 </div>
+                {item && <PostPage />}
             </header>
-            {showIframe && (
-                <div className="pop-up">
-                    <div className="pop-up--overlay" />
-                    <div className="pop-up--frame-container">
-                        <button
-                            className="pop-up--close-button"
-                            onClick={handleClose}
-                        >
-                            <CloseOutlined className="pop-up--icon" />
-                        </button>
-                        <iframe
-                            title="Post-page"
-                            src={`${window.location.origin}/#${routeConstants.POST_PAGE}`}
-                        ></iframe>
-                    </div>
-                </div>
-            )}
+
             {children}
         </div>
     );
