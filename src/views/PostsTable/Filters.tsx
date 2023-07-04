@@ -5,10 +5,10 @@ import './index.scss';
 import { useSearchParams } from 'react-router-dom';
 interface FilterProps {
     filtersList?: {
-        title: string | 'Lọc';
+        title: string;
         name: string;
         options?: { label: string; value: string | boolean | number }[];
-        type?: 'text' | 'checkbox' | 'radio' | 'dateRange';
+        type?: 'text' | 'checkbox' | 'radio' | 'dateRange' | 'tagSelect';
     }[];
 }
 const Filters: FC<FilterProps> = memo(({ filtersList }) => {
@@ -22,7 +22,7 @@ const Filters: FC<FilterProps> = memo(({ filtersList }) => {
                             <Form.Item
                                 key={item.name}
                                 name={item.name}
-                                initialValue={''}
+                                initialValue={searchParams.get(item.name) || ''}
                             >
                                 <Input
                                     type="text"
@@ -39,6 +39,7 @@ const Filters: FC<FilterProps> = memo(({ filtersList }) => {
                                 name={item.name}
                                 options={item.options}
                                 type="checkbox"
+                                defaultValue={searchParams.getAll(item.name)}
                             />
                         );
                     case 'radio':
@@ -60,6 +61,24 @@ const Filters: FC<FilterProps> = memo(({ filtersList }) => {
                                 type="dateRange"
                             />
                         );
+                    case 'tagSelect':
+                        return (
+                            <Dropdown
+                                key={item.name}
+                                title={item.title}
+                                name={item.name}
+                                type="tagSelect"
+                                handleTagSelectChange={tags => {
+                                    let paramString = '';
+                                    tags.forEach(tag => {
+                                        //Split by comma
+                                        paramString += `${tag},`;
+                                    });
+                                    searchParams.set(item.name, paramString);
+                                }}
+                            />
+                        );
+
                     default:
                         return <></>;
                 }

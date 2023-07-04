@@ -34,11 +34,11 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             type: 'radio',
             options: [
                 {
-                    label: 'Cũ nhất',
+                    label: 'Mới nhất',
                     value: 'desc',
                 },
                 {
-                    label: 'Mới nhất',
+                    label: 'Cũ nhất',
                     value: 'asc',
                 },
             ],
@@ -47,6 +47,11 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             title: 'Ngày đăng',
             name: 'postDate',
             type: 'dateRange',
+        },
+        {
+            title: 'Loại bài viết',
+            name: 'postType',
+            type: 'tagSelect',
         },
     ];
     const columns = [
@@ -65,10 +70,9 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             key: 'postType',
             dataIndex: 'postType',
             render: postType => {
-                const tags = postType.replace(/[[\]"]/g, '').split(',');
-                return tags.map((tag, index) => (
+                return postType?.map((tag, index) => (
                     <Tag key={index} color="geekblue">
-                        {tag.trim()}
+                        {tag.trim().toUpperCase()}
                     </Tag>
                 ));
             },
@@ -159,6 +163,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                         Object.keys(filterValues).forEach(key => {
                             if (
                                 filterValues[key] === undefined ||
+                                filterValues.length === 0 ||
                                 filterValues[key] === '' ||
                                 !filterValues[key]
                             ) {
@@ -174,6 +179,10 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                                         key
                                     ].format('YYYY-MM-DD')}T23:59:59`;
                                 }
+                                if (key === 'postType') {
+                                    filterValues[key] =
+                                        filterValues[key].join(',');
+                                }
                                 searchParams.set(key, filterValues[key]);
                             }
                         });
@@ -184,7 +193,6 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                         searchParams.set('page', page);
                         searchParams.set('pageSize', pageSize);
                         setSearchParams(searchParams);
-                        handleFinish(searchParams);
                     }}
                 />
             </div>

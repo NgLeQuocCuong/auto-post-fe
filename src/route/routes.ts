@@ -73,7 +73,7 @@ const routes: Array<Route> = [
         name: 'All Posts',
         path: routeConstants.ALL_POSTS,
         Component: commonLoadable(() => import('views/AllPosts')),
-        //authorization: true,
+        authorization: true,
     },
     {
         name: 'Post Management Of Post',

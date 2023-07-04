@@ -9,16 +9,25 @@ import {
 import ArrowIcon from 'components/CommonInput/icons/ArrowIcon';
 import dayjs, { Dayjs } from 'dayjs';
 import { FC, memo, useCallback, useMemo, useState } from 'react';
-
+import TagSelect from './TagSelect';
 interface DropdownProps {
     title: string;
     name: string;
     options?: { label: string; value: string | boolean | number }[]; //List of checkboxes/radios
-    type?: 'checkbox' | 'radio' | 'dateRange';
+    type?: 'checkbox' | 'radio' | 'dateRange' | 'tagSelect';
+    defaultValue?: (string | number)[];
+    handleTagSelectChange?: (tags: string[]) => void;
 }
 
 const Dropdown: FC<DropdownProps> = memo(
-    ({ title, name, options, type = 'checkbox' }) => {
+    ({
+        title,
+        name,
+        options,
+        type = 'checkbox',
+        defaultValue,
+        handleTagSelectChange,
+    }) => {
         const [open, setOpen] = useState(false);
         const handleOpenChange = useCallback((flag: boolean) => {
             setOpen(flag);
@@ -32,7 +41,10 @@ const Dropdown: FC<DropdownProps> = memo(
                     case 'checkbox':
                         return (
                             <Form.Item name={name} initialValue={undefined}>
-                                <Checkbox.Group options={options} />
+                                <Checkbox.Group
+                                    options={options}
+                                    defaultValue={defaultValue}
+                                />
                             </Form.Item>
                         );
                     case 'radio':
@@ -62,11 +74,21 @@ const Dropdown: FC<DropdownProps> = memo(
                                 </Form.Item>
                             </>
                         );
+                    case 'tagSelect':
+                        return (
+                            <Form.Item name={name}>
+                                <TagSelect
+                                    onChange={
+                                        handleTagSelectChange ?? (() => {})
+                                    }
+                                />
+                            </Form.Item>
+                        );
                     default:
                         return <></>;
                 }
             },
-            [name, options, disabledDate]
+            [name, options, disabledDate, defaultValue, handleTagSelectChange]
         );
         const items: MenuProps['items'] = useMemo(
             () => [

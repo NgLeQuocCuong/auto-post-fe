@@ -1,14 +1,11 @@
 import 'views/AllPosts/index.scss';
-import { Button, Tag, Tooltip } from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
+import { Button, Tag } from 'antd';
 import { memo, useCallback, useState } from 'react';
-import routeConstants from 'route/routeConstant';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import PostsTable from 'views/PostsTable/PostsTable';
 import WebLayout from 'layouts/Web/WebLayout';
-import { generatePath, useNavigate, useSearchParams } from 'react-router-dom';
-const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
-    const navigate = useNavigate();
+import { useSearchParams } from 'react-router-dom';
+const Inner = memo(({ handleViewPostManagement, tableData }) => {
     const [isFilterShown, setIsFilterShown] = useState(false);
     const toggleFilters = useCallback(() => {
         setIsFilterShown(!isFilterShown);
@@ -38,6 +35,10 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                 {
                     label: 'Linkedin',
                     value: 'LINKEDIN',
+                },
+                {
+                    label: 'Twitter',
+                    value: 'TWITTER',
                 },
             ],
         },
@@ -109,30 +110,6 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                 }
             },
         },
-        {
-            title: 'Hành động',
-            key: 'action',
-            render: (text, record) => (
-                <>
-                    <Tooltip placement="top" title="Xem chi tiết">
-                        <Button
-                            type="text"
-                            onClick={() => {
-                                const path = generatePath(
-                                    routeConstants.MANAGEMENT_DETAIL,
-                                    {
-                                        uid: record.uid,
-                                    }
-                                );
-                                navigate(path);
-                            }}
-                        >
-                            <EyeOutlined />
-                        </Button>
-                    </Tooltip>
-                </>
-            ),
-        },
     ];
     return (
         <WebLayout>
@@ -141,7 +118,7 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                     <div className="all-posts__header__title">
                         Lịch sử đăng của bài viết
                         <span className="posts-number">
-                            ({tableData.totalRows || 0})
+                            ({tableData?.totalRows ?? 0})
                         </span>
                     </div>
                     <Button
@@ -156,13 +133,12 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                 </div>
 
                 <PostsTable
-                    uid={uid}
                     columns={columns}
-                    content={tableData.content}
-                    currentPage={tableData.currentPage}
-                    pageSize={tableData.pageSize}
-                    totalRows={tableData.totalRows}
-                    totalPages={tableData.totalPages}
+                    content={tableData?.content}
+                    currentPage={tableData?.currentPage}
+                    pageSize={tableData?.pageSize}
+                    totalRows={tableData?.totalRows}
+                    totalPages={tableData?.totalPages}
                     filtersList={filtersList}
                     isFilterShown={isFilterShown}
                     onFilters={filterValues => {
@@ -170,6 +146,7 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                         Object.keys(filterValues).forEach(key => {
                             if (
                                 filterValues[key] === undefined ||
+                                filterValues.length === 0 ||
                                 filterValues[key] === '' ||
                                 !filterValues[key]
                             ) {
@@ -185,6 +162,14 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                                         key
                                     ].format('YYYY-MM-DD')}T23:59:59`;
                                 }
+                                if (
+                                    key === 'autoPublish' ||
+                                    key === 'status' ||
+                                    key === 'platform'
+                                ) {
+                                    filterValues[key] =
+                                        filterValues[key].join(',');
+                                }
                                 searchParams.set(key, filterValues[key]);
                             }
                         });
@@ -195,7 +180,6 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                         searchParams.set('page', page);
                         searchParams.set('pageSize', pageSize);
                         setSearchParams(searchParams);
-                        handleFinish(searchParams);
                     }}
                 />
             </div>
