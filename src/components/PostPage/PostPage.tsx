@@ -1,16 +1,13 @@
-import Content from 'components/PostPage/components/Content';
-import { Context, IContext } from 'components/PostPage/components/Context';
-import DropButton from 'components/PostPage/components/DropButton';
-import CheckList from 'components/PostPage/components/DropDown';
-import Social from 'components/PostPage/components/Social';
-import Title from 'components/PostPage/components/Title';
-import UploadImage from 'components/PostPage/components/UploadImage';
-import Wrapper from 'components/PostPage/components/Wrapper';
 import { FC, memo, useCallback, useMemo, useState } from 'react';
 import './style.scss';
+import './OverWrite.scss';
+import { Button, Modal } from 'antd';
+import PostForm from 'components/PostPage/components/PostForm';
+import UploadImage from 'components/PostPage/components/UploadImage';
+import { IContext, Context } from 'components/PostPage/components/Context';
 
 interface Props {
-    handlePost: any;
+    handlePost: any,
 }
 
 interface Option {
@@ -20,32 +17,54 @@ interface Option {
 }
 
 const PostPage: FC<Props> = memo(({ handlePost }) => {
+    const [display, setDisplay] = useState(true);
+    const handleModalClose = () => {
+        setDisplay(false);
+    };
+
     const [data, setData] = useState<IContext['data']>({
+        title: '',
         value: '',
-        postType: '',
+        loading: false,
+        postType: [],
         images: [],
         groupUID: [],
     });
 
-    const setValue = useCallback(
-        (newValue: string) => {
-            setData(prevData => ({
-                ...prevData,
-                value: newValue,
-            }));
-        },
-        [setData]
-    );
+    const setTitle = useCallback((newTitle: string) => {
+        setData(prevData => ({
+            ...prevData,
+            title: newTitle,
+        }));
+    }, []);
 
-    const setPostType = useCallback(
-        (newPostType: string) => {
-            setData(prevData => ({
-                ...prevData,
-                postType: newPostType,
-            }));
-        },
-        [setData]
-    );
+    const setValue = useCallback((newValue: string) => {
+        setData(prevData => ({
+            ...prevData,
+            value: newValue,
+        }));
+    }, []);
+
+    const setLoading = useCallback((isLoading: boolean) => {
+        setData(prevData => ({
+            ...prevData,
+            loading: isLoading,
+        }));
+    }, []);
+
+    const setPostType = useCallback((newPostType: string) => {
+        setData(prevData => ({
+            ...prevData,
+            postType: [...prevData.postType, newPostType],
+        }));
+    }, []);
+
+    const removePostType = useCallback((removePostType: string) => {
+        setData(prevData => ({
+            ...prevData,
+            postType: prevData.postType.filter(type => type !== removePostType),
+        }));
+    }, []);
 
     const setGroupUID = useCallback((newGroupUID: Option) => {
         setData(prevData => ({
@@ -54,57 +73,91 @@ const PostPage: FC<Props> = memo(({ handlePost }) => {
         }));
     }, []);
 
-    const removeGroupUID = useCallback(
-        (removeUID: Option) => {
-            setData(prevData => ({
-                ...prevData,
-                groupUID: prevData.groupUID.filter(type => type !== removeUID),
-            }));
-        },
-        [setData]
-    );
+    const removeGroupUID = useCallback((removeUID: Option) => {
+        setData(prevData => ({
+            ...prevData,
+            groupUID: prevData.groupUID.filter(type => type !== removeUID),
+        }));
+    }, []);
 
-    const setImages = useCallback(
-        (newUID: string) => {
-            setData(prevData => ({
-                ...prevData,
-                images: [...prevData.images, newUID],
-            }));
-        },
-        [setData]
-    );
+    const setImages = useCallback((newUID: string) => {
+        setData(prevData => ({
+            ...prevData,
+            images: [...prevData.images, newUID],
+        }));
+    }, []);
+
+    const resetForm = useCallback(() => {
+        setData({
+            title: '',
+            value: '',
+            loading: false,
+            postType: [],
+            images: [],
+            groupUID: [],
+        });
+    }, []);
 
     const contextValue = useMemo(
         () => ({
             data,
+            setTitle,
             setValue,
-            setPostType,
-            removeGroupUID,
+            setLoading,
             setImages,
+            setPostType,
+            removePostType,
             setGroupUID,
+            removeGroupUID,
+            resetForm,
         }),
-        [data, setValue, setPostType, removeGroupUID, setImages, setGroupUID]
+        [
+            data,
+            setTitle,
+            setValue,
+            setLoading,
+            setImages,
+            setPostType,
+            removePostType,
+            setGroupUID,
+            removeGroupUID,
+            resetForm,
+        ]
     );
+
+    const handlePostClick = useCallback(async () => {
+        setLoading(true);
+        await handlePost(data);
+        resetForm();
+        handleModalClose();
+    }, [data, handlePost, resetForm, setLoading]);
 
     return (
         <Context.Provider value={contextValue}>
-            <Wrapper>
-                <div className="nav-bar">
-                    <Title
-                        title="tạo bài viết mới"
-                        subTitle="Bạn muốn đăng gì nào?"
-                    />
-                    <Social />
+            <Modal
+                open={display}
+                title="Bài viết mới"
+                onCancel={handleModalClose}
+                footer={null}
+                className="modal-wrapper"
+                width={900}
+            >
+                <PostForm />
+                <div>
+                    <label className="image-label">Hình ảnh</label>
+                    <UploadImage />
                 </div>
-                <Content />
-                <UploadImage />
-                <CheckList />
-                <DropButton
-                    handlePost={handlePost}
-                    contentBtn="Đăng bài viết"
-                    haveMenu={true}
-                />
-            </Wrapper>
+                <div className="button-post">
+                    <Button onClick={handleModalClose}>Hủy</Button>
+                    <Button
+                        type="primary"
+                        onClick={handlePostClick}
+                        disabled={data.loading}
+                    >
+                        {data.loading ? 'Đang tạo ...' : 'Tạo bài viết'}
+                    </Button>
+                </div>
+            </Modal>
         </Context.Provider>
     );
 });
