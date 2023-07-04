@@ -2,7 +2,7 @@ import { Button, Form, Space, Typography, Row, Col } from 'antd';
 import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
 import WebLayout from 'layouts/Web/WebLayout';
-import { memo, useCallback, useRef, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import FileInputAvatar from 'components/Profile/components/FileInputAvatar';
@@ -17,35 +17,30 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
             message: 'Không được chứa số',
         },
     ];
-    // TODO: Username maybe used in the future
-    // const usernameTooltip = 'Tên đăng nhập tối thiểu 8 ký tự gồm chữ hoặc số';
-    // const rulesUsername = [
-    //     {
-    //         required: true,
-    //         message: 'Không được để trống',
-    //     },
-    //     {
-    //         pattern: /^[a-zA-Z\d]{8,}$/,
-    //         message: 'Không hợp lệ',
-    //     },
-    // ];
-    const [imgurl, setImgurl] = useState('');
-    const handleOnChange = useCallback(
-        event => {
-            setImgurl(event.target.url);
-            console.log(imgurl);
+    const [inputFile, setInputFile] = useState();
+    const handleImgChange = useCallback(
+        value => {
+            setInputFile(value);
         },
-        [imgurl]
+        [setInputFile]
     );
+
     const onFinish = values => {
         delete values.email;
-        handleUserUpdate(values);
+        delete values.avatar;
+        values.firstName = values.firstName.replace(/\s\s+/g, ' ');
+        values.lastName = values.lastName.replace(/\s\s+/g, ' ');
+        const body = {
+            avatar: inputFile,
+            data: values,
+        };
+        handleUserUpdate(body);
     };
     const onFinishFailed = () => {
         Message.sendError('Vui lòng kiểm tra lại thông tin.');
     };
     return (
-        <WebLayout title="User Update">
+        <WebLayout>
             <Form
                 form={form}
                 layout="vertical"
@@ -55,18 +50,16 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
             >
                 <Row className="user-update-form">
                     <Col span={6}>
-                        {/* <Avatar url={userInfo.avatar} /> */}
-                        <FileInputAvatar
-                            url={userInfo.avatar}
-                            onChange={handleOnChange}
-                        />
+                        <Form.Item name="avatar">
+                            <FileInputAvatar
+                                imgSrc={userInfo.avatar}
+                                imgChange={handleImgChange}
+                            />
+                        </Form.Item>
                     </Col>
                     <Col span={18}>
                         <Form.Item>
-                            <Typography.Text
-                                component="div"
-                                className="user-update-form__title"
-                            >
+                            <Typography.Text className="user-update-form__title">
                                 Chỉnh sửa thông tin
                             </Typography.Text>
                         </Form.Item>
@@ -91,16 +84,6 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                                 />
                             </Form.Item>
                         </Space>
-                        {/* TODO: Username may be used in the future*/}
-                        {/* <Form.Item
-                    name="username"
-                    label="Tên đăng nhập"
-                    className="user-update-form__label--fw-600"
-                    tooltip={usernameTooltip}
-                    rules={rulesUsername}
-                >
-                    <TextInput size="large" placeholder="Nhập tên đăng nhập" />
-                </Form.Item> */}
                         <Form.Item
                             name="email"
                             label="Email"

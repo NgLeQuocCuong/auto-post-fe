@@ -1,6 +1,7 @@
 @import 'scss/global';
 
 .input-avatar-wrapper {
+    filter: brightness(100%);
     &__avatar {
         &--round {
             border-radius: 50%;
@@ -15,18 +16,16 @@
 
     .overlay-text {
         opacity: 0;
+        filter: brightness(100%);
         color: $color--light;
         text-shadow: 2px 2px $color--black;
         position: absolute;
         transition: 0.2s;
     }
-    &:has(.anticon-loading) {
-        .overlay-text {
-            opacity: 1;
-            transition: 0.2s;
-        }
-    }
+    &:has(.anticon-loading),
     &:hover {
+        filter: brightness(90%);
+        transition: 0.2s;
         .overlay-text {
             opacity: 1;
             transition: 0.2s;
