@@ -1,5 +1,5 @@
 import { memo, useCallback, useMemo } from 'react';
-import userService from 'services/userService';
+import postService from 'services/postService';
 import Inner from 'views/PostPage/Inner';
 import showdown from 'showdown';
 import Message from 'components/Message';
@@ -25,10 +25,10 @@ const Wrapper = memo(() => {
                     })
                 ),
             };
-            const response = await userService.newpost(postData);
+            const response = await postService.newPost(postData);
             if (response.isSuccess) {
                 response.data.forEach(async item => {
-                    await userService.postNow(item.uid);
+                    await postService.postNow(item.uid);
                     Message.sendSuccess('Đăng bài thành công!!!');
                 });
             }

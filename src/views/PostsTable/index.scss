@@ -1,6 +1,9 @@
 @import 'scss/global.scss';
 
 .posts-table-container {
+    .ant-table-wrapper {
+        margin-top: 16px;
+    }
     *[class^='ant-'] {
         font-family: $font-inter;
     }
