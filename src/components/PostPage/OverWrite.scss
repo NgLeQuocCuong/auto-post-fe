@@ -1,0 +1,24 @@
+@import 'scss/global.scss';
+
+.ant-modal .ant-modal-title {
+    font-size: 24px;
+    color: $color--text5;
+}
+
+.ant-form-vertical .ant-form-item-label > label {
+    font-weight: 600;
+}
+
+.button-post {
+    .ant-btn-default {
+        margin-right: 20px;
+    }
+}
+
+.ant-input {
+    font-family: $font-inter;
+}
+
+.ant-tag .ant-tag-close-icon {
+    color: white;
+}

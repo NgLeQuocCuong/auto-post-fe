@@ -32,12 +32,6 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
-        name: 'POST_DETAILS',
-        path: routeConstants.POST_DETAILS,
-        Component: commonLoadable(() => import('views/ViewPageDetails')),
-        authorization: true,
-    },
-    {
         name: 'Register',
         path: routeConstants.REGISTER,
         Component: commonLoadable(() => import('views/Register')),
@@ -63,12 +57,6 @@ const routes: Array<Route> = [
         name: 'Logout',
         path: routeConstants.LOGOUT,
         Component: commonLoadable(() => import('views/Logout')),
-    },
-    {
-        name: 'Management Detail',
-        path: routeConstants.MANAGEMENT_DETAIL,
-        Component: commonLoadable(() => import('views/ManagementDetail')),
-        authorization: true,
     },
     {
         name: 'Forgot Password',

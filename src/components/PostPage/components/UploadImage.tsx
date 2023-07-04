@@ -1,11 +1,11 @@
+import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
-import usePostPageContext from 'components/PostPage/components/Context';
-import { BodyType } from 'modules/apis';
-import React, { useState } from 'react';
 import userService from 'services/userService';
+import { BodyType } from 'modules/apis';
+import usePostPageContext from 'components/PostPage/components/Context';
 
 const getBase64 = (file: RcFile): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -43,7 +43,11 @@ const App: React.FC = () => {
         if (newFileList) {
             setFileList(newFileList);
             const lastFile = newFileList[newFileList.length - 1];
-            if (lastFile.percent === 100 && lastFile.status === 'done') {
+            if (
+                lastFile &&
+                lastFile.percent === 100 &&
+                lastFile.status === 'done'
+            ) {
                 const body = {
                     file: lastFile.originFileObj,
                 };
@@ -66,9 +70,8 @@ const App: React.FC = () => {
     );
     return (
         <div className="uploadwrapper">
-            {/* <p className='uload'></p> */}
             <Upload
-                action="http://192.168.30.109:8000/api/images/upload" //link server can change
+                action="http://192.168.30.109:8000/api/images/upload"
                 listType="picture-card"
                 fileList={fileList}
                 method="POST"
