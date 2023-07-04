@@ -35,7 +35,7 @@ interface IApiOptions {
 }
 
 class ApiBase {
-    private _baseUrl = '26.180.111.11:8000/api';
+    private _baseUrl = 'http://192.168.30.109:8000/api';
 
     get(
         url: string,
