@@ -1,13 +1,13 @@
-import { Language } from 'translation/enums';
-import { memo, FC, PropsWithChildren, useEffect } from 'react';
+import { FC, PropsWithChildren, memo, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { localeActions } from 'reducers/locale';
+import { getLanguage } from 'reducers/locale/function';
 import {
     defaultLanguage,
     defaultNamespace,
     resources,
 } from 'translation/config';
-import { useDispatch } from 'react-redux';
-import { localeActions } from 'reducers/locale';
-import { getLanguage } from 'reducers/locale/function';
+import { Language } from 'translation/enums';
 
 interface IProps {
     lang?: TranslationLanguage;
