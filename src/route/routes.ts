@@ -32,12 +32,6 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Login')),
     },
     {
-        name: 'POST_DETAILS',
-        path: routeConstants.POST_DETAILS,
-        Component: commonLoadable(() => import('views/ViewPageDetails')),
-        authorization: true,
-    },
-    {
         name: 'Register',
         path: routeConstants.REGISTER,
         Component: commonLoadable(() => import('views/Register')),
