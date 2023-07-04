@@ -94,12 +94,6 @@ const routes: Array<Route> = [
         authorization: true,
     },
     {
-        name: 'Details Post Page',
-        path: routeConstants.DETAILS_POSTS,
-        Component: commonLoadable(() => import('views/DetailsPost')),
-        authorization: true,
-    },
-    {
         name: 'Home Page',
         path: routeConstants.HOME_PAGE,
         Component: commonLoadable(() => import('views/HomePage')),

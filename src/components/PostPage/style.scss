@@ -1,8 +1,7 @@
 @import 'scss/global';
 
 .wrapper {
-    background-color: $color-gray-light;
-    padding-top: 24px;
+    padding: 120px 0;
     &__content {
         width: 90%;
         height: 950px;
@@ -129,5 +128,45 @@
 
 //upload image
 .uploadwrapper {
-    margin: 0 35px;
+    margin: 10px 0;
+}
+/////////////////////////////////////////////////////////////////////////////////////
+.modal-wrapper {
+    width: 800px;
+    max-height: 700px;
+    overflow-y: auto;
+}
+.modal-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal-wrapper::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $color--light;
+}
+
+.modal-wrapper::-webkit-scrollbar-thumb {
+    background-color: $color--text-disabled;
+    border-radius: 10px;
+}
+.button-post {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    &:first-child {
+        margin-left: 20px;
+    }
+}
+.image-label {
+    font-weight: 600;
+    font-size: 14px;
+}
+.all-tags {
+    margin-top: 10px;
+}
+.category-tag {
+    background-color: $color-button--primary;
+    color: white;
+    padding: 3px 7px;
+    margin-bottom: 5px;
 }

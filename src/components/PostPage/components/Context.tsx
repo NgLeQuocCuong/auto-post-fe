@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { useContext, createContext } from 'react';
 
 interface Option {
     name: string;
@@ -7,31 +7,42 @@ interface Option {
 }
 export interface IContext {
     data: {
+        title: string;
         value: string;
-        postType: string;
+        loading: boolean;
+        postType: string[];
         images: string[];
         groupUID: Option[];
-        // time:
     };
+    setTitle: any;
     setValue: any;
-    setPostType: any;
+    setLoading: any;
     setImages: any;
+    setPostType: any;
+    removePostType: any;
     setGroupUID: any;
     removeGroupUID: any;
+    resetForm: any;
 }
 
 export const Context = createContext<IContext>({
     data: {
+        title: '',
         value: '',
-        postType: '',
+        loading: false,
+        postType: [],
         images: [],
         groupUID: [],
     },
+    setTitle: () => {},
     setValue: () => {},
-    setPostType: () => {},
+    setLoading: () => {},
     setImages: () => {},
+    setPostType: () => {},
+    removePostType: () => {},
     setGroupUID: () => {},
     removeGroupUID: () => {},
+    resetForm: () => {},
 });
 
 const usePostPageContext = () => useContext(Context);
