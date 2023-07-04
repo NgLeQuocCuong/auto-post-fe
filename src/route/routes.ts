@@ -65,12 +65,6 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Logout')),
     },
     {
-        name: 'Management Detail',
-        path: routeConstants.MANAGEMENT_DETAIL,
-        Component: commonLoadable(() => import('views/ManagementDetail')),
-        authorization: true,
-    },
-    {
         name: 'Forgot Password',
         path: routeConstants.FORGOT_PASSWORD,
         Component: commonLoadable(() => import('views/ForgotPassword')),
@@ -85,7 +79,7 @@ const routes: Array<Route> = [
         name: 'All Posts',
         path: routeConstants.ALL_POSTS,
         Component: commonLoadable(() => import('views/AllPosts')),
-        authorization: true,
+        //authorization: true,
     },
     {
         name: 'Post Management Of Post',
