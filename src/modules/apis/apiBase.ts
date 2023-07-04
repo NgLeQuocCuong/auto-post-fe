@@ -35,7 +35,7 @@ interface IApiOptions {
 }
 
 class ApiBase {
-    private _baseUrl = process.env.REACT_APP_API_URL + '/api';
+    private _baseUrl = '26.180.111.11:8000/api';
 
     get(
         url: string,

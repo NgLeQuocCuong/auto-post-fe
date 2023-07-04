@@ -19,10 +19,14 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
     const location = useLocation();
     const isALL_POSTS =
         location.pathname === routeConstants.ALL_POSTS ||
-        location.pathname === routeConstants.POST_MANAGEMENT_ALL;
+        location.pathname === routeConstants.POST_MANAGEMENT_ALL ||
+        location.pathname === routeConstants.POST_MANAGEMENT_OF_POST ||
+        location.pathname === routeConstants.MANAGEMENT_DETAIL ||
+        location.pathname === routeConstants.POST_DETAILS;
     const isHOME_PAGE = location.pathname === routeConstants.HOME_PAGE;
     const isUSER =
         location.pathname === routeConstants.USER_SETTINGS ||
+        location.pathname === routeConstants.USER_UPDATE ||
         location.pathname === routeConstants.CHANGE_PASSWORD;
     const handleOpen = () => {
         setShowIframe(true);
@@ -125,9 +129,9 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                             <CloseOutlined className="pop-up--icon" />
                         </button>
                         <iframe
-                            src="http://localhost:3000/#/post-page"
-                            title="iframe"
-                        />
+                            title="Post-page"
+                            src={`${window.location.origin}/#${routeConstants.POST_PAGE}`}
+                        ></iframe>
                     </div>
                 </div>
             )}
