@@ -6,27 +6,20 @@ import routeConstants from 'route/routeConstant';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import PostsTable from 'views/PostsTable/PostsTable';
 import WebLayout from 'layouts/Web/WebLayout';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate, useSearchParams } from 'react-router-dom';
 const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
     const toggleFilters = useCallback(() => {
         setIsFilterShown(!isFilterShown);
     }, [isFilterShown]);
-    const [filterParams, setFilterParams] = useState({});
-    const handleFinish = useCallback(values => {
-        //Format date time
-        if (values.minTime) {
-            values.minTime = values.minTime.format('YYYY-MM-DD') + 'T00:00:00';
-        }
-        if (values.maxTime) {
-            values.maxTime = values.maxTime.format('YYYY-MM-DD') + 'T23:59:59';
-        }
-        setFilterParams(values);
-    }, []);
-    useEffect(() => {
-        handleViewPostManagement(filterParams);
-    }, [filterParams, handleViewPostManagement]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const handleFinish = useCallback(
+        values => {
+            handleViewPostManagement(values);
+        },
+        [handleViewPostManagement]
+    );
     const filtersList = [
         {
             title: 'Ngày đăng',
@@ -43,13 +36,13 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                     value: 'FACEBOOK',
                 },
                 {
-                    label: 'Zalo',
-                    value: 'ZALO',
+                    label: 'Linkedin',
+                    value: 'LINKEDIN',
                 },
             ],
         },
         {
-            title: 'Cách đăng',
+            title: 'Hình thức đăng',
             name: 'autoPublish',
             type: 'checkbox',
             options: [
@@ -58,7 +51,7 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                     value: true,
                 },
                 {
-                    label: 'Thủ công',
+                    label: 'Đăng ngay',
                     value: false,
                 },
             ],
@@ -174,26 +167,37 @@ const Inner = memo(({ uid, handleViewPostManagement, tableData }) => {
                     filtersList={filtersList}
                     isFilterShown={isFilterShown}
                     onFilters={filterValues => {
-                        //Remove undefined fields
+                        //Remove undefined values
                         Object.keys(filterValues).forEach(key => {
                             if (
                                 filterValues[key] === undefined ||
+                                filterValues[key] === '' ||
                                 !filterValues[key]
                             ) {
                                 delete filterValues[key];
+                            } else {
+                                if (key === 'minTime') {
+                                    filterValues[key] = `${filterValues[
+                                        key
+                                    ].format('YYYY-MM-DD')}T00:00:00`;
+                                }
+                                if (key === 'maxTime') {
+                                    filterValues[key] = `${filterValues[
+                                        key
+                                    ].format('YYYY-MM-DD')}T23:59:59`;
+                                }
+                                searchParams.set(key, filterValues[key]);
                             }
                         });
-                        handleFinish({
-                            ...filterValues,
-                        });
+                        setSearchParams(searchParams);
+                        handleFinish(searchParams);
                     }}
-                    onPaginate={(page, pageSize) =>
-                        handleFinish({
-                            ...filterParams,
-                            page: page,
-                            pageSize: pageSize,
-                        })
-                    }
+                    onPaginate={(page, pageSize) => {
+                        searchParams.set('page', page);
+                        searchParams.set('pageSize', pageSize);
+                        setSearchParams(searchParams);
+                        handleFinish(searchParams);
+                    }}
                 />
             </div>
         </WebLayout>

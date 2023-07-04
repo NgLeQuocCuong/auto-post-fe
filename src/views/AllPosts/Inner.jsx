@@ -1,13 +1,12 @@
 import {
     DeleteOutlined,
     EditOutlined,
-    EyeOutlined,
     HistoryOutlined,
 } from '@ant-design/icons';
 import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
 import { memo, useCallback, useEffect, useState } from 'react';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate, useSearchParams } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import './index.scss';
 import PostsTable from 'views/PostsTable/PostsTable';
@@ -20,20 +19,13 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const toggleFilters = useCallback(() => {
         setIsFilterShown(!isFilterShown);
     }, [isFilterShown]);
-    const [filterParams, setFilterParams] = useState({});
-    const handleFinish = useCallback(values => {
-        //Format date time
-        if (values.minTime) {
-            values.minTime = values.minTime.format('YYYY-MM-DD') + 'T00:00:00';
-        }
-        if (values.maxTime) {
-            values.maxTime = values.maxTime.format('YYYY-MM-DD') + 'T23:59:59';
-        }
-        setFilterParams(values);
-    }, []);
-    useEffect(() => {
-        handleAllPosts(filterParams);
-    }, [filterParams, handleAllPosts]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const handleFinish = useCallback(
+        values => {
+            handleAllPosts(values);
+        },
+        [handleAllPosts]
+    );
     const filtersList = [
         {
             title: 'Tìm theo tiêu đề',
@@ -41,16 +33,16 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             type: 'text',
         },
         {
-            title: 'Sắp xếp',
+            title: 'Sắp xếp bài đăng',
             name: 'sortType',
-            type: 'checkbox',
+            type: 'radio',
             options: [
                 {
-                    label: 'Mới nhất',
+                    label: 'Cũ nhất',
                     value: 'desc',
                 },
                 {
-                    label: 'Cũ nhất',
+                    label: 'Mới nhất',
                     value: 'asc',
                 },
             ],
@@ -59,33 +51,6 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             title: 'Ngày đăng',
             name: 'postDate',
             type: 'dateRange',
-        },
-        {
-            title: 'Loại bài viết',
-            name: 'postType',
-            type: 'checkbox',
-            options: [
-                {
-                    label: 'Quảng cáo',
-                    value: 'COMMERCIAL',
-                },
-                {
-                    label: 'Báo chí',
-                    value: 'ARTICLE',
-                },
-                {
-                    label: 'Tuyển dụng',
-                    value: 'RECRUITMENT',
-                },
-                {
-                    label: 'Học thuật',
-                    value: 'EDUCATION',
-                },
-                {
-                    label: 'Marketing',
-                    value: 'MARKETING',
-                },
-            ],
         },
     ];
     const columns = [
@@ -103,49 +68,26 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             title: 'Loại bài viết',
             key: 'postType',
             dataIndex: 'postType',
-            render: postType => <Tag color="geekblue">{postType}</Tag>,
+            render: postType => {
+                const tags = postType.replace(/[[\]"]/g, '').split(',');
+                return tags.map((tag, index) => (
+                    <Tag key={index} color="geekblue">
+                        {tag.trim()}
+                    </Tag>
+                ));
+            },
         },
         {
             title: 'Hành động',
             key: 'action',
             render: uid => (
                 <>
-                    <Tooltip placement="top" title="Xem chi tiết">
-                        <Button type="text">
-                            <EyeOutlined
-                                onClick={() => {
-                                    const path = generatePath(
-                                        routeConstants.POST_DETAILS,
-                                        {
-                                            uid: uid.uid,
-                                        }
-                                    );
-                                    navigate(path);
-                                }}
-                            />
-                        </Button>
-                    </Tooltip>
-                    <Tooltip placement="top" title="Sửa bài viết">
-                        <Button
-                            type="text"
-                            onClick={() => {
-                                const path = generatePath(
-                                    routeConstants.POST_DETAILS,
-                                    {
-                                        uid: uid.uid,
-                                    }
-                                );
-                                navigate(path);
-                            }}
-                        >
-                            <EditOutlined />
-                        </Button>
-                    </Tooltip>
                     <Tooltip placement="top" title="Xóa bài viết">
                         <Button
                             type="text"
                             // TODO: Uncomment this when popup is ready
-                            onClick={() =>
+                            onClick={e => {
+                                e.stopPropagation();
                                 Popup.sendConfirm(
                                     'Bạn có chắc chắn muốn xóa bài viết này?',
                                     'Thao tác này không thể hoàn tác!',
@@ -159,8 +101,8 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                                         },
                                         onCancel: () => {},
                                     }
-                                )
-                            }
+                                );
+                            }}
                         >
                             <DeleteOutlined />
                         </Button>
@@ -168,7 +110,8 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                     <Tooltip placement="top" title="Lịch sử đăng">
                         <Button
                             type="text"
-                            onClick={() => {
+                            onClick={e => {
+                                e.stopPropagation();
                                 const path = generatePath(
                                     routeConstants.POST_MANAGEMENT_OF_POST,
                                     {
@@ -216,26 +159,37 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                     filtersList={filtersList}
                     isFilterShown={isFilterShown}
                     onFilters={filterValues => {
-                        //Remove undefined fields
+                        //Remove undefined values
                         Object.keys(filterValues).forEach(key => {
                             if (
                                 filterValues[key] === undefined ||
+                                filterValues[key] === '' ||
                                 !filterValues[key]
                             ) {
                                 delete filterValues[key];
+                            } else {
+                                if (key === 'minTime') {
+                                    filterValues[key] = `${filterValues[
+                                        key
+                                    ].format('YYYY-MM-DD')}T00:00:00`;
+                                }
+                                if (key === 'maxTime') {
+                                    filterValues[key] = `${filterValues[
+                                        key
+                                    ].format('YYYY-MM-DD')}T23:59:59`;
+                                }
+                                searchParams.set(key, filterValues[key]);
                             }
                         });
-                        handleFinish({
-                            ...filterValues,
-                        });
+                        setSearchParams(searchParams);
+                        handleFinish(searchParams);
                     }}
-                    onPaginate={(page, pageSize) =>
-                        handleFinish({
-                            ...filterParams,
-                            page: page,
-                            pageSize: pageSize,
-                        })
-                    }
+                    onPaginate={(page, pageSize) => {
+                        searchParams.set('page', page);
+                        searchParams.set('pageSize', pageSize);
+                        setSearchParams(searchParams);
+                        handleFinish(searchParams);
+                    }}
                 />
             </div>
         </WebLayout>
