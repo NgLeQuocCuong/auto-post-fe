@@ -9,7 +9,6 @@ import { Image } from 'antd';
 import './index.scss';
 import { useUserProfile } from 'reducers/profile/function';
 import PostPage from 'views/PostPage';
-import { displayName } from 'react-quill';
 
 const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
     const user = useUserProfile();
