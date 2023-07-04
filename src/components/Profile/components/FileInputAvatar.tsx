@@ -23,15 +23,13 @@ const FileInputAvatar: FC<Props> = memo(({ imgSrc, imgChange }) => {
         const isJpgOrPng =
             file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
-            Message.sendError('Chỉ được upload file JPG/PNG!');
+            Message.sendError('Ảnh phải là định dạng JPG hoặc PNG!');
         }
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
-            Message.sendError('Hình ảnh phải nhỏ hơn 2MB!');
+            Message.sendError('Dung lượng ảnh phải nhỏ hơn 2MB!');
         }
-        const isValid = isJpgOrPng && isLt2M;
-
-        return isValid;
+        return isJpgOrPng && isLt2M;
     };
 
     const [previewOpen, setPreviewOpen] = useState(false);

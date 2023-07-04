@@ -19,21 +19,20 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
     ];
     const [inputFile, setInputFile] = useState();
     const handleImgChange = useCallback(
-        value => {
-            setInputFile(value);
+        fileData => {
+            setInputFile(fileData);
         },
         [setInputFile]
     );
 
     const onFinish = values => {
         delete values.email;
-        delete values.avatar;
         values.firstName = values.firstName.replace(/\s\s+/g, ' ');
         values.lastName = values.lastName.replace(/\s\s+/g, ' ');
-        const body = {
-            avatar: inputFile,
-            data: values,
-        };
+        const body = Object.assign(
+            inputFile ? { avatar: inputFile } : {},
+            values
+        );
         handleUserUpdate(body);
     };
     const onFinishFailed = () => {
@@ -50,7 +49,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
             >
                 <Row className="user-update-form">
                     <Col span={6}>
-                        <Form.Item name="avatar">
+                        <Form.Item>
                             <FileInputAvatar
                                 imgSrc={userInfo.avatar}
                                 imgChange={handleImgChange}

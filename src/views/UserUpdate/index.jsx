@@ -1,7 +1,7 @@
 import Message from 'components/Message';
 import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { setUserProfile, useUserProfile } from 'reducers/profile/function';
+import { useUserProfile } from 'reducers/profile/function';
 import routeConstants from 'route/routeConstant';
 import userService from 'services/userService';
 import Inner from 'views/UserUpdate/Inner';
@@ -16,7 +16,6 @@ const Wrapper = memo(() => {
                 bodyType: BodyType.FORM_DATA,
             });
             if (response.isSuccess) {
-                setUserProfile(data);
                 Message.sendSuccess('Cập nhật thành công!');
                 navigate(routeConstants.USER_SETTINGS);
             }
