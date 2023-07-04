@@ -66,7 +66,7 @@ class UserService extends ApiBase {
     updateUser = (requestBody: {
         firstName: string;
         lastName: string;
-        username: string;
+        avatar?: string;
     }) => {
         const url = `${_USER_PATH}/update/info`;
         const res = this.post(url, requestBody);

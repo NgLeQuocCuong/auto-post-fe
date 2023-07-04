@@ -1,0 +1,35 @@
+@import 'scss/global';
+
+.input-avatar-wrapper {
+    &__avatar {
+        &--round {
+            border-radius: 50%;
+            + .ant-image-mask {
+                border-radius: 50%;
+            }
+        }
+        &--fit {
+            object-fit: none;
+        }
+    }
+
+    .overlay-text {
+        opacity: 0;
+        color: $color--light;
+        text-shadow: 2px 2px $color--black;
+        position: absolute;
+        transition: 0.2s;
+    }
+    &:has(.anticon-loading) {
+        .overlay-text {
+            opacity: 1;
+            transition: 0.2s;
+        }
+    }
+    &:hover {
+        .overlay-text {
+            opacity: 1;
+            transition: 0.2s;
+        }
+    }
+}
