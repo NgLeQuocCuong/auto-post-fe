@@ -8,7 +8,7 @@ import Inner from 'views/UserSettings/Inner';
 const Wrapper = memo(() => {
     const [userInfo, setUserInfo] = useState(useUserProfile());
     const [facebookProcessing, setFacebookProcessing] = useState(false);
-    const [LinkedinProcessing, setLinkedinProcessing] = useState(false);
+    const [linkedinProcessing, setLinkedinProcessing] = useState(false);
 
     const FACEBOOK_OAUTH_CLIENT_ID = '283990164019980';
     const FACEBOOK_PERMISSIONS =
@@ -69,16 +69,6 @@ const Wrapper = memo(() => {
         [userInfo]
     );
 
-    const handleLinkFacebook = useCallback(async () => {
-        setFacebookProcessing(true);
-        await window.FB.login(
-            responseFB => {
-                saveTokenFacebook(responseFB);
-            },
-            { scope: FACEBOOK_PERMISSIONS }
-        );
-    }, [saveTokenFacebook]);
-
     const handleUnlinkFacebook = useCallback(async () => {
         setFacebookProcessing(true);
         const response = await userService.unlinkFacebook();
@@ -95,29 +85,19 @@ const Wrapper = memo(() => {
         return response;
     }, [userInfo]);
 
-    const handleLinkLinkedin = useCallback(
-        async data => {
-            setLinkedinProcessing(true);
-            // const response = await userService.linkLinkedin({oathCode: data.oathCode});
-            const response = { ...data, isSuccess: false }; // Mock response
-            if (response.isSuccess) {
-                setUserInfo(prevState => ({
-                    ...prevState,
-                    LinkedinStatus: true,
-                }));
-                setUserProfile(userInfo);
-                // setLinkedinToken(data.oathCode);
-                Message.sendSuccess('Liên kết Linkedin thành công!');
-            } else {
-                Message.sendWarning(
-                    'Chức năng đang phát triển. Vui lòng thử lại sau.'
-                );
-            }
-            setLinkedinProcessing(false);
-            return response;
-        },
-        [userInfo]
-    );
+    const handleToggleFacebook = useCallback(async () => {
+        if (userInfo.facebookStatus) {
+            return handleUnlinkFacebook();
+        } else {
+            setFacebookProcessing(true);
+            await window.FB.login(
+                responseFB => {
+                    saveTokenFacebook(responseFB);
+                },
+                { scope: FACEBOOK_PERMISSIONS }
+            );
+        }
+    }, [userInfo.facebookStatus, handleUnlinkFacebook, saveTokenFacebook]);
 
     const handleUnlinkLinkedin = useCallback(async () => {
         setLinkedinProcessing(true);
@@ -125,7 +105,7 @@ const Wrapper = memo(() => {
         if (response.isSuccess) {
             setUserInfo(prevState => ({
                 ...prevState,
-                LinkedinStatus: false,
+                linkedinStatus: false,
             }));
             setUserProfile(userInfo);
             // setLinkedinToken('');
@@ -135,15 +115,41 @@ const Wrapper = memo(() => {
         return response;
     }, [userInfo]);
 
+    const handleToggleLinkedin = useCallback(
+        async data => {
+            if (userInfo.linkedinStatus) {
+                return handleUnlinkLinkedin();
+            } else {
+                setLinkedinProcessing(true);
+                // const response = await userService.linkLinkedin({oathCode: data.oathCode});
+                const response = { ...data, isSuccess: false }; // Mock response
+                if (response.isSuccess) {
+                    setUserInfo(prevState => ({
+                        ...prevState,
+                        linkedinStatus: true,
+                    }));
+                    setUserProfile(userInfo);
+                    // setLinkedinToken(data.oathCode);
+                    Message.sendSuccess('Liên kết Linkedin thành công!');
+                } else {
+                    Message.sendWarning(
+                        'Chức năng đang phát triển. Vui lòng thử lại sau.'
+                    );
+                }
+                setLinkedinProcessing(false);
+                return response;
+            }
+        },
+        [handleUnlinkLinkedin, userInfo]
+    );
+
     return (
         <Inner
             userInfo={userInfo}
-            handleLinkFacebook={handleLinkFacebook}
-            handleUnlinkFacebook={handleUnlinkFacebook}
+            handleToggleFacebook={handleToggleFacebook}
             facebookProcessing={facebookProcessing}
-            handleLinkLinkedin={handleLinkLinkedin}
-            handleUnlinkLinkedin={handleUnlinkLinkedin}
-            LinkedinProcessing={LinkedinProcessing}
+            handleToggleLinkedin={handleToggleLinkedin}
+            linkedinProcessing={linkedinProcessing}
         />
     );
 });

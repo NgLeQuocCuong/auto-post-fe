@@ -10,11 +10,10 @@ import routeConstants from 'route/routeConstant';
 const Inner = memo(
     ({
         userInfo,
-        handleLinkFacebook,
-        handleUnlinkFacebook,
+        handleToggleFacebook,
         facebookProcessing,
         // TODO: Uncomment this when LinkedIn is ready
-        // handleLinkLinkedin,
+        // handleToggleLinkedin,
         // handleUnlinkLinkedin,
         // LinkedinProcessing,
     }) => {
@@ -89,11 +88,7 @@ const Inner = memo(
                                             type="link"
                                             className="user-settings-form__btn--padding-x-0"
                                             danger={userInfo.facebookStatus}
-                                            onClick={
-                                                userInfo.facebookStatus
-                                                    ? handleUnlinkFacebook
-                                                    : handleLinkFacebook
-                                            }
+                                            onClick={handleToggleFacebook}
                                             disabled={facebookProcessing}
                                         >
                                             {facebookProcessing
@@ -107,7 +102,7 @@ const Inner = memo(
                                     {/* <List.Item>
                                         <Typography.Text className="user-settings-form__list--icon-group">
                                             Linkedin
-                                            {userInfo.LinkedinStatus ? (
+                                            {userInfo.linkedinStatus ? (
                                                 <CheckIcon />
                                             ) : (
                                                 ''
@@ -116,16 +111,12 @@ const Inner = memo(
                                         <Button
                                             type="link"
                                             className="user-settings-form__btn--padding-x-0"
-                                            danger={userInfo.LinkedinStatus}
-                                            onClick={
-                                                userInfo.LinkedinStatus
-                                                    ? handleUnlinkLinkedin
-                                                    : handleLinkLinkedin
-                                            }
+                                            danger={userInfo.linkedinStatus}
+                                            onClick={handleToggleLinkedin}
                                         >
                                             {LinkedinProcessing
                                                 ? 'Đang xử lý...'
-                                                : userInfo.LinkedinStatus
+                                                : userInfo.linkedinStatus
                                                 ? 'Hủy liên kết Linkedin'
                                                 : 'Liên kết Linkedin'}
                                         </Button>
