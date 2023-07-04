@@ -12,7 +12,7 @@ interface FilterProps {
 }
 const Filters: FC<FilterProps> = memo(({ filtersList }) => {
     return (
-        <div className="filters-container">
+        <>
             {filtersList?.map(item => {
                 switch (item.type) {
                     case 'text':
@@ -61,7 +61,7 @@ const Filters: FC<FilterProps> = memo(({ filtersList }) => {
             <Button danger htmlType="reset">
                 Bỏ chọn tất cả
             </Button>
-        </div>
+        </>
     );
 });
 
