@@ -1,5 +1,6 @@
 import { Button, Form, Typography, Space, List, Col, Row, Image } from 'antd';
 import { memo } from 'react';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import WebLayout from 'layouts/Web/WebLayout';
 import moment from 'moment';
 import './index.scss';
@@ -13,11 +14,14 @@ const Inner = memo(
         handleLinkFacebook,
         handleUnlinkFacebook,
         facebookProcessing,
-        // TODO: Uncomment this when LinkedIn is ready
-        // handleLinkLinkedin,
-        // handleUnlinkLinkedin,
-        // LinkedinProcessing,
+        handleLinkZalo,
+        handleUnlinkZalo,
+        zaloProcessing,
     }) => {
+        const appId = '283990164019980';
+        const facebookPermissions =
+            'public_profile,publish_to_groups,pages_manage_metadata,pages_manage_posts,pages_manage_engagement,pages_show_list';
+        const facebookGetFields = 'name,email,picture,groups.limit(100)';
         return (
             <WebLayout title="User Settings">
                 <Row className="user-settings-form">
@@ -25,15 +29,20 @@ const Inner = memo(
                         <Image
                             width={94}
                             height={94}
-                            src={userInfo.avatar}
-                            className="user-settings-form__avatar--round user-settings-form__avatar--fit"
-                            alt="Avatar"
+                            src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSSlr2_vaXAWXtDCZ627ItaZLtIXDXSDOA60uLfvcBnhnPnBCXs"
+                            className="user-settings-form__avatar--round"
                         />
                     </Col>
                     <Col span={18}>
                         <Form layout="vertical">
                             <Form.Item>
-                                <Space className="mt-3">
+                                <Typography.Text
+                                    component="div"
+                                    className="user-settings-form__title"
+                                >
+                                    {userInfo.username}
+                                </Typography.Text>
+                                <Space>
                                     <NavLink to={routeConstants.USER_UPDATE}>
                                         <Button
                                             size="large"
@@ -85,29 +94,48 @@ const Inner = memo(
                                                 ''
                                             )}
                                         </Typography.Text>
-                                        <Button
-                                            type="link"
-                                            className="user-settings-form__btn--padding-x-0"
-                                            danger={userInfo.facebookStatus}
-                                            onClick={
-                                                userInfo.facebookStatus
-                                                    ? handleUnlinkFacebook
-                                                    : handleLinkFacebook
-                                            }
-                                            disabled={facebookProcessing}
-                                        >
-                                            {facebookProcessing
-                                                ? 'Đang xử lý...'
-                                                : userInfo.facebookStatus
-                                                ? 'Hủy liên kết Facebook'
-                                                : 'Liên kết Facebook'}
-                                        </Button>
+                                        <FacebookLogin
+                                            appId={appId}
+                                            version="17.0"
+                                            scope={facebookPermissions}
+                                            fields={facebookGetFields}
+                                            callback={handleLinkFacebook}
+                                            render={renderProps => (
+                                                <Button
+                                                    type="link"
+                                                    className="user-settings-form__btn--padding-x-0"
+                                                    danger={
+                                                        userInfo.facebookStatus
+                                                    }
+                                                    onClick={
+                                                        userInfo.facebookStatus
+                                                            ? handleUnlinkFacebook
+                                                            : renderProps.onClick
+                                                    }
+                                                    onChange={
+                                                        userInfo.facebookStatus
+                                                            ? null
+                                                            : renderProps.callback
+                                                    }
+                                                    disabled={
+                                                        renderProps.isProcessing ||
+                                                        facebookProcessing
+                                                    }
+                                                >
+                                                    {renderProps.isProcessing ||
+                                                    facebookProcessing
+                                                        ? 'Đang xử lý...'
+                                                        : userInfo.facebookStatus
+                                                        ? 'Hủy liên kết Facebook'
+                                                        : 'Liên kết Facebook'}
+                                                </Button>
+                                            )}
+                                        />
                                     </List.Item>
-                                    {/* TODO: Uncomment when LinkedIn is ready */}
-                                    {/* <List.Item>
+                                    <List.Item>
                                         <Typography.Text className="user-settings-form__list--icon-group">
-                                            Linkedin
-                                            {userInfo.LinkedinStatus ? (
+                                            Zalo
+                                            {userInfo.zaloStatus ? (
                                                 <CheckIcon />
                                             ) : (
                                                 ''
@@ -116,20 +144,20 @@ const Inner = memo(
                                         <Button
                                             type="link"
                                             className="user-settings-form__btn--padding-x-0"
-                                            danger={userInfo.LinkedinStatus}
+                                            danger={userInfo.zaloStatus}
                                             onClick={
-                                                userInfo.LinkedinStatus
-                                                    ? handleUnlinkLinkedin
-                                                    : handleLinkLinkedin
+                                                userInfo.zaloStatus
+                                                    ? handleUnlinkZalo
+                                                    : handleLinkZalo
                                             }
                                         >
-                                            {LinkedinProcessing
+                                            {zaloProcessing
                                                 ? 'Đang xử lý...'
-                                                : userInfo.LinkedinStatus
-                                                ? 'Hủy liên kết Linkedin'
-                                                : 'Liên kết Linkedin'}
+                                                : userInfo.zaloStatus
+                                                ? 'Hủy liên kết Zalo'
+                                                : 'Liên kết Zalo'}
                                         </Button>
-                                    </List.Item> */}
+                                    </List.Item>
                                 </List>
                             </Form.Item>
                             <Form.Item className="user-settings-form__label--padding-bottom-0">
