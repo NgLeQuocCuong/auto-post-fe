@@ -8,7 +8,8 @@ import Message from 'components/Message';
 import './index.scss';
 
 const Inner = memo(({ handleChangePassword }) => {
-    const passwordTooltip = 'Mật khẩu tối thiểu 8 ký tự bao gồm chữ và số';
+    const passwordTooltip =
+        'Mật khẩu tối thiểu 8 ký tự, không có khoảng trắng, phải chứa số và chữ cái hoặc ký tự đặc biệt';
     const rulesPasswordCurrent = [
         {
             required: true,
@@ -18,12 +19,12 @@ const Inner = memo(({ handleChangePassword }) => {
     const rulesPasswordNew = [
         ...rulesPasswordCurrent,
         {
-            pattern: /^(?=.*[\d])(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
+            pattern: /^(?=.*\d)(?=.*\D)[^\s]{8,}$/,
             message: 'Mật khẩu không hợp lệ',
         },
     ];
     const rulesPasswordRenew = [
-        ...rulesPasswordCurrent,
+        ...rulesPasswordNew,
         ({ getFieldValue }) => ({
             validator(_, value) {
                 if (!value || getFieldValue('newPassword') === value) {
