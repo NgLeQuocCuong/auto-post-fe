@@ -2,7 +2,7 @@ import { Button, Form, Space, Typography, Row, Col } from 'antd';
 import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
 import WebLayout from 'layouts/Web/WebLayout';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import FileInputAvatar from 'components/Profile/components/FileInputAvatar';
@@ -13,24 +13,25 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
     form.setFieldsValue(userInfo);
     const rulesName = [
         {
-            pattern: /^[^\d]+$/,
-            message: 'Không được chứa số',
+            required: true,
+            message: 'Không được để trống',
+        },
+        {
+            pattern: /^(?! *$)([^\d])+$/,
+            message: 'Không được chứa số hoặc chỉ có khoảng trắng',
         },
     ];
-    const [inputFile, setInputFile] = useState();
-    const handleImgChange = useCallback(
-        fileData => {
-            setInputFile(fileData);
-        },
-        [setInputFile]
-    );
+    const inputFile = useRef(null);
+    const handleImgChange = useCallback(fileData => {
+        inputFile.current = fileData;
+    }, []);
 
     const onFinish = values => {
         delete values.email;
-        values.firstName = values.firstName.replace(/\s\s+/g, ' ');
-        values.lastName = values.lastName.replace(/\s\s+/g, ' ');
+        values.firstName = values.firstName.replace(/\s+/g, ' ').trim();
+        values.lastName = values.lastName.replace(/\s+/g, ' ').trim();
         const body = Object.assign(
-            inputFile ? { avatar: inputFile } : {},
+            inputFile.current ? { avatar: inputFile.current } : {},
             values
         );
         handleUserUpdate(body);
@@ -49,12 +50,10 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
             >
                 <Row className="user-update-form">
                     <Col span={6}>
-                        <Form.Item>
-                            <FileInputAvatar
-                                imgSrc={userInfo.avatar}
-                                imgChange={handleImgChange}
-                            />
-                        </Form.Item>
+                        <FileInputAvatar
+                            imgSrc={userInfo.avatar}
+                            imgChange={handleImgChange}
+                        />
                     </Col>
                     <Col span={18}>
                         <Form.Item>
