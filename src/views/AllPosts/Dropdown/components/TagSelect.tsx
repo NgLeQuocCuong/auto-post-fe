@@ -28,9 +28,12 @@ const TagSelect: FC<TagSelectProps> = memo(({ onChange }) => {
 
     const [searchParams] = useSearchParams();
     useEffect(() => {
-        const postTypes = searchParams.getAll('postType').join(',').split(',');
-        const counterTag = `${postTypes.length}/5`;
-        setTags(() => [counterTag, ...postTypes]);
+        const postTypesFromUrl = searchParams.getAll('postType');
+        if (postTypesFromUrl.length > 0) {
+            const postTypes = postTypesFromUrl.join(',').split(',');
+            const counterTag = `${postTypes.length}/5`;
+            setTags(() => [counterTag, ...postTypes]);
+        }
     }, [searchParams]);
 
     const handleClose = useCallback(

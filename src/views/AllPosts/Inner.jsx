@@ -181,10 +181,13 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                                 searchParams.set(key, filterValues[key]);
                             }
                         });
-                        //Remove empty search from url but still apply in filter
-                        if (searchParams.get('search') === '') {
-                            searchParams.delete('search');
-                        }
+                        //Delete empty search params
+                        searchParams.forEach((value, key) => {
+                            if (value === '') {
+                                searchParams.delete(key);
+                            }
+                        });
+
                         setSearchParams(searchParams);
                         handleFinish(searchParams);
                     }}

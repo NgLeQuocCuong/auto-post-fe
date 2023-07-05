@@ -3,7 +3,7 @@ import type { RangePickerProps } from 'antd/es/date-picker';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { FC, memo } from 'react';
-
+import { useSearchParams } from 'react-router-dom';
 dayjs.extend(customParseFormat);
 
 const disabledDate: RangePickerProps['disabledDate'] = current => {
@@ -11,15 +11,23 @@ const disabledDate: RangePickerProps['disabledDate'] = current => {
     return current && current > dayjs().endOf('day');
 };
 
-const CustomDatePicker: FC = memo(() => (
-    <Space direction="vertical" size={12}>
-        <DatePicker
-            disabledDate={disabledDate}
-            format="DD/MM/YYYY"
-            placeholder="Chọn ngày"
-        />
-    </Space>
-));
+const CustomDatePicker: FC = memo(() => {
+    const [searchParams] = useSearchParams();
+    return (
+        <Space direction="vertical" size={12}>
+            <DatePicker
+                disabledDate={disabledDate}
+                format="DD/MM/YYYY"
+                placeholder="Chọn ngày"
+                value={
+                    searchParams.get('minTime')
+                        ? dayjs(searchParams.get('minTime')?.split('T')[0])
+                        : undefined
+                }
+            />
+        </Space>
+    );
+});
 
 CustomDatePicker.displayName = 'CustomDatePicker';
 export default CustomDatePicker;
