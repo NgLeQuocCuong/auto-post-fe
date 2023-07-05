@@ -1,28 +1,13 @@
 @import 'scss/global';
 
-.container {
-    width: 90%;
-    margin: 0 auto;
-    background-color: $color-gray-light;
-}
-
-.wrap {
-    &--menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-    }
-}
-
 //header
 .header {
     height: 80px;
+    width: 100%;
     &__wrap {
         display: flex;
         align-items: center;
-        padding: 16px 48px;
+        padding: 8px 36px;
         border-bottom: 1px solid $color--border2;
         background-color: $color--light;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -39,7 +24,6 @@
             margin: auto;
             width: fit-content;
         }
-
         &--link {
             text-decoration: none;
             font-weight: 600;
@@ -58,17 +42,20 @@
                 background-color: $color-hborder;
             }
         }
+        &--sidelink {
+            display: none;
+        }
+        &--sidebut {
+            display: none;
+        }
         &--button {
             display: flex;
             flex-direction: row;
             align-items: center;
-            width: 215px;
-            Button {
+            max-width: 215px;
+            .header_wrap--buttonn {
                 font-size: 16px;
                 font-weight: 500;
-                margin-right: 20px;
-            }
-            button {
                 color: $color-htext-hover;
                 border: $color-htext-hover 1px solid;
                 height: 48px;
@@ -77,13 +64,27 @@
             }
             .user-dropdown {
                 position: relative;
+                margin-left: 10%;
+                cursor: pointer;
                 z-index: 1;
-
+                border-radius: 50%;
+                transition: all 0.2s linear;
                 .header_avatar {
-                    height: 48px;
-                    width: 48px;
+                    height: auto;
+                    width: 64px;
+                    padding: 8px;
                     border-radius: 50%;
                     object-fit: fill;
+                }
+                &:hover {
+                    background-color: $color-hborder;
+                }
+                &.active {
+                    border: $color-htext-hover 1px solid;
+
+                    &:hover {
+                        background-color: $color--light;
+                    }
                 }
 
                 .dropdown {
@@ -91,8 +92,9 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    height: 64px;
                     width: 64px;
+                    height: 64px;
+                    margin-left: 10%;
                     border-radius: 50%;
                     transition: all 0.2s linear;
                     &:hover {
@@ -195,5 +197,63 @@
         &--dropdown {
             margin-left: 30px;
         }
+    }
+}
+
+.drawer__menu-item {
+    align-items: center;
+    p {
+        margin: 0;
+    }
+}
+@media (max-width: 900px) {
+    .header__wrap--items {
+        display: none;
+    }
+    .header__wrap--button {
+        Button {
+            display: none;
+        }
+        button {
+            color: $color-htext-hover;
+            border: $color-htext-hover 1px solid;
+            height: 48px;
+            border-radius: 24px;
+            width: 151px;
+        }
+    }
+
+    .header__wrap--button {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+    .header__wrap--sidelink {
+        display: inline;
+    }
+    .header__wrap--sidebut {
+        display: inline;
+        font-size: 16px;
+        font-weight: 500;
+        color: $color-htext-hover;
+        border: $color-htext-hover 1px solid;
+        height: 48px;
+        border-radius: 24px;
+    }
+    .drawer__menu-link {
+        margin: 8px 0;
+    }
+
+    .header__wrap--button .user-dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
     }
 }

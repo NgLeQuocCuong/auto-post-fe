@@ -1,11 +1,10 @@
 import { FC, PropsWithChildren, memo, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-import LogoSmall from 'components/CommonInput/icons/LogoSmall';
+import { Button, Drawer, Image } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import Logout from 'layouts/Web/Logout';
-import { Image } from 'antd';
+import LogoSmall from 'components/CommonInput/icons/LogoSmall';
 import './index.scss';
 import { useUserProfile } from 'reducers/profile/function';
 import PostPage from 'views/PostPage';
@@ -14,23 +13,24 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
     const user = useUserProfile();
     const [item, setItem] = useState(false);
     const handleCreatePost = () => {
-        setItem(() => !item);
+        setItem(prevState => !prevState);
     };
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const toggleDrawer = () => {
+        setIsDrawerOpen(prevState => !prevState);
     };
     const location = useLocation();
-    const is_all_posts = location.pathname.startsWith('/posts');
-    const is_home_page = location.pathname === routeConstants.HOME_PAGE;
-    const is_user = location.pathname.startsWith('/users');
+    const isAllPosts = location.pathname.startsWith(routeConstants.ALL_POSTS);
+    const isHomePage = location.pathname === routeConstants.HOME_PAGE;
+    const isUser = location.pathname.startsWith(routeConstants.USER);
+
     return (
         <div>
             <header className="header">
                 <div className="header__wrap">
                     <div className="header__wrap--logo">
-                        <NavLink to={'/'}>
-                            <LogoSmall></LogoSmall>
+                        <NavLink to="/">
+                            <LogoSmall />
                         </NavLink>
                     </div>
                     <ul className="header__wrap--items">
@@ -38,7 +38,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                             <NavLink
                                 to={routeConstants.HOME_PAGE}
                                 className={`header__wrap--link ${
-                                    is_home_page ? 'active' : ''
+                                    isHomePage ? 'active' : ''
                                 }`}
                             >
                                 TRANG CHỦ
@@ -48,7 +48,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                             <NavLink
                                 to={routeConstants.ALL_POSTS}
                                 className={`header__wrap--link ${
-                                    is_all_posts ? 'active' : ''
+                                    isAllPosts ? 'active' : ''
                                 }`}
                             >
                                 BÀI ĐĂNG
@@ -65,49 +65,86 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                         </Button>
                         <div
                             className={`user-dropdown ${
-                                isDropdownOpen ? 'open' : ''
+                                isUser ? 'active' : ''
                             }`}
+                            onClick={toggleDrawer}
                         >
-                            <div
-                                className={`dropdown ${
-                                    is_user ? 'active' : ''
-                                }`}
-                                onClick={toggleDropdown}
-                            >
-                                <Image
-                                    src={user.avatar}
-                                    className="header_avatar"
-                                    preview={false}
-                                />
-                            </div>
-                            <ul className="dropdown-menu">
-                                <li>
-                                    <NavLink
-                                        to={routeConstants.USER_SETTINGS}
-                                        className="Drop-item"
-                                    >
-                                        <p>Xem hồ sơ</p>
-                                    </NavLink>
-                                </li>
-
-                                <li>
-                                    <NavLink
-                                        to={routeConstants.CHANGE_PASSWORD}
-                                        className="Drop-item"
-                                    >
-                                        <p>Đổi mật khẩu</p>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <Logout></Logout>
-                                </li>
-                            </ul>
+                            <Image
+                                src={user.avatar}
+                                className="header_avatar"
+                                preview={false}
+                            />
                         </div>
                     </div>
                 </div>
-                {item && <PostPage />}
+                <Drawer
+                    placement="right"
+                    closable={false}
+                    visible={isDrawerOpen}
+                    onClose={toggleDrawer}
+                    className="drawer"
+                    width={'200px'}
+                >
+                    <div className="drawer__menu-link">
+                        <Button
+                            size={'large'}
+                            className="header__wrap--sidelink"
+                            type={isHomePage ? 'primary' : 'default'}
+                            block
+                        >
+                            <NavLink to={routeConstants.HOME_PAGE}>
+                                TRANG CHỦ
+                            </NavLink>
+                        </Button>
+                    </div>
+                    <div className="drawer__menu-link">
+                        <Button
+                            size={'large'}
+                            className="header__wrap--sidelink"
+                            type={isAllPosts ? 'primary' : 'default'}
+                            block
+                        >
+                            <NavLink to={routeConstants.ALL_POSTS}>
+                                BÀI ĐĂNG
+                            </NavLink>
+                        </Button>
+                    </div>
+                    <div className="drawer__menu-link">
+                        <Button
+                            icon={<PlusOutlined />}
+                            className="header__wrap--sidebut"
+                            onClick={handleCreatePost}
+                        >
+                            Bài viết mới
+                        </Button>
+                    </div>
+                    <div className="drawer__menu-item">
+                        <Button type="link" size={'large'}>
+                            <NavLink
+                                to={routeConstants.USER_SETTINGS}
+                                className="Drop-item"
+                            >
+                                <p>Xem hồ sơ</p>
+                            </NavLink>
+                        </Button>
+                    </div>
+                    <div className="drawer__menu-item">
+                        <Button type="link" size={'large'}>
+                            <NavLink
+                                to={routeConstants.CHANGE_PASSWORD}
+                                className="Drop-item"
+                            >
+                                <p>Đổi mật khẩu</p>
+                            </NavLink>
+                        </Button>
+                    </div>
+                    <div className="drawer__menu-item">
+                        <Logout />
+                    </div>
+                </Drawer>
             </header>
 
+            {item && <PostPage />}
             {children}
         </div>
     );
