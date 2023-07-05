@@ -12,7 +12,11 @@ const Wrapper = memo(() => {
     const handleVerifyAccount = useCallback(
         async data => {
             setLoading(true);
-            const response = await userService.verifyAccount(data, token);
+            const newData = {
+                token: token,
+                password: data.password,
+            };
+            const response = await userService.verifyAccount(newData);
             setLoading(false);
             if (response.isSuccess) {
                 Message.sendSuccess(

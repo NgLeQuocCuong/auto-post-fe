@@ -2,16 +2,12 @@ import { Button, Form, Spin, Statistic } from 'antd';
 import AccountLayout from 'layouts/Account';
 import { memo, useMemo, useCallback, useState, useEffect } from 'react';
 import AccountInput from 'layouts/Account/AccountInput';
-
+import moment from 'moment';
 const { Countdown } = Statistic;
 const Inner = memo(({ handleForgotPassword, loading }) => {
     const COOLDOWN_TIME = 60; //In seconds
-    const [remainingTime, setRemainingTime] = useState(
-        parseInt(localStorage.getItem('remainingTime')) || COOLDOWN_TIME
-    );
-    const [isCooldown, setIsCooldown] = useState(
-        localStorage.getItem('isCooldown') === 'true' || false
-    );
+    const [remainingTime, setRemainingTime] = useState(COOLDOWN_TIME);
+    const [isCooldown, setIsCooldown] = useState(false);
     // Validate rules
     const emailRules = useMemo(
         () => [
@@ -22,41 +18,39 @@ const Inner = memo(({ handleForgotPassword, loading }) => {
         ],
         []
     );
-
+    const startCooldown = useCallback(() => {
+        setIsCooldown(true);
+        localStorage.setItem('resendEmailCooldown', moment().format());
+    }, []);
+    const handleCooldownFinish = useCallback(() => {
+        setIsCooldown(false);
+        localStorage.removeItem('resendEmailCooldown');
+    }, []);
     const handleFinish = useCallback(
         values => {
             handleForgotPassword(values).then(res => {
                 if (res.isSuccess) {
-                    setIsCooldown(true);
-                    setRemainingTime(COOLDOWN_TIME);
-                    localStorage.setItem('remainingTime', COOLDOWN_TIME);
-                    localStorage.setItem('isCooldown', true);
+                    startCooldown();
                 }
             });
         },
-        [handleForgotPassword]
+        [handleForgotPassword, startCooldown]
     );
 
     useEffect(() => {
-        let countdownId;
-        if (isCooldown) {
-            countdownId = setTimeout(() => {
-                setRemainingTime(prevTime => prevTime - 1);
-            }, 1000);
+        const storedTime = localStorage.getItem('resendEmailCooldown');
+        if (storedTime) {
+            const secondsPassed = moment().diff(storedTime, 'seconds');
+            const diffTime = COOLDOWN_TIME - secondsPassed;
+            if (diffTime > 0) {
+                setRemainingTime(diffTime);
+                startCooldown();
+            } else {
+                setIsCooldown(false);
+                localStorage.removeItem('resendEmailCooldown');
+            }
         }
-        return () => clearTimeout(countdownId);
-    }, [isCooldown, remainingTime]);
-
-    useEffect(() => {
-        if (remainingTime === 0) {
-            setIsCooldown(false);
-            localStorage.removeItem('remainingTime');
-            localStorage.removeItem('isCooldown');
-        } else {
-            localStorage.setItem('remainingTime', remainingTime);
-            localStorage.setItem('isCooldown', true);
-        }
-    }, [remainingTime]);
+    }, [startCooldown]);
 
     return (
         <Spin spinning={loading} size="large">
@@ -84,11 +78,13 @@ const Inner = memo(({ handleForgotPassword, loading }) => {
                     </Button>
                     {isCooldown && (
                         <div className="resend-email">
-                            <span>Bạn có thể gửi lại email sau</span>
                             <Countdown
                                 className="resend-email__countdown"
-                                value={Date.now() + 1000 * remainingTime}
-                                format="ss giây."
+                                value={moment().add(remainingTime, 'seconds')}
+                                prefix="Bạn có thể gửi lại email sau "
+                                suffix=" giây."
+                                format="ss"
+                                onFinish={handleCooldownFinish}
                             />
                         </div>
                     )}

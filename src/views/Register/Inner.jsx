@@ -27,33 +27,6 @@ const Inner = memo(({ handleRegister }) => {
         ],
         []
     );
-
-    // const passwordRules = useMemo(
-    //     () => [
-    //         {
-    //             pattern: /^(?=.*\d)(?=.*\D)[^\s]{8,}$/,
-    //             message: 'Mật khẩu phải có ít nhất 8 ký tự gồm chữ và số.',
-    //         },
-    //     ],
-    //     []
-    // );
-
-    // const confirmPasswordRules = useMemo(
-    //     () => [
-    //         ...passwordRules,
-    //         ({ getFieldValue }) => ({
-    //             validator(_, value) {
-    //                 if (!value || getFieldValue('password') === value) {
-    //                     return Promise.resolve();
-    //                 }
-    //                 return Promise.reject(
-    //                     new Error('Mật khẩu nhập lại không trùng khớp.')
-    //                 );
-    //             },
-    //         }),
-    //     ],
-    //     [passwordRules]
-    // );
     const handleFinish = useCallback(
         values => {
             handleRegister(values);
