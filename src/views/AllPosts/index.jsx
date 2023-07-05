@@ -32,10 +32,7 @@ const Wrapper = memo(() => {
         const params = {
             page: searchParams.get('page') || undefined,
             pageSize: searchParams.get('pageSize') || undefined,
-            search:
-                searchParams.get('search') === 'undefined'
-                    ? undefined
-                    : searchParams.get('search'),
+            search: searchParams.get('search') || undefined,
             title: searchParams.get('title') || undefined,
             postType: searchParams.get('postType') || undefined,
             sortType: searchParams.get('sortType') || undefined,

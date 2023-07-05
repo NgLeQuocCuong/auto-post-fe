@@ -161,12 +161,7 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                     onFilters={filterValues => {
                         //Remove undefined values
                         Object.keys(filterValues).forEach(key => {
-                            if (
-                                filterValues[key] === undefined ||
-                                filterValues.length === 0 ||
-                                filterValues[key] === '' ||
-                                !filterValues[key]
-                            ) {
+                            if (filterValues[key] === undefined) {
                                 delete filterValues[key];
                             } else {
                                 if (key === 'minTime') {
@@ -186,6 +181,10 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                                 searchParams.set(key, filterValues[key]);
                             }
                         });
+                        //Remove empty search from url but still apply in filter
+                        if (searchParams.get('search') === '') {
+                            searchParams.delete('search');
+                        }
                         setSearchParams(searchParams);
                         handleFinish(searchParams);
                     }}
