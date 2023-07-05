@@ -11,6 +11,7 @@ import './index.scss';
 const Inner = memo(({ handleUserUpdate, userInfo }) => {
     const [form] = Form.useForm();
     form.setFieldsValue(userInfo);
+    const nameTooltip = 'Không được chứa số hoặc chỉ có khoảng trắng';
     const rulesName = [
         {
             required: true,
@@ -18,7 +19,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
         },
         {
             pattern: /^(?! *$)([^\d])+$/,
-            message: 'Không được chứa số hoặc chỉ có khoảng trắng',
+            message: 'Không hợp lệ',
         },
     ];
     const inputFile = useRef(null);
@@ -66,6 +67,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                                 name="firstName"
                                 label="Họ"
                                 className="user-update-form__label--fw-600"
+                                tooltip={nameTooltip}
                                 rules={rulesName}
                             >
                                 <TextInput size="large" placeholder="Nhập họ" />
@@ -74,6 +76,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
                                 name="lastName"
                                 label="Tên"
                                 className="user-update-form__label--fw-600"
+                                tooltip={nameTooltip}
                                 rules={rulesName}
                             >
                                 <TextInput
