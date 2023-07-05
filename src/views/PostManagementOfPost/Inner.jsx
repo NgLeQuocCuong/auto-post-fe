@@ -146,8 +146,6 @@ const Inner = memo(({ handleViewPostManagement, tableData }) => {
                         Object.keys(filterValues).forEach(key => {
                             if (
                                 filterValues[key] === undefined ||
-                                filterValues.length === 0 ||
-                                filterValues[key] === '' ||
                                 !filterValues[key]
                             ) {
                                 delete filterValues[key];
@@ -173,6 +171,13 @@ const Inner = memo(({ handleViewPostManagement, tableData }) => {
                                 searchParams.set(key, filterValues[key]);
                             }
                         });
+                        //Delete empty search params
+                        searchParams.forEach((value, key) => {
+                            if (value === '') {
+                                searchParams.delete(key);
+                            }
+                        });
+
                         setSearchParams(searchParams);
                         handleFinish(searchParams);
                     }}

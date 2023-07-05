@@ -161,7 +161,10 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                     onFilters={filterValues => {
                         //Remove undefined values
                         Object.keys(filterValues).forEach(key => {
-                            if (filterValues[key] === undefined) {
+                            if (
+                                filterValues[key] === undefined ||
+                                !filterValues[key]
+                            ) {
                                 delete filterValues[key];
                             } else {
                                 if (key === 'minTime') {
