@@ -78,10 +78,8 @@ const Inner = memo(
                                     <List.Item>
                                         <Typography.Text className="user-settings-form__list--icon-group">
                                             Facebook
-                                            {userInfo.facebookStatus ? (
+                                            {userInfo.facebookStatus && (
                                                 <CheckIcon />
-                                            ) : (
-                                                ''
                                             )}
                                         </Typography.Text>
                                         <Button
@@ -91,21 +89,20 @@ const Inner = memo(
                                             onClick={handleToggleFacebook}
                                             disabled={facebookProcessing}
                                         >
-                                            {facebookProcessing
-                                                ? 'Đang xử lý...'
-                                                : userInfo.facebookStatus
-                                                ? 'Hủy liên kết Facebook'
-                                                : 'Liên kết Facebook'}
+                                            {facebookProcessing &&
+                                                'Đang xử lý...'}
+                                            {!facebookProcessing &&
+                                                (userInfo.facebookStatus
+                                                    ? 'Hủy liên kết Facebook'
+                                                    : 'Liên kết Facebook')}
                                         </Button>
                                     </List.Item>
                                     {/* TODO: Uncomment when LinkedIn is ready */}
                                     {/* <List.Item>
                                         <Typography.Text className="user-settings-form__list--icon-group">
                                             Linkedin
-                                            {userInfo.linkedinStatus ? (
+                                            {userInfo.linkedinStatus && (
                                                 <CheckIcon />
-                                            ) : (
-                                                ''
                                             )}
                                         </Typography.Text>
                                         <Button
@@ -114,11 +111,12 @@ const Inner = memo(
                                             danger={userInfo.linkedinStatus}
                                             onClick={handleToggleLinkedin}
                                         >
-                                            {LinkedinProcessing
-                                                ? 'Đang xử lý...'
-                                                : userInfo.linkedinStatus
-                                                ? 'Hủy liên kết Linkedin'
-                                                : 'Liên kết Linkedin'}
+                                            {LinkedinProcessing &&
+                                                'Đang xử lý...'}
+                                            {!LinkedinProcessing &&
+                                                (userInfo.linkedinStatus
+                                                    ? 'Hủy liên kết Linkedin'
+                                                    : 'Liên kết Linkedin')}
                                         </Button>
                                     </List.Item> */}
                                 </List>
