@@ -8,26 +8,21 @@ import {
 } from 'antd';
 import ArrowIcon from 'components/CommonInput/icons/ArrowIcon';
 import dayjs, { Dayjs } from 'dayjs';
+import 'dayjs/locale/vi';
 import { FC, memo, useCallback, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import TagSelect from './TagSelect';
+dayjs.extend(require('dayjs/plugin/customParseFormat'));
 interface DropdownProps {
     title: string;
     name: string;
     options?: { label: string; value: string | boolean | number }[]; //List of checkboxes/radios
     type?: 'checkbox' | 'radio' | 'dateRange' | 'tagSelect';
-    defaultValue?: (string | number)[];
     handleTagSelectChange?: (tags: string[]) => void;
 }
 
 const Dropdown: FC<DropdownProps> = memo(
-    ({
-        title,
-        name,
-        options,
-        type = 'checkbox',
-        defaultValue,
-        handleTagSelectChange,
-    }) => {
+    ({ title, name, options, type = 'checkbox', handleTagSelectChange }) => {
         const [open, setOpen] = useState(false);
         const handleOpenChange = useCallback((flag: boolean) => {
             setOpen(flag);
@@ -35,22 +30,26 @@ const Dropdown: FC<DropdownProps> = memo(
         const disabledDate = useCallback((current: Dayjs) => {
             return current && current > dayjs().endOf('day');
         }, []);
+        const [searchParams, setSearchParams] = useSearchParams();
         const getMenuLabel = useCallback(
             (type: string) => {
                 switch (type) {
                     case 'checkbox':
                         return (
-                            <Form.Item name={name} initialValue={undefined}>
+                            <Form.Item name={name}>
                                 <Checkbox.Group
                                     options={options}
-                                    defaultValue={defaultValue}
+                                    defaultValue={searchParams.getAll(name)}
                                 />
                             </Form.Item>
                         );
                     case 'radio':
                         return (
                             <Form.Item name={name}>
-                                <Radio.Group options={options} />
+                                <Radio.Group
+                                    options={options}
+                                    defaultValue={searchParams.get(name)}
+                                />
                             </Form.Item>
                         );
                     case 'dateRange':
@@ -88,7 +87,7 @@ const Dropdown: FC<DropdownProps> = memo(
                         return <></>;
                 }
             },
-            [name, options, disabledDate, defaultValue, handleTagSelectChange]
+            [name, options, disabledDate, handleTagSelectChange, searchParams]
         );
         const items: MenuProps['items'] = useMemo(
             () => [

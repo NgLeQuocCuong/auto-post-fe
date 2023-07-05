@@ -18,9 +18,9 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const handleFinish = useCallback(
         values => {
-            handleAllPosts(values);
+            setSearchParams(values);
         },
-        [handleAllPosts]
+        [setSearchParams]
     );
     const filtersList = [
         {

@@ -3,7 +3,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import type { InputRef } from 'antd';
 import { Button, Space, Input, Tag, Tooltip } from 'antd';
 import { ChangeEvent } from 'react';
-
+import { useSearchParams } from 'react-router-dom';
 interface TagSelectProps {
     onChange: (tags: string[]) => void;
 }
@@ -25,6 +25,13 @@ const TagSelect: FC<TagSelectProps> = memo(({ onChange }) => {
     useEffect(() => {
         editInputRef.current?.focus();
     }, [inputValue]);
+
+    const [searchParams] = useSearchParams();
+    useEffect(() => {
+        const postTypes = searchParams.getAll('postType').join(',').split(',');
+        const counterTag = `${postTypes.length}/5`;
+        setTags(() => [counterTag, ...postTypes]);
+    }, [searchParams]);
 
     const handleClose = useCallback(
         (removedTag: string) => {

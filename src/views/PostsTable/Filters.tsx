@@ -39,7 +39,6 @@ const Filters: FC<FilterProps> = memo(({ filtersList }) => {
                                 name={item.name}
                                 options={item.options}
                                 type="checkbox"
-                                defaultValue={searchParams.getAll(item.name)}
                             />
                         );
                     case 'radio':
