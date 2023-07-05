@@ -19,11 +19,6 @@ const CustomDatePicker: FC = memo(() => {
                 disabledDate={disabledDate}
                 format="DD/MM/YYYY"
                 placeholder="Chọn ngày"
-                value={
-                    searchParams.get('minTime')
-                        ? dayjs(searchParams.get('minTime')?.split('T')[0])
-                        : undefined
-                }
             />
         </Space>
     );
