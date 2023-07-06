@@ -93,6 +93,9 @@ const messageCodes = {
     EMAIL_ALREADY_EXIST: 'Email đã tồn tại',
     THIS_FACEBOOK_ACCOUNT_ALREADY_EXIST: 'Tài khoản Facebook đã tồn tại',
 
+    SAME_PASSWORD: 'Mật khẩu mới không được trùng với mật khẩu cũ',
+    PASSWORD_NOT_MATCH: 'Mật khẩu hiện tại không chính xác',
+
     default: 'Có lỗi xảy ra... Vui lòng thử lại',
 } as {
     [key: string]: string;
