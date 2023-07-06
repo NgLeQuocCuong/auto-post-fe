@@ -3,10 +3,10 @@ import AccountLayout from 'layouts/Account';
 import { memo, useMemo, useCallback, useState, useEffect } from 'react';
 import AccountInput from 'layouts/Account/AccountInput';
 import moment from 'moment';
+import Message from 'components/Message';
 const { Countdown } = Statistic;
 const Inner = memo(({ handleForgotPassword, loading }) => {
     const COOLDOWN_TIME = 60; //In seconds
-    const [remainingTime, setRemainingTime] = useState(COOLDOWN_TIME);
     const [isCooldown, setIsCooldown] = useState(false);
     // Validate rules
     const emailRules = useMemo(
@@ -19,39 +19,45 @@ const Inner = memo(({ handleForgotPassword, loading }) => {
         []
     );
     const startCooldown = useCallback(() => {
-        setIsCooldown(true);
         localStorage.setItem('resendEmailCooldown', moment().format());
+        setIsCooldown(true);
     }, []);
-    const handleCooldownFinish = useCallback(() => {
-        setIsCooldown(false);
+    const finishCooldown = useCallback(() => {
         localStorage.removeItem('resendEmailCooldown');
+        setIsCooldown(false);
     }, []);
     const handleFinish = useCallback(
         values => {
             handleForgotPassword(values).then(res => {
                 if (res.isSuccess) {
+                    Message.sendSuccess('Vui lòng kiểm tra email của bạn.');
                     startCooldown();
                 }
             });
         },
         [handleForgotPassword, startCooldown]
     );
-
+    const initTime = useMemo(() => {
+        if (isCooldown) {
+            const storedTime = localStorage.getItem('resendEmailCooldown');
+            if (storedTime) {
+                const secondsPassed = moment().diff(storedTime, 'seconds');
+                const diffTime = COOLDOWN_TIME - secondsPassed;
+                if (diffTime > 0) {
+                    return diffTime;
+                }
+                return 0;
+            }
+        }
+        return 0;
+    }, [isCooldown]);
+    //Check condition when reload page
     useEffect(() => {
         const storedTime = localStorage.getItem('resendEmailCooldown');
         if (storedTime) {
-            const secondsPassed = moment().diff(storedTime, 'seconds');
-            const diffTime = COOLDOWN_TIME - secondsPassed;
-            if (diffTime > 0) {
-                setRemainingTime(diffTime);
-                startCooldown();
-            } else {
-                setIsCooldown(false);
-                localStorage.removeItem('resendEmailCooldown');
-            }
+            setIsCooldown(true);
         }
     }, [startCooldown]);
-
     return (
         <Spin spinning={loading} size="large">
             <AccountLayout title="Lấy lại mật khẩu">
@@ -72,19 +78,19 @@ const Inner = memo(({ handleForgotPassword, loading }) => {
                         className="account-layout-button"
                         type="primary"
                         htmlType="submit"
-                        disabled={isCooldown}
+                        disabled={initTime > 0}
                     >
                         Gửi email
                     </Button>
-                    {isCooldown && (
+                    {initTime > 0 && (
                         <div className="resend-email">
                             <Countdown
                                 className="resend-email__countdown"
-                                value={moment().add(remainingTime, 'seconds')}
+                                value={moment().add(initTime, 'seconds')}
                                 prefix="Bạn có thể gửi lại email sau "
                                 suffix=" giây."
                                 format="ss"
-                                onFinish={handleCooldownFinish}
+                                onFinish={finishCooldown}
                             />
                         </div>
                     )}

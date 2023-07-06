@@ -6,7 +6,7 @@ interface AccountInputProps {
     name: string;
     label: string;
     placeholder?: string;
-    rules?: any;
+    rules?: [];
 }
 
 const AccountInput: FC<AccountInputProps> = memo(
@@ -27,7 +27,7 @@ const AccountInput: FC<AccountInputProps> = memo(
                         required: true,
                         message: 'Trường này không được để trống.',
                     },
-                    ...rules,
+                    ...(rules || []),
                 ]}
                 {...props}
             >
