@@ -10,7 +10,11 @@ import './index.scss';
 
 const Inner = memo(({ handleUserUpdate, userInfo }) => {
     const [form] = Form.useForm();
-    form.setFieldsValue(userInfo);
+    const initForm = useCallback(() => {
+        form.setFieldsValue(userInfo);
+    }, [form, userInfo]);
+    initForm();
+
     const nameTooltip = 'Không được chứa số hoặc chỉ có khoảng trắng';
     const rulesName = [
         {
@@ -22,7 +26,7 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
             message: 'Không hợp lệ',
         },
     ];
-    const inputFile = useRef(null);
+    const inputFile = useRef('');
     const handleImgChange = useCallback(fileData => {
         inputFile.current = fileData;
     }, []);
