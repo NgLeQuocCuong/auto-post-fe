@@ -1,13 +1,11 @@
-import { useState, FC, memo } from 'react';
+import { useState, FC, memo, useCallback } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Modal, Upload, Image } from 'antd';
-import Message from 'components/Message';
+import { Modal, Upload, Image, UploadFile } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
-import type { RcFile, UploadProps } from 'antd/es/upload';
-import type { UploadFile } from 'antd/es/upload/interface';
+import Message from 'components/Message';
 import './style.scss';
 
-const getBase64 = (file: RcFile, callback: (url: string) => void) => {
+const getBase64 = (file: File, callback: (url: string) => void) => {
     const reader = new FileReader();
     reader.onload = () => callback(reader.result as string);
     reader.readAsDataURL(file);
@@ -15,18 +13,18 @@ const getBase64 = (file: RcFile, callback: (url: string) => void) => {
 
 interface Props {
     imgSrc: string;
-    imgChange: any;
+    imgChange: Function;
 }
 
 const FileInputAvatar: FC<Props> = memo(({ imgSrc, imgChange }) => {
-    const beforeUpload = (file: RcFile) => {
+    const beforeUpload = (file: File) => {
         const isJpgOrPng =
             file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
             Message.sendError('Ảnh phải là định dạng JPG hoặc PNG!');
         }
         const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) {
+        if (isJpgOrPng && !isLt2M) {
             Message.sendError('Dung lượng ảnh phải nhỏ hơn 2MB!');
         }
         return isJpgOrPng && isLt2M;
@@ -40,27 +38,28 @@ const FileInputAvatar: FC<Props> = memo(({ imgSrc, imgChange }) => {
 
     const handleCancel = () => setPreviewOpen(false);
 
-    const handlePreview = async (file: UploadFile) => {
+    const handlePreview = useCallback((file: UploadFile) => {
         setPreviewOpen(true);
         setPreviewTitle(file.name);
-    };
+    }, []);
 
-    const handleChange: UploadProps['onChange'] = async (
-        info: UploadChangeParam<UploadFile>
-    ) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            getBase64(info.file.originFileObj as RcFile, url => {
-                setPreviewImage(url);
-                setLoading(false);
-                setImageUrl(url);
-            });
-            imgChange(info.file.originFileObj as RcFile);
-        }
-    };
+    const handleChange = useCallback(
+        (info: UploadChangeParam) => {
+            if (info.file.status === 'uploading') {
+                setLoading(true);
+                return;
+            }
+            if (info.file.status === 'done') {
+                getBase64(info.file.originFileObj as File, url => {
+                    setPreviewImage(url);
+                    setLoading(false);
+                    setImageUrl(url);
+                });
+                imgChange(info.file.originFileObj as File);
+            }
+        },
+        [imgChange]
+    );
 
     const uploadButton = (
         <div className="overlay-text">
@@ -68,15 +67,15 @@ const FileInputAvatar: FC<Props> = memo(({ imgSrc, imgChange }) => {
             <div style={{ marginTop: 8 }}>Thay ảnh</div>
         </div>
     );
-    const dummyRequest = ({ onSuccess }: any) => {
-        setTimeout(() => {
-            onSuccess('ok');
-        }, 0);
+
+    const customRequest = ({ onSuccess }: any) => {
+        onSuccess();
     };
+
     return (
         <div className="input-avatar-wrapper">
             <Upload
-                customRequest={dummyRequest} // Use customRequest instead of "action" to fix calling upload api twice
+                customRequest={customRequest}
                 listType="picture-circle"
                 className="avatar-uploader"
                 showUploadList={false}

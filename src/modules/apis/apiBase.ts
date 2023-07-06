@@ -13,8 +13,8 @@ const prepareData = (response: any): any => {
         result = response.map((item: any) => prepareData(item));
     } else if (isObject(response)) {
         result = {};
-        forEach(response, (value: any, key) => {
-            if (key === 'file' || value instanceof Blob) {
+        forEach(response, (value: unknown, key) => {
+            if (value instanceof Blob) {
                 result[key] = value;
             } else {
                 result[toSnakeCase(key)] = prepareData(value);
