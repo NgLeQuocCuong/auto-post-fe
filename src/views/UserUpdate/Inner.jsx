@@ -2,7 +2,7 @@ import { Button, Form, Space, Typography, Row, Col } from 'antd';
 import TextInput from 'components/CommonInput/components/TextInput';
 import Message from 'components/Message';
 import WebLayout from 'layouts/Web/WebLayout';
-import { memo, useCallback, useRef } from 'react';
+import { memo, useCallback, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import FileInputAvatar from 'components/Profile/components/FileInputAvatar';
@@ -13,7 +13,9 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
     const initForm = useCallback(() => {
         form.setFieldsValue(userInfo);
     }, [form, userInfo]);
-    initForm();
+    useEffect(() => {
+        initForm();
+    }, [initForm]);
 
     const nameTooltip = 'Không được chứa số hoặc chỉ có khoảng trắng';
     const rulesName = [
@@ -26,21 +28,24 @@ const Inner = memo(({ handleUserUpdate, userInfo }) => {
             message: 'Không hợp lệ',
         },
     ];
-    const inputFile = useRef('');
+    const [inputFile, setInputFile] = useState();
     const handleImgChange = useCallback(fileData => {
-        inputFile.current = fileData;
+        setInputFile(fileData);
     }, []);
 
-    const onFinish = values => {
-        delete values.email;
-        values.firstName = values.firstName.replace(/\s+/g, ' ').trim();
-        values.lastName = values.lastName.replace(/\s+/g, ' ').trim();
-        const body = Object.assign(
-            inputFile.current ? { avatar: inputFile.current } : {},
-            values
-        );
-        handleUserUpdate(body);
-    };
+    const onFinish = useCallback(
+        values => {
+            delete values.email;
+            values.firstName = values.firstName.replace(/\s+/g, ' ').trim();
+            values.lastName = values.lastName.replace(/\s+/g, ' ').trim();
+            const body = Object.assign(
+                inputFile ? { avatar: inputFile } : {},
+                values
+            );
+            handleUserUpdate(body);
+        },
+        [inputFile, handleUserUpdate]
+    );
     const onFinishFailed = () => {
         Message.sendError('Vui lòng kiểm tra lại thông tin.');
     };
