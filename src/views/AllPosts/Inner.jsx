@@ -1,7 +1,7 @@
 import { DeleteOutlined, HistoryOutlined } from '@ant-design/icons';
 import { Button, Tag, Tooltip } from 'antd';
 import ToggleFilterIcon from 'icons/ToggleFilterIcon';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useState, useMemo } from 'react';
 import { generatePath, useNavigate, useSearchParams } from 'react-router-dom';
 import routeConstants from 'route/routeConstant';
 import './index.scss';
@@ -22,111 +22,119 @@ const Inner = memo(({ handleRemovePost, tableData }) => {
         },
         [setSearchParams]
     );
-    const filtersList = [
-        {
-            title: 'Tìm theo tiêu đề',
-            name: 'search',
-            type: 'text',
-        },
-        {
-            title: 'Sắp xếp bài đăng',
-            name: 'sortType',
-            type: 'radio',
-            options: [
-                {
-                    label: 'Mới nhất',
-                    value: 'desc',
-                },
-                {
-                    label: 'Cũ nhất',
-                    value: 'asc',
-                },
-            ],
-        },
-        {
-            title: 'Ngày đăng',
-            name: 'postDate',
-            type: 'dateRange',
-        },
-        {
-            title: 'Loại bài viết',
-            name: 'postType',
-            type: 'tagSelect',
-        },
-    ];
-    const columns = [
-        {
-            title: 'Thời gian',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
-        },
-        {
-            title: 'Tiêu đề',
-            dataIndex: 'title',
-            key: 'title',
-        },
-        {
-            title: 'Loại bài viết',
-            key: 'postType',
-            dataIndex: 'postType',
-            render: postType => {
-                return postType?.map(tag => (
-                    <Tag key={tag} color="geekblue">
-                        {tag.trim().toUpperCase()}
-                    </Tag>
-                ));
+    const filtersList = useMemo(
+        () => [
+            {
+                title: 'Tìm theo tiêu đề',
+                name: 'search',
+                type: 'text',
             },
-        },
-        {
-            title: 'Hành động',
-            key: 'action',
-            render: uid => (
-                <>
-                    <Tooltip placement="top" title="Xóa bài viết">
-                        <Button
-                            type="text"
-                            onClick={e => {
-                                e.stopPropagation();
-                                Popup.sendConfirm(
-                                    'Bạn có chắc chắn muốn xóa bài viết này?',
-                                    'Thao tác này không thể hoàn tác!',
-                                    {
-                                        onOk: () => {
-                                            handleRemovePost(uid).then(res => {
-                                                if (res.isSuccess) {
-                                                    window.location.reload();
-                                                }
-                                            });
-                                        },
-                                        onCancel: () => {},
-                                    }
-                                );
-                            }}
-                        >
-                            <DeleteOutlined />
-                        </Button>
-                    </Tooltip>
-                    <Tooltip placement="top" title="Lịch sử đăng">
-                        <Button
-                            type="text"
-                            onClick={e => {
-                                e.stopPropagation();
-                                const path = generatePath(
-                                    routeConstants.POST_MANAGEMENT_OF_POST,
-                                    {
-                                        uid: uid.uid,
-                                    }
-                                );
-                                navigate(path);
-                            }}
-                        >
-                            <HistoryOutlined />
-                        </Button>
-                    </Tooltip>
-                </>
-            ),
-        },
-    ];
+            {
+                title: 'Sắp xếp bài đăng',
+                name: 'sortType',
+                type: 'radio',
+                options: [
+                    {
+                        label: 'Mới nhất',
+                        value: 'desc',
+                    },
+                    {
+                        label: 'Cũ nhất',
+                        value: 'asc',
+                    },
+                ],
+            },
+            {
+                title: 'Ngày đăng',
+                name: 'postDate',
+                type: 'dateRange',
+            },
+            {
+                title: 'Loại bài viết',
+                name: 'postType',
+                type: 'tagSelect',
+            },
+        ],
+        []
+    );
+    const columns = useMemo(
+        () => [
+            {
+                title: 'Thời gian',
+                dataIndex: 'createdAt',
+                key: 'createdAt',
+            },
+            {
+                title: 'Tiêu đề',
+                dataIndex: 'title',
+                key: 'title',
+            },
+            {
+                title: 'Loại bài viết',
+                key: 'postType',
+                dataIndex: 'postType',
+                render: postType => {
+                    return postType?.map(tag => (
+                        <Tag key={tag} color="geekblue">
+                            {tag.trim().toUpperCase()}
+                        </Tag>
+                    ));
+                },
+            },
+            {
+                title: 'Hành động',
+                key: 'action',
+                render: uid => (
+                    <>
+                        <Tooltip placement="top" title="Xóa bài viết">
+                            <Button
+                                type="text"
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    Popup.sendConfirm(
+                                        'Bạn có chắc chắn muốn xóa bài viết này?',
+                                        'Thao tác này không thể hoàn tác!',
+                                        {
+                                            onOk: () => {
+                                                handleRemovePost(uid).then(
+                                                    res => {
+                                                        if (res.isSuccess) {
+                                                            window.location.reload();
+                                                        }
+                                                    }
+                                                );
+                                            },
+                                            onCancel: () => {},
+                                        }
+                                    );
+                                }}
+                            >
+                                <DeleteOutlined />
+                            </Button>
+                        </Tooltip>
+                        <Tooltip placement="top" title="Lịch sử đăng">
+                            <Button
+                                type="text"
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    const path = generatePath(
+                                        routeConstants.POST_MANAGEMENT_OF_POST,
+                                        {
+                                            uid: uid.uid,
+                                        }
+                                    );
+                                    navigate(path);
+                                }}
+                            >
+                                <HistoryOutlined />
+                            </Button>
+                        </Tooltip>
+                    </>
+                ),
+            },
+        ],
+        [handleRemovePost, navigate]
+    );
     return (
         <WebLayout>
             <div className="all-posts-container">
