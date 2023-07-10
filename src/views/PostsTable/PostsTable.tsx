@@ -121,10 +121,7 @@ const PostsTable: FC<TableProps> = memo(
                         showSizeChanger: true,
                         pageSizeOptions: ['5', '10', '25', '50'],
                         total: Number(storedTableData?.totalRows),
-                        showTotal: (
-                            total = Number(storedTableData?.totalPages),
-                            range
-                        ) =>
+                        showTotal: (total, range) =>
                             `Hiện ${range[0]}-${range[1]} trong ${total} kết quả.`,
                         onChange: (page, pageSize) => {
                             onPaginate(page || 1, pageSize || 10);
