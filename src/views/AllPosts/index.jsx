@@ -52,7 +52,18 @@ const Wrapper = memo(() => {
         const response = await postService.removePost(uid);
         setIsLoading(false);
         if (response.isSuccess) {
-            window.location.reload();
+            //Remove post from table manually because remove API only return success/fail
+            setTableData(prevData => {
+                const newData = { ...prevData };
+                newData.content = newData.content.filter(
+                    post => post.uid !== uid
+                );
+                newData.totalRows -= 1;
+                newData.totalPages = Math.ceil(
+                    newData.totalRows / newData.pageSize
+                );
+                return newData;
+            });
         }
         return response;
     }, []);
