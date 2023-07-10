@@ -22,10 +22,6 @@ const TagSelect: FC<TagSelectProps> = memo(({ onChange }) => {
         }
     }, [inputVisible]);
 
-    useEffect(() => {
-        editInputRef.current?.focus();
-    }, [inputValue]);
-
     const [searchParams] = useSearchParams();
     useEffect(() => {
         const postTypesFromUrl = searchParams.getAll('postType');
