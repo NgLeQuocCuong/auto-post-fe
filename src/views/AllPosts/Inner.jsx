@@ -9,7 +9,7 @@ import PostsTable from 'views/PostsTable/PostsTable';
 import Popup from 'components/Popup';
 import WebLayout from 'layouts/Web/WebLayout';
 
-const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
+const Inner = memo(({ handleRemovePost, tableData }) => {
     const navigate = useNavigate();
     const [isFilterShown, setIsFilterShown] = useState(false);
     const toggleFilters = useCallback(() => {
@@ -70,8 +70,8 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
             key: 'postType',
             dataIndex: 'postType',
             render: postType => {
-                return postType?.map((tag, index) => (
-                    <Tag key={index} color="geekblue">
+                return postType?.map(tag => (
+                    <Tag key={tag} color="geekblue">
                         {tag.trim().toUpperCase()}
                     </Tag>
                 ));
@@ -85,7 +85,6 @@ const Inner = memo(({ handleAllPosts, handleRemovePost, tableData }) => {
                     <Tooltip placement="top" title="Xóa bài viết">
                         <Button
                             type="text"
-                            // TODO: Uncomment this when popup is ready
                             onClick={e => {
                                 e.stopPropagation();
                                 Popup.sendConfirm(
