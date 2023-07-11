@@ -80,7 +80,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                 <Drawer
                     placement="right"
                     closable={false}
-                    visible={isDrawerOpen}
+                    open={isDrawerOpen}
                     onClose={toggleDrawer}
                     className="drawer"
                     width={'200px'}
