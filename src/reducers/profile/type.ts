@@ -12,6 +12,8 @@ export class ProfileState {
     dateJoined: string;
     facebookStatus: boolean;
     zaloStatus: boolean;
+    // linkedinStatus: boolean;
+
     avatar: string;
     // profile: IProfile;
 
@@ -24,6 +26,8 @@ export class ProfileState {
         this.dateJoined = data?.dateJoined || '';
         this.facebookStatus = data?.facebookStatus || false;
         this.zaloStatus = data?.zaloStatus || false;
+        //this.linkedinStatus = data?.linkedinStatus || false;
+        this.avatar = data?.avatar || '';
         // this.profile = data?.profile || { status: 'PENDING' };
         this.avatar = data?.avatar || '';
     }
