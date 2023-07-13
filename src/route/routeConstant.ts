@@ -1,11 +1,11 @@
 const routeConstants = {
     LOGIN: '/login',
     REGISTER: '/register',
+    VERIFY_ACCOUNT: '/verify-account/:token',
     FORGOT_PASSWORD: '/forgot-password',
     ALL_POSTS: '/posts',
     USER_SETTINGS: '/user-settings',
-    POST_MANAGEMENT_ALL: '/post-management', //TODO
-    POST_MANAGEMENT_OF_POST: '/post-management/:uid', //TODO
+    POST_MANAGEMENT_OF_POST: '/post-management/:uid',
     UPDATE_POST: '/update-post/:uid',
     LOGOUT: '/logout',
     CHANGE_PASSWORD: '/change-password',

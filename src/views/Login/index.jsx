@@ -10,7 +10,6 @@ const Wrapper = memo(() => {
     useEffect(() => {
         const token = getToken();
         if (token) {
-            //navigate(routeConstants.HOME_PAGE);
             navigate(routeConstants.HOME_PAGE);
         }
     }, [navigate]);

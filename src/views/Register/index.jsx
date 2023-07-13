@@ -11,9 +11,9 @@ const Wrapper = memo(() => {
             const response = await userService.register(data);
             if (response.isSuccess) {
                 Message.sendSuccess(
-                    'Đăng ký thành công. Vui lòng đăng nhập để tiếp tục.'
+                    'Đăng ký thành công. Vui lòng kiểm tra email để xác thực tài khoản.'
                 );
-                navigate(routeConstants.LOGIN);
+                navigate(routeConstants.VERIFY_EMAIL);
             }
             return response;
         },

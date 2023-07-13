@@ -37,6 +37,11 @@ const routes: Array<Route> = [
         Component: commonLoadable(() => import('views/Register')),
     },
     {
+        name: 'Verify Account',
+        path: routeConstants.VERIFY_ACCOUNT,
+        Component: commonLoadable(() => import('views/VerifyAccount')),
+    },
+    {
         name: 'Change Password',
         path: routeConstants.CHANGE_PASSWORD,
         Component: commonLoadable(() => import('views/ChangePassword')),
@@ -79,12 +84,6 @@ const routes: Array<Route> = [
         name: 'Post Management Of Post',
         path: routeConstants.POST_MANAGEMENT_OF_POST,
         Component: commonLoadable(() => import('views/PostManagementOfPost')),
-        authorization: true,
-    },
-    {
-        name: 'Post Management Matrix',
-        path: routeConstants.POST_MANAGEMENT_ALL,
-        Component: commonLoadable(() => import('views/PostManagementMatrix')),
         authorization: true,
     },
     {
