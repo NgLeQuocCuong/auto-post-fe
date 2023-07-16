@@ -1,0 +1,37 @@
+@import 'scss/global';
+
+.input-avatar-wrapper {
+    &__avatar {
+        &--round {
+            border-radius: 50%;
+            + .ant-image-mask {
+                border-radius: 50%;
+            }
+        }
+        &--fit {
+            object-fit: none;
+        }
+    }
+    img {
+        filter: brightness(100%);
+        transition: 0.2s;
+    }
+
+    .overlay-text {
+        position: absolute;
+        color: $color--light;
+        opacity: 0;
+        transition: 0.2s;
+    }
+    &:has(.anticon-loading),
+    &:hover {
+        img {
+            filter: brightness(70%);
+            transition: 0.2s;
+        }
+        .overlay-text {
+            opacity: 1;
+            transition: 0.2s;
+        }
+    }
+}
