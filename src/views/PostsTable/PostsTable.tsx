@@ -1,4 +1,4 @@
-import { FC, memo, useMemo, useEffect, useState, useCallback } from 'react';
+import { FC, memo, useMemo, useCallback } from 'react';
 import { Table, Form } from 'antd';
 import moment from 'moment';
 import Filters from './Filters';
@@ -43,26 +43,6 @@ const PostsTable: FC<TableProps> = memo(
         onFilters,
     }) => {
         const navigate = useNavigate();
-        const [storedTableData, setStoredTableData] = useState<TableProps>();
-        useEffect(() => {
-            setStoredTableData({
-                columns: columns,
-                content: content,
-                currentPage: currentPage,
-                totalRows: totalRows,
-                totalPages: totalPages,
-                onPaginate: onPaginate,
-                onFilters: onFilters,
-            });
-        }, [
-            columns,
-            content,
-            currentPage,
-            totalRows,
-            totalPages,
-            onPaginate,
-            onFilters,
-        ]);
         const translateStatus = useCallback((value: string) => {
             switch (value) {
                 //Status
@@ -79,7 +59,7 @@ const PostsTable: FC<TableProps> = memo(
         //Declare data for table rows
         const data: RowData[] =
             useMemo(() => {
-                return storedTableData?.content?.map((item, index) => {
+                return content?.map((item, index) => {
                     return {
                         key: index.toString(),
                         uid: item.uid,
@@ -98,7 +78,7 @@ const PostsTable: FC<TableProps> = memo(
                         autoPublish: item.autoPublish ? 'Hẹn giờ' : 'Thủ công',
                     };
                 });
-            }, [storedTableData, translateStatus]) || [];
+            }, [content, translateStatus]) || [];
         const [searchParams, setSearchParams] = useSearchParams();
         return (
             <div className="posts-table-container">
@@ -120,7 +100,7 @@ const PostsTable: FC<TableProps> = memo(
                     pagination={{
                         showSizeChanger: true,
                         pageSizeOptions: ['5', '10', '25', '50'],
-                        total: Number(storedTableData?.totalRows),
+                        total: Number(totalRows) || 0,
                         showTotal: (total, range) =>
                             `Hiện ${range[0]}-${range[1]} trong ${total} kết quả.`,
                         onChange: (page, pageSize) => {
