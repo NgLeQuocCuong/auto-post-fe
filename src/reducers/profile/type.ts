@@ -29,7 +29,6 @@ export class ProfileState {
         //this.linkedinStatus = data?.linkedinStatus || false;
         this.avatar = data?.avatar || '';
         // this.profile = data?.profile || { status: 'PENDING' };
-        this.avatar = data?.avatar || '';
     }
 }
 

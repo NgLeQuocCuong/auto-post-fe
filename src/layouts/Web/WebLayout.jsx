@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Drawer, Image } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -9,12 +9,12 @@ import './index.scss';
 import { useUserProfile } from 'reducers/profile/function';
 import PostPage from 'views/PostPage';
 
-const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
+const WebLayout = memo(({ children }) => {
     const user = useUserProfile();
     const [item, setItem] = useState(false);
-    const handleCreatePost = () => {
+    const handleCreatePost = useCallback(async () => {
         setItem(prevState => !prevState);
-    };
+    }, []);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const toggleDrawer = () => {
         setIsDrawerOpen(prevState => !prevState);
@@ -144,7 +144,7 @@ const WebLayout: FC<PropsWithChildren> = memo(({ children }) => {
                 </Drawer>
             </header>
 
-            {item && <PostPage />}
+            {item && <PostPage set={handleCreatePost} />}
             {children}
         </div>
     );
