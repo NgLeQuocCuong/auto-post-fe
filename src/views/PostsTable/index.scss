@@ -8,3 +8,38 @@
         font-family: $font-inter;
     }
 }
+
+.posts-table {
+    .ant-table-cell {
+        &:first-child {
+            width: 250px;
+            max-width: 400px;
+        }
+        &:nth-child(3) {
+            width: 250px;
+            max-width: 500px;
+        }
+        &:last-child {
+            width: 200px;
+            max-width: 200px;
+        }
+        &-row-hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.filters-container {
+    .ant-radio-group,
+    .ant-checkbox-group {
+        display: flex;
+        flex-direction: column !important;
+        > * {
+            margin: 8px 0;
+        }
+    }
+    .ant-dropdown {
+        width: 100px;
+        max-width: 300px;
+    }
+}

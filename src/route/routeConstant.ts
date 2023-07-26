@@ -13,7 +13,6 @@ const routeConstants = {
     USER_UPDATE: '/user-update',
     POST_DETAILS: '/post-details/:uid',
     POSTS_MANAGEMENT: '/posts-management',
-    MANAGEMENT_DETAIL: '/posts-management/detail/:uid',
     RESET_PASSWORD: '/reset-password/:slug',
     HOME_PAGE: '/',
 };
