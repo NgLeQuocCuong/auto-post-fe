@@ -1,19 +1,37 @@
 import { Form, Input } from 'antd';
 import { FC, memo } from 'react';
 import './index.scss';
-
 interface AccountInputProps {
-    type?: string | 'text';
+    type?: string;
     name: string;
     label: string;
-    placeholder?: string | 'Nhập vào trường này';
+    placeholder?: string;
+    rules?: [];
 }
 
 const AccountInput: FC<AccountInputProps> = memo(
-    ({ type, name, label, placeholder, ...props }) => {
+    ({
+        type = 'text',
+        name,
+        label,
+        placeholder = 'Nhập vào trường này',
+        rules,
+        ...props
+    }) => {
         return (
-            <Form.Item name={name} label={label} required {...props}>
-                <Input type={type} placeholder={placeholder} />
+            <Form.Item
+                name={name}
+                label={label}
+                rules={[
+                    {
+                        required: true,
+                        message: 'Trường này không được để trống.',
+                    },
+                    ...(rules || []),
+                ]}
+                {...props}
+            >
+                <Input type={type} placeholder={placeholder} size="large" />
             </Form.Item>
         );
     }

@@ -58,3 +58,21 @@
 .has-account {
     margin-top: 12px;
 }
+
+.resend-email {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+    &__countdown {
+        span {
+            @include font-14;
+        }
+        .ant-statistic-content-value {
+            color: $color--text5;
+        }
+    }
+    .button-hidden {
+        display: none;
+    }
+}

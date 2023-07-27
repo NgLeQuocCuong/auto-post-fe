@@ -11,18 +11,8 @@ const Inner = memo(({ handleRegister }) => {
     const nameRules = useMemo(
         () => [
             {
-                pattern: /^[^0-9]*$/,
+                pattern: /^\D*$/,
                 message: 'Họ và tên không được chứa số.',
-            },
-        ],
-        []
-    );
-
-    const usernameRules = useMemo(
-        () => [
-            {
-                min: 8,
-                message: 'Tên đăng nhập phải có ít nhất 8 ký tự.',
             },
         ],
         []
@@ -37,37 +27,8 @@ const Inner = memo(({ handleRegister }) => {
         ],
         []
     );
-
-    const passwordRules = useMemo(
-        () => [
-            {
-                pattern: /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/,
-                message: 'Mật khẩu phải có ít nhất 8 ký tự gồm cả chữ và số.',
-            },
-        ],
-        []
-    );
-
-    const confirmPasswordRules = useMemo(
-        () => [
-            ...passwordRules,
-            ({ getFieldValue }) => ({
-                validator(_, value) {
-                    if (!value || getFieldValue('password') === value) {
-                        return Promise.resolve();
-                    }
-                    return Promise.reject(
-                        new Error('Mật khẩu nhập lại không trùng khớp.')
-                    );
-                },
-            }),
-        ],
-        [passwordRules]
-    );
     const handleFinish = useCallback(
         values => {
-            //Delete confirm password field before calling API
-            delete values.confirmPassword;
             handleRegister(values);
         },
         [handleRegister]
@@ -98,32 +59,9 @@ const Inner = memo(({ handleRegister }) => {
                 <AccountInput
                     name="email"
                     label="Email"
-                    type="email"
+                    type="text"
                     placeholder="Email"
                     rules={emailRules}
-                />
-                <AccountInput
-                    name="username"
-                    label="Tên đăng nhập"
-                    type="text"
-                    placeholder="Tên đăng nhập"
-                    tooltip="Tên đăng nhập phải có ít nhất 8 ký tự."
-                    rules={usernameRules}
-                />
-                <AccountInput
-                    name="password"
-                    label="Mật khẩu"
-                    type="password"
-                    placeholder="Mật khẩu"
-                    tooltip="Mật khẩu phải có ít nhất 8 kí tự, bao gồm cả chữ và số."
-                    rules={passwordRules}
-                />
-                <AccountInput
-                    name="confirmPassword"
-                    label="Nhập lại mật khẩu"
-                    type="password"
-                    placeholder="Nhập lại mật khẩu"
-                    rules={confirmPasswordRules}
                 />
                 <Button
                     className="account-layout-button"

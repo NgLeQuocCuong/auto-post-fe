@@ -15,30 +15,33 @@ class UserService extends ApiBase {
         return res;
     };
 
-    forgotPass = (requestBody: any) => {
-        const url = `${_USER_PATH}/forgot-password`;
-        const res = this.post(url, requestBody);
-        return res;
-    };
-
-    resetPass = (requestBody: { email: string }) => {
-        const url = `${_USER_PATH}/reset-password`;
-        const res = this.post(url, requestBody);
-        return res;
-    };
-
     register = (requestBody: {
-        first_name: string;
-        last_name: string;
+        firstName: string;
+        lastName: string;
         email: string;
-        username: string;
-        password: string;
     }) => {
         const url = `${_USER_PATH}/register`;
         const res = this.post(url, requestBody);
         return res;
     };
 
+    verifyAccount = (requestBody: { token: string; password: string }) => {
+        const url = `${_USER_PATH}/register-check`;
+        const res = this.put(url, requestBody);
+        return res;
+    };
+
+    forgotPassword = (requestBody: { email: string }) => {
+        const url = `${_USER_PATH}/forgot-password`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+
+    resetPassword = (requestBody: { token: string; email: string }) => {
+        const url = `${_USER_PATH}/reset-password`;
+        const res = this.put(url, requestBody);
+        return res;
+    };
     logout = () => {
         const url = `${_USER_PATH}/logout`;
         return this.post(url);
@@ -63,13 +66,16 @@ class UserService extends ApiBase {
         return res;
     };
 
-    updateUser = (requestBody: {
-        firstName: string;
-        lastName: string;
-        username: string;
-    }) => {
+    updateUser = (
+        requestBody: {
+            avatar?: Blob;
+            firstName: string;
+            lastName: string;
+        },
+        options: object
+    ) => {
         const url = `${_USER_PATH}/update/info`;
-        const res = this.post(url, requestBody);
+        const res = this.post(url, requestBody, options);
         return res;
     };
 

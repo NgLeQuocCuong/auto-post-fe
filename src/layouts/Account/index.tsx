@@ -1,6 +1,6 @@
-import AutopostLogo48 from 'assets/images/AutopostLogo48';
 import { FC, PropsWithChildren, memo } from 'react';
 import './index.scss';
+import AutopostLogo48 from 'assets/images/AutopostLogo48';
 interface Props {
     title?: string;
 }
