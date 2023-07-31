@@ -3,7 +3,7 @@ import { memo, useCallback } from 'react';
 import userService from 'services/userService';
 import Inner from 'views/PostPage/Inner';
 
-const Wrapper = memo(() => {
+const Wrapper = memo(set => {
     // const {setLoading} = usePostPageContext();
     const handlePost = useCallback(async data => {
         const postData = {
@@ -30,7 +30,7 @@ const Wrapper = memo(() => {
         }
         return response;
     }, []);
-    return <Inner handlePost={handlePost} />;
+    return <Inner handlePost={handlePost} set={set} />;
 });
 Wrapper.displayName = 'PostPage';
 

@@ -7,7 +7,8 @@ import UploadImage from 'components/PostPage/components/UploadImage';
 import { IContext, Context } from 'components/PostPage/components/Context';
 
 interface Props {
-    handlePost: any,
+    handlePost: any;
+    set: any;
 }
 
 interface Option {
@@ -16,11 +17,12 @@ interface Option {
     page_access_token: string;
 }
 
-const PostPage: FC<Props> = memo(({ handlePost }) => {
+const PostPage: FC<Props> = memo(({ handlePost, set }) => {
     const [display, setDisplay] = useState(true);
-    const handleModalClose = () => {
+    const handleModalClose = useCallback(() => {
         setDisplay(false);
-    };
+        set.set();
+    }, [set]);
 
     const [data, setData] = useState<IContext['data']>({
         title: '',
@@ -130,7 +132,7 @@ const PostPage: FC<Props> = memo(({ handlePost }) => {
         await handlePost(data);
         resetForm();
         handleModalClose();
-    }, [data, handlePost, resetForm, setLoading]);
+    }, [data, handlePost, resetForm, setLoading, handleModalClose]);
 
     return (
         <Context.Provider value={contextValue}>

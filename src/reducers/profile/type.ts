@@ -13,10 +13,12 @@ export class ProfileState {
     facebookStatus: boolean;
     zaloStatus: boolean;
     // linkedinStatus: boolean;
+
     avatar: string;
     // profile: IProfile;
 
     constructor(data?: IProfileState) {
+        this.avatar = data?.avatar || '';
         this.email = data?.email || '';
         this.firstName = data?.firstName || '';
         this.lastName = data?.lastName || '';
